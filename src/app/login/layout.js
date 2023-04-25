@@ -5,17 +5,7 @@
  */
 'use client'
 
-const API_URL = 'https://petmatch.up.railway.app/api/v1'
-
-const logMeIn = async (email, password) => {
-  const response = await fetch(`${API_URL}/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
-  })
-  const data = await response.json()
-  return data
-}
+import { logMeIn } from '../../services/PetMatch'
 
 export default async function Login () {
   const bodyRequest = {
