@@ -12,6 +12,9 @@ const links = [{
 }, {
   label: 'About',
   route: '/about'
+}, {
+  label: 'Pets',
+  route: '/pets'
 }]
 
 export default function Header () {
