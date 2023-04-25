@@ -6,7 +6,7 @@
 import Link from 'next/link'
 import styles from './Header.module.css'
 
-const links = [{
+const mainMenu = [{
   label: 'Home',
   route: '/'
 }, {
@@ -17,12 +17,31 @@ const links = [{
   route: '/pets'
 }]
 
+const secondaryMenu = [{
+  label: 'Login',
+  route: '/login'
+}, {
+  label: 'Register',
+  route: '/register'
+}]
+
 export default function Header () {
   return (
     <header className={styles.header}>
       <nav>
         <ul className={styles.navigation}>
-          {links.map(({ label, route }) => (
+          {mainMenu.map(({ label, route }) => (
+            <li key={route}>
+              <Link href={route}>
+                {label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <nav>
+        <ul className={styles.navigation}>
+          {secondaryMenu.map(({ label, route }) => (
             <li key={route}>
               <Link href={route}>
                 {label}
