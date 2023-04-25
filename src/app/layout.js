@@ -4,8 +4,8 @@
  */
 
 import '../styles/globals.css'
-
 import Header from '../components/header/Header'
+import { font } from './fonts'
 
 export const metadata = {
   title: 'PetMatch. Bringing forever homes and loving pets together',
@@ -20,7 +20,7 @@ export default function RootLayout ({ children }) {
         <meta name='description' content={metadata.description} />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
       </head>
-      <body>
+      <body className={font.variable}>
         <Header />
         {children}
       </body>
