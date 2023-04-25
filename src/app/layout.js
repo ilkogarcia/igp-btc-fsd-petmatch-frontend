@@ -3,6 +3,8 @@
  * @description This file contains the root layout component
  */
 
+import '../styles/globals.css'
+
 import Header from './components/Header'
 
 export const metadata = {

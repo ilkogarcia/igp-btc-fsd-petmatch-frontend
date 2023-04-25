@@ -4,6 +4,7 @@
  */
 
 import Link from 'next/link'
+import styles from './Header.module.css'
 
 const links = [{
   label: 'Home',
@@ -15,9 +16,9 @@ const links = [{
 
 export default function Header () {
   return (
-    <header>
+    <header className={styles.header}>
       <nav>
-        <ul>
+        <ul className={styles.navigation}>
           {links.map(({ label, route }) => (
             <li key={route}>
               <Link href={route}>
