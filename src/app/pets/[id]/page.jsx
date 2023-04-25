@@ -6,8 +6,12 @@
 
 import { LikeButton } from '@/components/like/LikeButton'
 
-const fetchOnePet = (id) => {
-  return fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+const fetchOnePet = async (id) => {
+  return fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+    next: {
+      revalidate: 60
+    }
+  })
     .then(res => res.json())
 }
 
