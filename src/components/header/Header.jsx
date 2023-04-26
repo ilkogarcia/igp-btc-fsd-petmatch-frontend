@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import styles from './Header.module.css'
 
 const mainMenu = [
   {
@@ -24,17 +23,21 @@ const mainMenu = [
   },
 ]
 
-export default function Header() {
+const Header = () => {
   return (
-    <header
-      className={`${styles.header} mx-auto flex w-full max-w-4xl items-center justify-between py-3`}
-    >
-      <h1 className='text-m font-bold'>🐶 PetMatch.es</h1>
+    <header className='mx-auto flex w-full max-w-4xl items-center justify-between py-3'>
+      <h1 className='text-xl font-extrabold text-green-50'>
+        <Link href='/'>
+          🐶 PetMatch.es
+        </Link>
+      </h1>
       <nav>
-        <ul className={`${styles.navigation} flex list-none gap-8`}>
+        <ul className='flex list-none gap-8'>
           {mainMenu.map(({ label, route }) => (
             <li key={route}>
-              <Link href={route}>{label}</Link>
+              <Link className='text-green-50' href={route}>
+                {label}
+              </Link>
             </li>
           ))}
         </ul>
@@ -42,3 +45,5 @@ export default function Header() {
     </header>
   )
 }
+
+export default Header

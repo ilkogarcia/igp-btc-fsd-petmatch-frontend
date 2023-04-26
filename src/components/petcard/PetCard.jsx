@@ -11,7 +11,7 @@ export default async function PetCard(params) {
   }
 
   return (
-    <div className='max-w-sm overflow-hidden rounded shadow-lg'>
+    <div className='max-w-sm overflow-hidden rounded shadow-lg bg-white'>
       <img className='w-full' src={data.imageUrl} alt={data.name} />
       <div className='px-6 py-4'>
         <div className='mb-2 text-xl font-bold'>
