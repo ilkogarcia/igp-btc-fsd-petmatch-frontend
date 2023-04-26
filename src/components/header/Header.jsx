@@ -1,10 +1,6 @@
-/**
- * @file Header.jsx
- * @description Header component.
- */
-
 import Link from 'next/link'
 import styles from './Header.module.css'
+import { Container } from 'postcss'
 
 const mainMenu = [{
   label: 'Home',
@@ -39,6 +35,7 @@ export default function Header () {
           ))}
         </ul>
       </nav>
+
       <nav>
         <ul className={styles.navigation}>
           {secondaryMenu.map(({ label, route }) => (
