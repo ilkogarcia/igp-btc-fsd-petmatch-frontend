@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
         <meta name='description' content={metadata.description} />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
       </head>
-      <body className={font.variable}>
+      <body className={`${font.variable} min-h-screen bg-green-700`}>
         <Header />
         {children}
         <Footer />

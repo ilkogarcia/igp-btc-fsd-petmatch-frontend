@@ -1,19 +1,7 @@
 .header {
-  top: 0;
-  left: 0;
-  width: 100vw;
-  border: 1px solid #f0f0f0;
-  border-radius: 4px;
-  padding: 4px;
+  background-color: transparent; /* rgb(204 251 241) */
 }
 
 .navigation {
-  display: flex;
-  list-style: none;
-  gap: 28px;
-}
-
-.navigation a:hover {
-  color: #0f0f0f;
-  text-decoration: underline;
+  background-color: transparent;
 }

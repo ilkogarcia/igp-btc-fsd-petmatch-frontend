@@ -1,4 +1,4 @@
-const { add } = require('../app/utils/utils')
+const { add } = require('../utils/utils')
 
 describe('test services', () => {
   test('add', () => {

@@ -14,9 +14,6 @@ const mainMenu = [
     label: 'Pets',
     route: '/pets',
   },
-]
-
-const secondaryMenu = [
   {
     label: 'Login',
     route: '/login',
@@ -29,20 +26,13 @@ const secondaryMenu = [
 
 export default function Header() {
   return (
-    <header className={styles.header}>
+    <header
+      className={`${styles.header} mx-auto flex w-full max-w-4xl items-center justify-between py-3`}
+    >
+      <h1 className='text-m font-bold'>🐶 PetMatch.es</h1>
       <nav>
-        <ul className={styles.navigation}>
+        <ul className={`${styles.navigation} flex list-none gap-8`}>
           {mainMenu.map(({ label, route }) => (
-            <li key={route}>
-              <Link href={route}>{label}</Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      <nav>
-        <ul className={styles.navigation}>
-          {secondaryMenu.map(({ label, route }) => (
             <li key={route}>
               <Link href={route}>{label}</Link>
             </li>
