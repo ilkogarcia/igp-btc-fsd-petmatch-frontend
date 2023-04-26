@@ -7,12 +7,12 @@ const mainMenu = [
     route: '/',
   },
   {
-    label: 'About',
-    route: '/about',
-  },
-  {
     label: 'Pets',
     route: '/pets',
+  },
+  {
+    label: 'About',
+    route: '/about',
   },
   {
     label: 'Login',

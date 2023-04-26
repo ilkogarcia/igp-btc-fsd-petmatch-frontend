@@ -6,9 +6,9 @@
 const API_URL = 'https://petmatch.up.railway.app/api/v1'
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQ4LCJ1c2VyRW1haWwiOiJpbGtvLmdhcmNpYUBnbWFpbC5jb20iLCJ1c2VyUm9sZSI6ImFkbWluaXN0cmF0b3IiLCJpYXQiOjE2ODI0MzkxODcsImV4cCI6MTY4MjUyNTU4N30.GoOLg4MwRlukZ1hSvcqhc7_Ew3-8Um86z8zJa9zv7nk'
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQ4LCJ1c2VyRW1haWwiOiJpbGtvLmdhcmNpYUBnbWFpbC5jb20iLCJ1c2VyUm9sZSI6ImFkbWluaXN0cmF0b3IiLCJpYXQiOjE2ODI1Mjc0MDQsImV4cCI6MTY4MjYxMzgwNH0.mji5eLQUpADbGbgp7JxI3U8v4vfoj7M8o6TAR91AGqM'
 
-export const fetchAllPets = async (bodyRequest) => {
+const fetchAllPets = async (bodyRequest) => {
   return await fetch(`${API_URL}/pets/search?limit=20&page=1`, {
     method: 'POST',
     headers: {
@@ -23,7 +23,7 @@ export const fetchAllPets = async (bodyRequest) => {
   }).then((res) => res.json())
 }
 
-export const fetchOnePet = async (id) => {
+const fetchOnePet = async (id) => {
   return await fetch(`${API_URL}/pets/${id}`, {
     method: 'GET',
     headers: {
@@ -37,7 +37,7 @@ export const fetchOnePet = async (id) => {
   }).then((res) => res.json())
 }
 
-export const logMeIn = async (email, password) => {
+const logMeIn = async (email, password) => {
   const response = await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -45,4 +45,10 @@ export const logMeIn = async (email, password) => {
   })
   const data = await response.json()
   return data
+}
+
+module.exports = {
+  fetchAllPets,
+  fetchOnePet,
+  logMeIn,
 }

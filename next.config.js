@@ -1,12 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['loremflickr.com', 'source.unsplash.com']
+    domains: [
+      'loremflickr.com',
+      'source.unsplash.com',
+      'images.unsplash.com',
+      'unsplash.com',
+      'cdn.pixabay.com',
+      'picsum.photos',
+      'fastly.picsum.photos',
+    ],
   },
   experimental: {
-    appDir: true
+    appDir: true,
   },
-  reactStrictMode: true
+  reactStrictMode: true,
 }
 
 module.exports = nextConfig
