@@ -4,19 +4,19 @@ import PetCard from '../components/petcard/PetCard'
 const HomePage = () => {
   return (
     <div>
-      <section className='mt-48 flex flex-wrap w-full justify-center content-center'>
-        <h1 className='w-3/4 text-center text-8xl font-extrabold text-white'>
+      <section className='mt-48 flex w-full flex-wrap content-center justify-center px-16'>
+        <h1 className='mx-auto w-4/5 text-center text-8xl font-extrabold text-white'>
           Find your new best friend today!
         </h1>
-        <p className='w-3/4 mx-auto mt-10 max-w-lg text-center text-2xl text-white opacity-95'>
+        <p className='mx-auto mt-10 w-4/5 text-center text-2xl text-white opacity-85'>
           Bringing forever homes and loving pets together. Adopting today can make the difference.
         </p>
       </section>
       <section className='mt-48'>
-        <h2 className='text-center text-6xl font-extralight text-white mb-12'>
+        <h2 className='mb-12 text-center text-6xl font-extralight text-white'>
           Adoptable Pets
         </h2>
-        <div className='flex flex-wrap gap-10 justify-center mt-10'>
+        <div className='mt-10 flex flex-wrap justify-center gap-10'>
           <div className='w-1/4'>
             <PetCard id={19} />
           </div>
@@ -28,8 +28,8 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <section className='mt-48 mb-48'>
-        <h2 className='text-center text-6xl font-extralight text-white mb-12'>
+      <section className='mb-48 mt-48'>
+        <h2 className='mb-12 text-center text-6xl font-extralight text-white'>
           Happy Tails
         </h2>
         <p className='mx-auto mt-10 max-w-lg text-center text-2xl text-white'>

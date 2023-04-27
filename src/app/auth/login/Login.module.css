@@ -1,0 +1,19 @@
+.input_group {
+  @apply flex rounded-xl border;
+  position: relative;
+}
+
+.input_text {
+  @apply w-full rounded-xl border bg-slate-50 px-6 py-4;
+  @apply border-none focus:outline-none;
+}
+
+.button {
+  @apply w-full rounded-md bg-gradient-to-r from-green-400 to-green-600;
+  @apply py-3 text-lg font-semibold text-gray-50;
+}
+
+.button:hover {
+  @apply border-2 border-green-400 bg-gradient-to-r from-gray-100 to-gray-300;
+  @apply text-gray-700;
+}
