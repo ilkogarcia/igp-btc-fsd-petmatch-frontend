@@ -35,17 +35,17 @@ const fetchOnePet = async (id) => {
   }).then((res) => res.json())
 }
 
-const signIn = async (email, password) => {
+const logMeIn = async (credentials) => {
   const response = await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify(credentials),
   })
   const data = await response.json()
   return data
 }
 
-const signUp = async (email, password) => {
+const signMeUp = async (email, password) => {
   const response = await fetch(`${API_URL}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -58,6 +58,6 @@ const signUp = async (email, password) => {
 module.exports = {
   fetchAllPets,
   fetchOnePet,
-  signIn,
-  signUp,
+  logMeIn,
+  signMeUp,
 }

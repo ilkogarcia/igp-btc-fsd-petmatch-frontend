@@ -15,9 +15,9 @@ import {
 } from 'react-icons/hi2'
 
 // Import utilities used
-import { registerValidate } from '@/utils/validate'
+import validateSignUp  from '../../utils/validateSignUp'
 
-const SignUp = () => {
+export default function SignUp() {
   const [show, setShow] = useState({ password: false, cpassword: false })
   const formik = useFormik({
     initialValues: {
@@ -26,7 +26,7 @@ const SignUp = () => {
       password: '',
       cpassword: '',
     },
-    validate: registerValidate,
+    validate: validateSignUp,
     onSubmit,
   })
 
@@ -160,5 +160,3 @@ const SignUp = () => {
     </section>
   )
 }
-
-export default SignUp

@@ -1,13 +1,13 @@
 import '../../styles/globals.css'
 import Image from 'next/image'
-import SignIn from '@/components/signin/SignIn'
+import SignIn from '../../components/signin/SignIn'
 
 export const metadata = {
   title: 'PetMatch. Login to your account.',
   description: 'Welcome back! Please log in to access your account and stay connected with all the latest updates from PetMatch.',
 }
 
-const LoginPage = () => {  
+export default function LoginPage() {  
   const petImage = '/assets/michaelG_aEtAEp3e0c_1920x2880.jpg'
 
   return (
@@ -36,5 +36,3 @@ const LoginPage = () => {
     </div>
   )
 }
-
-export default LoginPage

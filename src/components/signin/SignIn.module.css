@@ -6,6 +6,7 @@
 .input_text {
   @apply w-full rounded-xl border bg-slate-50 px-6 py-4;
   @apply border-none focus:outline-none;
+  @apply text-gray-500;
 }
 
 .input_text + * {

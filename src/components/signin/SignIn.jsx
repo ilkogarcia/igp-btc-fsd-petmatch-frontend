@@ -3,19 +3,20 @@
 // Import styles sheet
 import styles from './SignIn.module.css'
 
-// Import hooks needed
+// Import hooks needed and libraries
 import { useState } from 'react'
 import { useFormik } from 'formik'
+import { signIn } from 'next-auth/react'
 
 // Import components used on this page
 import Link from 'next/link'
 import { HiOutlineAtSymbol, HiOutlineEye } from 'react-icons/hi2'
 
 // Import utilities used
-import loginValidate from '../../utils/validate'
+import validateSignIn from '../../utils/validateSignIn'
 
 // Main component
-const SignIn = () => {
+export default function SignIn() {
   const [show, setShow] = useState(false)
 
   // Formik hook
@@ -24,12 +25,18 @@ const SignIn = () => {
       email: '',
       password: '',
     },
-    validate: loginValidate,
+    validate: validateSignIn,
     onSubmit,
   })
 
   async function onSubmit(values) {
-    console.log(values)
+    const status = await signIn(`credentials`, {
+      redirect: false,
+      email: values.email,
+      password: values.password,
+      callbackUrl: '/'
+    })
+    console.log(status)
   }
 
   return (
@@ -118,5 +125,3 @@ const SignIn = () => {
     </section>
   )
 }
-
-export default SignIn
