@@ -5,8 +5,8 @@
 
 const API_URL = 'https://petmatch.up.railway.app/api/v1'
 
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQ4LCJ1c2VyRW1haWwiOiJpbGtvLmdhcmNpYUBnbWFpbC5jb20iLCJ1c2VyUm9sZSI6ImFkbWluaXN0cmF0b3IiLCJpYXQiOjE2ODI1Mjc0MDQsImV4cCI6MTY4MjYxMzgwNH0.mji5eLQUpADbGbgp7JxI3U8v4vfoj7M8o6TAR91AGqM'
+// const token =
+//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQ4LCJ1c2VyRW1haWwiOiJpbGtvLmdhcmNpYUBnbWFpbC5jb20iLCJ1c2VyUm9sZSI6ImFkbWluaXN0cmF0b3IiLCJpYXQiOjE2ODI2MTQ2OTksImV4cCI6MTY4MjcwMTA5OX0.GismXrULlWdrQFFhC1xJERYUiYH_Rxbh_uDerN78-Kc'
 
 const fetchAllPets = async (bodyRequest) => {
   return await fetch(`${API_URL}/pets/search?limit=20&page=1`, {
@@ -14,7 +14,6 @@ const fetchAllPets = async (bodyRequest) => {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(bodyRequest),
     next: {
@@ -29,7 +28,6 @@ const fetchOnePet = async (id) => {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: `Bearer ${token}`,
     },
     next: {
       revalidate: 60,

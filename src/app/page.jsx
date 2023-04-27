@@ -8,8 +8,9 @@ const HomePage = () => {
         <h1 className='mx-auto w-4/5 text-center text-8xl font-extrabold text-white'>
           Find your new best friend today!
         </h1>
-        <p className='mx-auto mt-10 w-4/5 text-center text-2xl text-white opacity-85'>
-          Bringing forever homes and loving pets together. Adopting today can make the difference.
+        <p className='opacity-85 mx-auto mt-10 w-4/5 text-center text-2xl text-white'>
+          Bringing forever homes and loving pets together. Adopting today can
+          make the difference.
         </p>
       </section>
       <section className='mt-48'>

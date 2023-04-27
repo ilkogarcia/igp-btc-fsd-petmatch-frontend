@@ -1,59 +1,84 @@
-const SignIn = async () => {
+'use client'
+import { useState } from 'react'
+import { HiOutlineAtSymbol, HiOutlineEye } from 'react-icons/hi2'
+import Link from 'next/link'
+import styles from './SignIn.module.css'
+
+function initShow() {
+  return false
+}
+
+const SignIn = () => {
+  const [show, setShow] = useState(initShow)
+
   return (
-    <div className='w-full max-w-xs'>
-      <form className='mb-4 rounded bg-white px-8 pb-8 pt-6 shadow-md'>
-        <div className='mb-4'>
-          <label
-            className='mb-2 block text-sm font-bold text-gray-700'
-            for='email'
-          >
-            Email
-          </label>
-          <input
-            className='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
-            required
-            type='email'
-            name='email'
-            placeholder='name@example.com'
-          />
-          <p className='text-xs italic text-red-500'>
-            Please provide a valid email.
-          </p>
-        </div>
-        <div className='mb-6'>
-          <label
-            className='mb-2 block text-sm font-bold text-gray-700'
-            for='password'
-          >
-            Password
-          </label>
-          <input
-            className='focus:shadow-outline mb-3 w-full appearance-none rounded border border-red-500 px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none'
-            required
-            name='password'
-            type='password'
-            placeholder='******************'
-          />
-          <p className='text-xs italic text-red-500'>
-            Please provide a valid password.
-          </p>
-        </div>
-        <div className='flex items-center justify-between'>
-          <button
-            className='focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none'
-            type='button'
-          >
-            Sign In
-          </button>
-          <a
-            className='inline-block align-baseline text-sm font-bold text-blue-500 hover:text-blue-800'
+    <section className='mx-auto w-3/4'>
+      <div className='title'>
+        <h1 className='py-4 text-4xl font-bold text-gray-800'>
+          Login to Your Account
+        </h1>
+        <p className='mx-auto mb-6 w-3/4 text-gray-400'>
+          Welcome back! Please log in to access your account and stay connected
+          with all the latest updates from PetMatch.
+        </p>
+
+        {/* login form */}
+        <form className='flex flex-col gap-5'>
+          <div className={styles.input_group}>
+            <input
+              type='email'
+              name='email'
+              placeholder='Email address'
+              className={styles.input_text}
+            />
+            <span className='icon flex items-center px-4'>
+              <HiOutlineAtSymbol size={25} />
+            </span>
+          </div>
+          <div className={styles.input_group}>
+            <input
+              type={`${show ? 'text' : 'password'}`}
+              name='password'
+              placeholder='Password'
+              className={styles.input_text}
+            />
+            <span
+              className='icon flex items-center px-4'
+              onClick={() => setShow(!show)}
+            >
+              <HiOutlineEye size={25} />
+            </span>
+          </div>
+
+          {/* login buttons */}
+          <div className='input-button'>
+            <button type='submit' className={styles.button}>
+              Login
+            </button>
+          </div>
+        </form>
+
+        {/* bottom */}
+        <div className='mt-2 text-center text-gray-400'>
+          <Link
             href='#'
+            className='text-green-500 hover:text-green-800'
           >
-            Forgot Password?
-          </a>
+            Forgot you password?
+          </Link>
         </div>
-      </form>
-    </div>
+        <div className='mt-2 mx-auto w-3/4 text-center text-gray-400'>
+          <p>Don't have an account yet?</p>
+          <Link
+            href='/register'
+            className='text-green-500 hover:text-green-800'
+          >
+            Sign Up
+          </Link>
+          {' '}and finding your perfect pet companion.
+        </div>
+      </div>
+    </section>
   )
 }
 

@@ -15,11 +15,11 @@ const mainMenu = [
   },
   {
     label: 'Login',
-    route: '/auth/login',
+    route: '/login',
   },
   {
     label: 'Register',
-    route: '/auth/register',
+    route: '/register',
   },
 ]
 
