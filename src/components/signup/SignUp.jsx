@@ -1,15 +1,38 @@
 'use client'
+// Import styles sheet
+import styles from './SignUp.module.css'
+
+// Import hooks needed
 import { useState } from 'react'
+import { useFormik } from 'formik'
+
+// Import components used on this page
+import Link from 'next/link'
 import {
   HiOutlineAtSymbol,
   HiOutlineEye,
   HiOutlineUserCircle,
 } from 'react-icons/hi2'
-import Link from 'next/link'
-import styles from './SignUp.module.css'
+
+// Import utilities used
+import { registerValidate } from '@/utils/validate'
 
 const SignUp = () => {
   const [show, setShow] = useState({ password: false, cpassword: false })
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      email: '',
+      password: '',
+      cpassword: '',
+    },
+    validate: registerValidate,
+    onSubmit,
+  })
+
+  async function onSubmit(values) {
+    console.log(values)
+  }
 
   return (
     <section className='mx-auto w-3/4'>
@@ -23,7 +46,7 @@ const SignUp = () => {
         </p>
 
         {/* register form */}
-        <form className='flex flex-col gap-5'>
+        <form className='flex flex-col gap-5' onSubmit={formik.handleSubmit}>
           {/* username imput */}
           <div className={styles.input_group}>
             <input
@@ -31,11 +54,19 @@ const SignUp = () => {
               name='username'
               placeholder='Username'
               className={styles.input_text}
+              {...formik.getFieldProps('username')}
             />
             <span className='icon flex items-center px-4'>
               <HiOutlineUserCircle size={25} />
             </span>
           </div>
+          {formik.touched.username && formik.errors.username ? (
+            <span className='self-start mt-0.5 text-sm text-rose-500'>
+              {formik.errors.username}
+            </span>
+          ) : (
+            <></>
+          )}
 
           {/* email imput */}
           <div className={styles.input_group}>
@@ -44,11 +75,20 @@ const SignUp = () => {
               name='email'
               placeholder='Email address'
               className={styles.input_text}
+              {...formik.getFieldProps('email')}
             />
             <span className='icon flex items-center px-4'>
               <HiOutlineAtSymbol size={25} />
             </span>
           </div>
+          {formik.touched.email && formik.errors.email ? (
+            <span className='self-start mt-0.5 text-sm text-rose-500'>
+              {formik.errors.email}
+            </span>
+          ) : (
+            <></>
+          )}
+
 
           {/* password input */}
           <div className={styles.input_group}>
@@ -57,6 +97,7 @@ const SignUp = () => {
               name='password'
               placeholder='Password'
               className={styles.input_text}
+              {...formik.getFieldProps('password')}
             />
             <span
               className='icon flex items-center px-4'
@@ -65,6 +106,13 @@ const SignUp = () => {
               <HiOutlineEye size={25} />
             </span>
           </div>
+          {formik.touched.password && formik.errors.password ? (
+            <span className='self-start mt-0.5 text-sm text-rose-500'>
+              {formik.errors.password}
+            </span>
+          ) : (
+            <></>
+          )}
 
           {/* confirm password input */}
           <div className={styles.input_group}>
@@ -73,6 +121,7 @@ const SignUp = () => {
               name='password'
               placeholder='Confirm password'
               className={styles.input_text}
+              {...formik.getFieldProps('cpassword')}
             />
             <span
               className='icon flex items-center px-4'
@@ -81,6 +130,13 @@ const SignUp = () => {
               <HiOutlineEye size={25} />
             </span>
           </div>
+          {formik.touched.cpassword && formik.errors.cpassword ? (
+            <span className='self-start mt-0.5 text-sm text-rose-500'>
+              {formik.errors.cpassword}
+            </span>
+          ) : (
+            <></>
+          )}
 
           {/* login buttons */}
           <div className='input-button'>

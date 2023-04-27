@@ -1,15 +1,36 @@
 'use client'
-import { useState } from 'react'
-import { HiOutlineAtSymbol, HiOutlineEye } from 'react-icons/hi2'
-import Link from 'next/link'
+
+// Import styles sheet
 import styles from './SignIn.module.css'
 
-function initShow() {
-  return false
-}
+// Import hooks needed
+import { useState } from 'react'
+import { useFormik } from 'formik'
 
+// Import components used on this page
+import Link from 'next/link'
+import { HiOutlineAtSymbol, HiOutlineEye } from 'react-icons/hi2'
+
+// Import utilities used
+import loginValidate from '../../utils/validate'
+
+// Main component
 const SignIn = () => {
-  const [show, setShow] = useState(initShow)
+  const [show, setShow] = useState(false)
+
+  // Formik hook
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validate: loginValidate,
+    onSubmit,
+  })
+
+  async function onSubmit(values) {
+    console.log(values)
+  }
 
   return (
     <section className='mx-auto w-3/4'>
@@ -23,24 +44,36 @@ const SignIn = () => {
         </p>
 
         {/* login form */}
-        <form className='flex flex-col gap-5'>
+        <form className='flex flex-col gap-5' onSubmit={formik.handleSubmit}>
+          {/* input email field */}
           <div className={styles.input_group}>
             <input
               type='email'
               name='email'
               placeholder='Email address'
               className={styles.input_text}
+              {...formik.getFieldProps('email')}
             />
             <span className='icon flex items-center px-4'>
               <HiOutlineAtSymbol size={25} />
             </span>
           </div>
+          {formik.touched.email && formik.errors.email ? (
+            <span className='self-start mt-0.5 text-sm text-rose-500'>
+              {formik.errors.email}
+            </span>
+          ) : (
+            <></>
+          )}
+
+          {/* imput password field */}
           <div className={styles.input_group}>
             <input
               type={`${show ? 'text' : 'password'}`}
               name='password'
               placeholder='Password'
               className={styles.input_text}
+              {...formik.getFieldProps('password')}
             />
             <span
               className='icon flex items-center px-4'
@@ -49,6 +82,13 @@ const SignIn = () => {
               <HiOutlineEye size={25} />
             </span>
           </div>
+          {formik.touched.password && formik.errors.password ? (
+            <span className='self-start mt-0.5 text-sm text-rose-500'>
+              {formik.errors.password}
+            </span>
+          ) : (
+            <></>
+          )}
 
           {/* login buttons */}
           <div className='input-button'>
@@ -60,22 +100,19 @@ const SignIn = () => {
 
         {/* bottom */}
         <div className='mt-2 text-center text-gray-400'>
-          <Link
-            href='#'
-            className='text-green-500 hover:text-green-800'
-          >
+          <Link href='#' className='text-green-500 hover:text-green-800'>
             Forgot you password?
           </Link>
         </div>
-        <div className='mt-2 mx-auto w-3/4 text-center text-gray-400'>
+        <div className='mx-auto mt-2 w-3/4 text-center text-gray-400'>
           <p>Don't have an account yet?</p>
           <Link
             href='/register'
             className='text-green-500 hover:text-green-800'
           >
             Sign Up
-          </Link>
-          {' '}and finding your perfect pet companion.
+          </Link>{' '}
+          and finding your perfect pet companion.
         </div>
       </div>
     </section>
