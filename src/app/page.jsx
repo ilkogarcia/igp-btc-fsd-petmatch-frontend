@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import PetCard from '../components/petcard/PetCard'
 
-const HomePage = () => {
+export default function HomePage () {
   return (
     <div>
       <section className='mt-48 flex w-full flex-wrap content-center justify-center px-16'>
@@ -43,5 +43,3 @@ const HomePage = () => {
     </div>
   )
 }
-
-export default HomePage

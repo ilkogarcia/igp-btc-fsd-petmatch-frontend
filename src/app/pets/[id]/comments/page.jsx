@@ -1,9 +1,3 @@
-
-/**
- * @module src/app/pets/[id]/comments/page
- * @description Route to show all comments for an specific pet
- */
-
 import Image from 'next/image'
 
 const fetchComments = async (id) => {

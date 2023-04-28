@@ -1,6 +1,11 @@
 import '../../styles/globals.css'
 
-const AboutPage = () => {
+export const metadata = {
+  title: 'PetMatch. About us. Adopt a Pet and Save a Life',
+  description: 'The PetMatch platform is designed to make the adoption process as simple and stress-free as possible for both pets and their new families.'
+}
+
+export default function AboutPage () {
   return (
     <div>
       <section className='mt-48 flex w-full flex-wrap content-center justify-center'>
@@ -125,5 +130,3 @@ const AboutPage = () => {
     </div>
   )
 }
-
-export default AboutPage

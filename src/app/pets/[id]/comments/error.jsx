@@ -1,7 +1,3 @@
-/**
- * @fileoverview Error component for comments
- */
-
 'use client'
 
 export default function Error () {

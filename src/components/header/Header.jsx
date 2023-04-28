@@ -1,49 +1,26 @@
 import Link from 'next/link'
+import MainMenu from '../mainmenu/MainMenu'
+import UserMenu from '../usermenu/UserMenu'
 
-const mainMenu = [
-  {
-    label: 'Home',
-    route: '/',
-  },
-  {
-    label: 'Pets',
-    route: '/pets',
-  },
-  {
-    label: 'About',
-    route: '/about',
-  },
-  {
-    label: 'Login',
-    route: '/login',
-  },
-  {
-    label: 'Register',
-    route: '/register',
-  },
-]
-
-const Header = () => {
+export default function Header () {
   return (
-    <header className='mx-auto flex w-full max-w-4xl items-center justify-between py-3'>
-      <h1 className='text-xl font-extrabold text-green-50'>
-        <Link href='/'>
-          🐶 PetMatch.es
-        </Link>
-      </h1>
-      <nav>
-        <ul className='flex list-none gap-8'>
-          {mainMenu.map(({ label, route }) => (
-            <li key={route}>
-              <Link className='text-green-50' href={route}>
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+    <header className='mx-auto grid max-w-fit items-center justify-between py-2 lg:grid-cols-4'>
+      <div className='flex'>
+        <h1 className='text-xl font-extrabold text-gray-900'>
+          <Link href='/'>
+            🐶 PetMatch.es
+          </Link>
+        </h1>
+      </div>
+      <div className='flex'>
+        <MainMenu />
+      </div>
+      <div className='flex'>
+        <input className='rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50' type='text' placeholder='Search your next loving friend!' />
+      </div>
+      <div className='flex'>
+        <UserMenu />
+      </div>
     </header>
   )
 }
-
-export default Header
