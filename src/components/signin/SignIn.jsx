@@ -6,12 +6,13 @@ import styles from './SignIn.module.css'
 // Import hooks needed and libraries
 import { useState } from 'react'
 import { useFormik } from 'formik'
-// import { useRouter, useSearchParams } from 'next/navigation'
-import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 // Import components used on this page
 import Link from 'next/link'
 import { HiOutlineAtSymbol, HiOutlineEye } from 'react-icons/hi2'
+import { signIn } from 'next-auth/react'
+import toast from 'react-hot-toast'
 
 // Import utilities used
 import validateSignIn from '../../utils/validateSignIn'
@@ -19,6 +20,7 @@ import validateSignIn from '../../utils/validateSignIn'
 // Main component
 export default function SignIn() {
   const [show, setShow] = useState(false)
+  const router = useRouter()
 
   // Formik hook
   const formik = useFormik({
@@ -30,15 +32,20 @@ export default function SignIn() {
     onSubmit,
   })
 
+  // Handle form submission
   async function onSubmit(values) {
-    console.log('Form data', values);
-    const status = await signIn(`credentials`, {
-      redirect: true,
+    const response = await signIn(`credentials`, {
+      redirect: false,
       email: values.email,
       password: values.password,
       callbackUrl: '/'
     })
-    console.log('NextAuth Status:', status)
+    if (response.ok && !response.error) {
+      toast.success('Logged in successfully!', { duration: 3000 })
+      router.push('/')
+    } else {
+      toast.error(<div><span>Something went wrong!</span><br /><span className='text-sm'>{response.error}</span></div>, { duration: 5000 })
+    }
   }
 
   return (

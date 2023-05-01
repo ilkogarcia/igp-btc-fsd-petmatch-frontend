@@ -12,7 +12,7 @@ export default function RegisterPage() {
 
   return (
       <div className='flex h-screen bg-green-400'>
-        <div className='m-auto grid h-3/4 w-3/5 rounded-md bg-slate-50 lg:grid-cols-2'>
+        <div className='mx-auto mt-20 grid h-3/4 w-3/5 rounded-md bg-slate-50 lg:grid-cols-2'>
           <div className='relative overflow-hidden rounded-l-md'>
             <Image
               alt='This pet is looking for a home'

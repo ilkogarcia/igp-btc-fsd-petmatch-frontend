@@ -8,8 +8,7 @@ import Header from '../components/header/Header'
 import { font } from './fonts'
 import Footer from '@/components/footer/Footer'
 import { NextAuthProvider } from './providers'
-import { getServerSession } from 'next-auth'
-import { authOptions } from './api/auth/[...nextauth]/route'
+import { Toaster } from 'react-hot-toast'
 
 export const metadata = {
   title: 'PetMatch. Bringing forever homes and loving pets together',
@@ -18,9 +17,6 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children }) {
-  const session = await getServerSession(authOptions)
-  console.log(session)
-
   return (
     <html lang='en'>
       <head>
@@ -35,6 +31,7 @@ export default async function RootLayout({ children }) {
           <Header />
           {children}
           <Footer />
+          <Toaster />
         </NextAuthProvider>
       </body>
     </html>
