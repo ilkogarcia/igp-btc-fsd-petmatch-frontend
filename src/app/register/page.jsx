@@ -17,11 +17,13 @@ export default function RegisterPage() {
             <Image
               alt='This pet is looking for a home'
               src={petImage}
-              quality={100}
+              quality={85}
+              priority
               fill
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               style={{
                 objectFit: 'cover',
+                objectPosition: 'center',
               }}
             />
           </div>

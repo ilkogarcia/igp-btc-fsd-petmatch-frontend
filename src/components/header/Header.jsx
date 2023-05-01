@@ -2,24 +2,22 @@ import Link from 'next/link'
 import MainMenu from '../mainmenu/MainMenu'
 import UserMenu from '../usermenu/UserMenu'
 
-export default function Header () {
+export default function Header() {
+
   return (
-    <header className='mx-auto grid max-w-fit items-center justify-between py-2 lg:grid-cols-4'>
-      <div className='flex'>
-        <h1 className='text-xl font-extrabold text-gray-900'>
-          <Link href='/'>
+    <header className='mx-auto max-w-screen-xl bg-transparent py-4'>
+      <div className='flex items-center space-y-0 px-6 py-5'>
+        <div className='flex flex-grow justify-start'>
+          <Link className='text-xl font-bold text-white' href='/'>
             🐶 PetMatch.es
           </Link>
-        </h1>
-      </div>
-      <div className='flex'>
-        <MainMenu />
-      </div>
-      <div className='flex'>
-        <input className='rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50' type='text' placeholder='Search your next loving friend!' />
-      </div>
-      <div className='flex'>
-        <UserMenu />
+        </div>
+        <div className='hidden items-center justify-center space-x-6 pl-28 text-base font-medium md:flex md:pl-16'>
+          <MainMenu />
+        </div>
+        <div className='hidden items-center justify-center space-x-6 pl-28 text-base font-medium md:flex md:pl-16'>
+          <UserMenu />
+        </div>
       </div>
     </header>
   )

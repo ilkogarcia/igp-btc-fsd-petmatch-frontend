@@ -35,14 +35,14 @@ const fetchOnePet = async (id) => {
   }).then((res) => res.json())
 }
 
-const logMeIn = async (credentials) => {
+const logMeIn = async (email, password) => {
   const response = await fetch(`${API_URL}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(credentials),
+    body: JSON.stringify({ email, password }),
   })
-  const data = await response.json()
-  return data
+  const user = await response.json()
+  return user
 }
 
 const signMeUp = async (email, password) => {

@@ -9,6 +9,7 @@ const nextConfig = {
       'cdn.pixabay.com',
       'picsum.photos',
       'fastly.picsum.photos',
+      'xsgames.co',
     ],
   },
   experimental: {

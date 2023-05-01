@@ -6,6 +6,7 @@ import styles from './SignIn.module.css'
 // Import hooks needed and libraries
 import { useState } from 'react'
 import { useFormik } from 'formik'
+// import { useRouter, useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 
 // Import components used on this page
@@ -30,17 +31,18 @@ export default function SignIn() {
   })
 
   async function onSubmit(values) {
+    console.log('Form data', values);
     const status = await signIn(`credentials`, {
-      redirect: false,
+      redirect: true,
       email: values.email,
       password: values.password,
       callbackUrl: '/'
     })
-    console.log(status)
+    console.log('NextAuth Status:', status)
   }
 
   return (
-    <section className='mx-auto w-3/4'>
+    <div className='mx-auto w-3/4'>
       <div className='title'>
         <h1 className='py-4 text-4xl font-bold text-gray-800'>
           Login to Your Account
@@ -122,6 +124,6 @@ export default function SignIn() {
           and finding your perfect pet companion.
         </div>
       </div>
-    </section>
+    </div>
   )
 }

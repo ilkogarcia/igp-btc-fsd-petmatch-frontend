@@ -7,8 +7,8 @@ export const metadata = {
 
 export default function AboutPage () {
   return (
-    <div>
-      <section className='mt-48 flex w-full flex-wrap content-center justify-center'>
+    <div className='h-fit bg-green-400'>
+    <section className='mt-48 flex w-full flex-wrap content-center justify-center'>
         <h1 className='w-3/4 text-center text-8xl font-extrabold text-white'>
           About PetMatch
         </h1>

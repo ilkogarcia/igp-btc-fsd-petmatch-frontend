@@ -12,15 +12,15 @@ export default function LoginPage() {
 
   return (
       <div className='flex h-screen bg-green-400'>
-        <div className='m-auto grid h-3/4 w-3/5 rounded-md bg-slate-50 lg:grid-cols-2'>
+        <div className='mx-auto mt-20 grid h-3/4 w-3/5 rounded-md bg-slate-50 lg:grid-cols-2'>
           <div className='relative overflow-hidden rounded-l-md'>
             <Image
               alt='This pet is looking for a home'
               src={petImage}
               quality={85}
-              fill
-              sizes='100vw'
               priority
+              fill
+              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               style={{
                 objectFit: 'cover',
                 objectPosition: 'center',

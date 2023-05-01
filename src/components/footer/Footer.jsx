@@ -73,7 +73,7 @@ export default function Footer () {
               </li>
               <li className='mb-2'>
                 <a href='#!' className='text-neutral-600 dark:text-neutral-200'>
-                  About Us
+                  About us
                 </a>
               </li>
               <li className='mb-2'>
@@ -97,12 +97,12 @@ export default function Footer () {
               </li>
               <li className='mb-2'>
                 <a href='#!' className='text-neutral-600 dark:text-neutral-200'>
-                  Donate
+                  Donations
                 </a>
               </li>
               <li className='mb-2'>
                 <a href='#!' className='text-neutral-600 dark:text-neutral-200'>
-                  Volunteer
+                  Volunteering
                 </a>
               </li>
               <li className='mb-2'>
@@ -112,7 +112,7 @@ export default function Footer () {
               </li>
               <li className='mb-2'>
                 <a href='#!' className='text-neutral-600 dark:text-neutral-200'>
-                  erms and conditions
+                  Terms and conditions
                 </a>
               </li>
             </ul>
