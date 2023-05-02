@@ -1,6 +1,13 @@
 import '../../styles/globals.css'
 import Image from 'next/image'
-import { FaLinkedinIn, FaTwitter, FaFacebookF } from 'react-icons/fa'
+import {
+  FaLinkedinIn,
+  FaTwitter,
+  FaFacebookF,
+  FaRegHeart,
+  FaRegClock,
+  FaRegHandshake,
+} from 'react-icons/fa'
 
 export const metadata = {
   title: 'PetMatch. About us. Adopt a Pet and Save a Life',
@@ -9,7 +16,8 @@ export const metadata = {
 }
 
 export default function AboutPage() {
-  const petImage = '/assets/pexelsdorte_179221_640x640.jpg'
+  const petImage1 = '/assets/pexelsdorte_179221_640x640.jpg'
+  const petImage2 = '/assets/pexels_davidbrown_13993706_640x640.jpg'
 
   return (
     <div className='h-fit bg-white'>
@@ -34,7 +42,7 @@ export default function AboutPage() {
           <Image
             className='aspect-square overflow-clip rounded-full shadow'
             alt='This pet is looking for a home'
-            src={petImage}
+            src={petImage1}
             quality={85}
             priority
             width={400}
@@ -45,16 +53,53 @@ export default function AboutPage() {
 
       {/* our story */}
       <div className='mx-auto my-40 w-3/5'>
-        <div className='flex flex-col space-y-4 text-center'>
-          <span className='text-green-600'>About Us</span>
-          <h1 className='text-6xl font-extrabold text-gray-600'>Our Story</h1>
-          <p className='text-xl text-gray-400'>
-            PetMatch was founded in 2015 by a group of animal lovers who were
-            passionate about finding homes for pets in need. After seeing the
-            number of animals in shelters and the challenges that come with pet
-            ownership, they decided to create a platform that would make it
-            easier for families to find the perfect pet for their lifestyle.
-          </p>
+        <div className='flex flex-col text-center'>
+          <div className='mb-12 space-y-6'>
+            <span className='text-green-600'>Our Story</span>
+            <h1 className='text-6xl font-extrabold text-gray-600'>
+              We aim to make a change
+            </h1>
+          </div>
+          <div className='flex flex-col space-y-8 text-ellipsis text-left text-lg italic text-gray-400 antialiased'>
+            <p>
+              PetMatch was founded in 2015 by a group of animal lovers who were
+              passionate about finding homes for pets in need. After seeing the
+              number of animals in shelters and the challenges that come with
+              pet ownership, they decided to create a platform that would make
+              it easier for families to find the perfect pet for their
+              lifestyle.
+            </p>
+            <p>
+              Our platform is designed to make the adoption process as simple
+              and stress-free as possible for both pets and their new families.
+              We carefully select our partner shelters and rescue organizations
+              based on their commitment to animal welfare and responsible
+              adoption practices. This means that every pet available for
+              adoption on PetMatch has received proper medical care, behavioral
+              assessments, and training to ensure a smooth transition to their
+              new home.
+            </p>
+            <p>
+              We also believe in supporting pet parents throughout their journey
+              with their new companion. Our team is always available to provide
+              guidance and advice on everything from pet care and training to
+              veterinary care and nutrition. We are committed to ensuring that
+              every pet parent feels confident and prepared to provide a loving
+              and nurturing home for their new family member.
+            </p>
+            <p>
+              By choosing to adopt a pet through PetMatch, you are not only
+              saving the life of an animal in need, but you are also making a
+              positive impact on the world. Adopting a pet promotes responsible
+              pet ownership, reduces the number of animals in shelters and
+              rescues, and creates space for more animals in need to find their
+              forever homes.
+            </p>
+            <p className='text-sm'>
+              Thank you for choosing PetMatch and joining us in our mission to
+              make the world a better place for animals.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -64,15 +109,15 @@ export default function AboutPage() {
           <Image
             className='aspect-square overflow-clip rounded-full shadow'
             alt='This pet is looking for a home'
-            src={petImage}
+            src={petImage2}
             quality={85}
             priority
             width={400}
             height={400}
           />
         </div>
-        <div className='right flex flex-col space-y-6'>
-          <span className='text-green-600'>About Us</span>
+        <div className='right flex flex-col space-y-6 text-right'>
+          <span className='text-green-600'>Our Mission</span>
           <h1 className='text-6xl font-extrabold text-gray-600'>Our Mision</h1>
           <p className='text-xl text-gray-400'>
             Our mission at PetMatch is to connect loving families with pets in
@@ -85,9 +130,11 @@ export default function AboutPage() {
       {/* our values */}
       <div className='mx-auto my-40 w-3/5'>
         <div className='flex flex-col text-center'>
-          <div className='mb-12 space-y-6'>          
-            <span className='text-green-600'>About Us</span>
-            <h1 className='text-6xl font-extrabold text-gray-600'>Our Values</h1>
+          <div className='mb-12 space-y-6'>
+            <span className='text-green-600'>Our Values</span>
+            <h1 className='text-6xl font-extrabold text-gray-600'>
+              We live by these
+            </h1>
             <p className='text-xl text-gray-400'>
               Our work is guided by a set of core values that reflect{' '}
               <span className='text-green-500'>
@@ -96,31 +143,33 @@ export default function AboutPage() {
             </p>
           </div>
           <div className='grid gap-20 lg:grid-cols-3'>
-            <div className='flex flex-col items-center justify-items-center text-center'>
-              <h2 className='text-2xl font-bold text-gray-600'>London</h2>
-              <p className='text-lg text-gray-500'>
-                123 Main Street. London, UK
-              </p>
-              <p className='mt-6 text-sm text-gray-400'>
-                +44 123 456 7890 - london@petmatch.es
-              </p>
-            </div>
-            <div className='flex flex-col items-center justify-items-center text-center'>
-              <h2 className='text-2xl font-bold text-gray-600'>Paris</h2>
-              <p className='text-lg text-gray-500'>
-                123 Main Street. Paris, France
-              </p>
-              <p className='mt-6 text-sm text-gray-400'>
-                +33 123 456 7890 - paris@petmatch.es
+            <div className='flex cursor-pointer flex-col items-center justify-items-center text-center transition duration-500 hover:scale-125'>
+              <span className='icon mb-4 flex items-center rounded-full bg-gray-50 p-4 text-green-600'>
+                <FaRegHeart size={25} />
+              </span>
+              <h2 className='text-xl font-bold text-gray-600'>Compassion</h2>
+              <p className='text-md text-gray-500'>
+                We care deeply about every animal.
               </p>
             </div>
-            <div className='flex flex-col items-center justify-items-center text-center'>
-              <h2 className='text-2xl font-bold text-gray-600'>Berlin</h2>
-              <p className='text-lg text-gray-500'>
-                123 Main Street. Berlin, Germany
+            <div className='flex cursor-pointer flex-col items-center justify-items-center text-center transition duration-500 hover:scale-125'>
+              <span className='icon mb-4 flex items-center rounded-full bg-gray-50 p-4 text-green-600'>
+                <FaRegClock size={25} />
+              </span>
+              <h2 className='text-xl font-bold text-gray-600'>
+                Responsiveness
+              </h2>
+              <p className='text-md text-gray-500'>
+                We act quickly to meet needs.
               </p>
-              <p className='mt-6 text-sm text-gray-400'>
-                +49 123 456 7890 - berlin@petmatch.es
+            </div>
+            <div className='flex cursor-pointer flex-col items-center justify-items-center text-center transition duration-500 hover:scale-125'>
+              <span className='icon mb-4 flex items-center rounded-full bg-gray-50 p-4 text-green-600'>
+                <FaRegHandshake size={25} />
+              </span>
+              <h2 className='text-xl font-bold text-gray-600'>Trust</h2>
+              <p className='text-md text-gray-500'>
+                We are committed to honesty and transparency
               </p>
             </div>
           </div>
@@ -131,12 +180,14 @@ export default function AboutPage() {
       <div className='mx-auto my-40 w-3/5'>
         <div className='flex flex-col text-center'>
           <div className='mb-12 space-y-6'>
-            <span className='text-green-600'>About Us</span>
-            <h1 className='text-6xl font-extrabold text-gray-600'>Our Team</h1>
+            <span className='text-green-600'>Our Team</span>
+            <h1 className='text-6xl font-extrabold text-gray-600'>
+              Meet these fine folks
+            </h1>
             <p className='text-xl text-gray-400'>
               We have a dedicated team of animal welfare experts, software
-              engineers, and customer support specialists who are passionate about
-              helping pets and families find their perfect matc
+              engineers, and customer support specialists who are passionate
+              about helping pets and families find their perfect matc
             </p>
           </div>
           <div className='grid gap-20 lg:grid-cols-3'>
@@ -157,7 +208,7 @@ export default function AboutPage() {
                 <FaFacebookF className='text-xl text-gray-300' />
               </div>
             </div>
-            
+
             <div className='flex flex-col items-center justify-items-center text-center'>
               <Image
                 className='aspect-square shadow'
@@ -167,7 +218,9 @@ export default function AboutPage() {
                 width={400}
                 height={400}
               />
-              <p className='mt-6 text-sm font-bold text-green-500'>CFO/FOUNDER</p>
+              <p className='mt-6 text-sm font-bold text-green-500'>
+                CFO/FOUNDER
+              </p>
               <h3 className='mt-4 text-2xl text-gray-600'>Miguel Perez</h3>
               <div className='mt-8 flex space-x-4'>
                 <FaLinkedinIn className='text-xl text-gray-300' />
@@ -175,7 +228,7 @@ export default function AboutPage() {
                 <FaFacebookF className='text-xl text-gray-300' />
               </div>
             </div>
-            
+
             <div className='flex flex-col items-center justify-items-center text-center'>
               <Image
                 className='aspect-square shadow'
@@ -185,7 +238,9 @@ export default function AboutPage() {
                 width={400}
                 height={400}
               />
-              <p className='mt-6 text-sm font-bold text-green-500'>CEO/FOUNDER</p>
+              <p className='mt-6 text-sm font-bold text-green-500'>
+                CEO/FOUNDER
+              </p>
               <h3 className='mt-4 text-2xl text-gray-600'>Dalia Gomez</h3>
               <div className='mt-8 flex space-x-4'>
                 <FaLinkedinIn className='text-xl text-gray-300' />
