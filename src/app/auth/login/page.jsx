@@ -3,7 +3,7 @@ import Image from 'next/image'
 import SignIn from '../../../components/signin/SignIn'
 
 export default function LoginPage() {  
-  const petImage = '/assets/michaelG_aEtAEp3e0c_1920x2880.jpg'
+  const petImage = '/assets/michaelG_V7J3CSg5LY4_1920x2880.jpg'
 
   return (
       <div className='flex h-screen bg-green-400'>

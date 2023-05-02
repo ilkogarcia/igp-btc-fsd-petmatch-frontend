@@ -47,6 +47,7 @@ This project utilizes the following open source licensed images:
 
 Foto de Renee Bigelow: https://www.pexels.com/es-es/foto/fotografia-macro-de-gato-atigrado-marron-51439/
 
+Foto de Dorte: https://www.pexels.com/es-es/foto/fotografia-en-primer-plano-de-perro-de-pelo-corto-blanco-y-negro-179221/
 
 We appreciate the work of these authors and their contributions to the open source community.
   
