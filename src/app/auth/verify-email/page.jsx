@@ -1,19 +1,21 @@
+'use client'
+
+import { useSearchParams } from 'next/navigation'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { verifyEmail } from '../../../services/PetMatch'
 
-const fetchVerifyEmail = async (token) => {
-  // TODO: Remove this timeout when the API is ready
-  // console.log(token)
-  // await new Promise(resolve => setTimeout(resolve, 1000))
-  // TODO: Remove this error when the API is ready
-  // throw new Error('API not ready')
-  return true
-}
-
-export default async function VerifyEmailPage({ params }) {
+// Main component
+export default async function VerifyEmailPage() {
   const petImage = '/assets/michaelG_TJ0LK4iFgNM_1920x2880.jpg'
-  const { token } = params
-  const isEmailVerify = await fetchVerifyEmail(token)
+
+  // Get token from url
+  const searchParams = useSearchParams();
+  const token = searchParams.get('token');
+
+  // Verify email fetch request
+  const verifyEmailResponse = await verifyEmail(token)
 
   return (
     <div className='flex h-screen bg-green-400'>
@@ -33,15 +35,23 @@ export default async function VerifyEmailPage({ params }) {
           />
         </div>
         <div className='right flex flex-col justify-evenly'>
-          {isEmailVerify ? (
+          {verifyEmailResponse.sucess ? (
             <div className='mx-auto w-3/4 text-center align-middle'>
               <h1 className='text-4xl font-bold text-gray-800'>
                 Email verified!
               </h1>
-              <p className='mb-6 mt-2 text-gray-400'>
-                Your email has been successfully verified.
+              <p className='mb-8 mt-2 text-gray-400'>
+                Your email has been{' '}
+                <span className='font-bold text-green-500'>successfully</span>{' '}
+                verified.
                 <br />
-                Click below to log into your account.
+                <span className='text-gray-400'>
+                  {verifyEmailResponse.message}
+                </span>
+                <br />
+                <span className='font-light italic text-gray-400'>
+                  Click below to log into your account.
+                </span>
               </p>
               <Link
                 className='mx-auto rounded-full bg-green-500 px-8 py-4 text-lg text-white outline-none ring ring-green-300 hover:bg-green-700 active:bg-green-900'
@@ -55,13 +65,21 @@ export default async function VerifyEmailPage({ params }) {
               <h1 className='text-4xl font-bold text-gray-800'>
                 Email not verified!
               </h1>
-              <p className='mb-6 mt-2 text-gray-400'>
-                Your email has not been verified.
+              <p className='mb-8 mt-2 text-gray-500'>
+                Your email has{' '}
+                <span className='font-bold text-rose-500'>not</span> been
+                verified.
                 <br />
-                Please check your email for the verification link.
+                <span className='text-gray-400'>
+                  {verifyEmailResponse.message}
+                </span>
+                <br />
+                <span className='font-light italic text-gray-400'>
+                  Please check your email for the verification link.
+                </span>
               </p>
               <Link
-                className='mx-auto rounded-full bg-green-500 px-8 py-4 text-lg text-white outline-none ring ring-green-300 hover:bg-green-700 active:bg-green-900'
+                className='mx-auto rounded-full bg-rose-500 px-8 py-4 text-lg text-white outline-none ring ring-rose-300 hover:bg-rose-700 active:bg-rose-900'
                 href='/'
               >
                 Continue
