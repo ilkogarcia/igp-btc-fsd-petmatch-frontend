@@ -153,13 +153,13 @@ export default function Footer() {
             <div className='flex flex-col space-y-2 text-neutral-600 dark:text-neutral-200'>
               <Link
                 className='block text-sm hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4'
-                href='/'
+                href='/legal/privacy-policy'
               >
                 Privacy policy
               </Link>
               <Link
                 className='block text-sm hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4'
-                href='/'
+                href='/legal/terms-conditions'
               >
                 Terms and conditions
               </Link>
