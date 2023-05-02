@@ -45,5 +45,8 @@ This project utilizes the following open source licensed images:
 - [Image Name 2](https://image2-url.com) by [Author 2](https://author2-url.com) licensed under [License Name 2](https://license2-url.com)
 - [Image Name 3](https://image3-url.com) by [Author 3](https://author3-url.com) licensed under [License Name 3](https://license3-url.com)
 
+Foto de Renee Bigelow: https://www.pexels.com/es-es/foto/fotografia-macro-de-gato-atigrado-marron-51439/
+
+
 We appreciate the work of these authors and their contributions to the open source community.
   

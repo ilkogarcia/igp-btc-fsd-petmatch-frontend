@@ -1,10 +1,6 @@
+'use client'
 import Image from 'next/image'
 import SignUp from '../../../components/signup/SignUp'
-
-export const metadata = {
-  title: 'PetMatch. Join the PetMatch Community.',
-  description: 'By registering for an account, you can be part of a growing community of pet lovers who are committed to helping animals in need.',
-}
 
 export default function RegisterPage() {
   const petImage = '/assets/michaelG_kpbHRhlSHHA_1920x2880.jpg'

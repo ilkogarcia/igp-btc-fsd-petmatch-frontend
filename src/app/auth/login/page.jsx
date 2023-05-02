@@ -1,10 +1,6 @@
+'use client'
 import Image from 'next/image'
 import SignIn from '../../../components/signin/SignIn'
-
-export const metadata = {
-  title: 'PetMatch. Login to your account.',
-  description: 'Welcome back! Please log in to access your account and stay connected with all the latest updates from PetMatch.',
-}
 
 export default function LoginPage() {  
   const petImage = '/assets/michaelG_aEtAEp3e0c_1920x2880.jpg'

@@ -20,7 +20,7 @@ export default async function VerifyEmailPage() {
   return (
     <div className='flex h-screen bg-green-400'>
       <div className='mx-auto mt-20 grid h-3/4 w-3/5 rounded-md bg-slate-50 lg:grid-cols-2'>
-        <div className='relative overflow-hidden rounded-l-md'>
+        <div className='relative overflow-hidden rounded-t-md md:rounded-t-md lg:rounded-l-md lg:rounded-tr-none'>
           <Image
             alt='This pet is looking for a home'
             src={petImage}
@@ -30,7 +30,7 @@ export default async function VerifyEmailPage() {
             sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
             style={{
               objectFit: 'cover',
-              objectPosition: 'center',
+              objectPosition: 'top center',
             }}
           />
         </div>
@@ -44,12 +44,10 @@ export default async function VerifyEmailPage() {
                 Your email has been{' '}
                 <span className='font-bold text-green-500'>successfully</span>{' '}
                 verified.
-                <br />
-                <span className='text-gray-400'>
+                <span className='inline-block align-baseline text-gray-400'>
                   {verifyEmailResponse.message}
                 </span>
-                <br />
-                <span className='font-light italic text-gray-400'>
+                <span className='inline-block align-baseline font-light italic text-gray-400'>
                   Click below to log into your account.
                 </span>
               </p>

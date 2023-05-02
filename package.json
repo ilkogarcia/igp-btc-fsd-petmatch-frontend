@@ -11,6 +11,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "@sendgrid/helpers": "^7.7.0",
+    "@sendgrid/mail": "7.7.0",
     "autoprefixer": "10.4.14",
     "formik": "2.2.9",
     "next": "^13.3.4",

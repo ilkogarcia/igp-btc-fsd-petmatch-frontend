@@ -39,7 +39,7 @@ export default function UserMenu() {
         </button>
       ) : (
         <div className='flex items-center justify-between gap-6'>
-          <Link className='text-green-900 hover:text-white' href='/auth/login'>
+          <Link className='hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4 text-green-900 hover:text-white' href='/auth/login'>
             Log in
           </Link>
           <Link
