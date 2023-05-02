@@ -39,12 +39,12 @@ export default function UserMenu() {
         </button>
       ) : (
         <div className='flex items-center justify-between gap-6'>
-          <Link className='text-green-900 hover:text-white' href='/login'>
+          <Link className='text-green-900 hover:text-white' href='/auth/login'>
             Log in
           </Link>
           <Link
             className='rounded-full border bg-green-500 px-4 py-2 text-sm text-white hover:bg-green-700 focus:outline-none focus:ring focus:ring-green-300 active:bg-green-900'
-            href='/register'
+            href='/auth/register'
           >
             Register
           </Link>

@@ -1,6 +1,5 @@
-import '../../styles/globals.css'
 import Image from 'next/image'
-import SignIn from '../../components/signin/SignIn'
+import SignIn from '../../../components/signin/SignIn'
 
 export const metadata = {
   title: 'PetMatch. Login to your account.',

@@ -3,13 +3,8 @@
  * @description This module is responsible off data fetching and manipulation from the PetMatch API.
  */
 
-const API_URL = 'https://petmatch.up.railway.app/api/v1'
-
-// const token =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQ4LCJ1c2VyRW1haWwiOiJpbGtvLmdhcmNpYUBnbWFpbC5jb20iLCJ1c2VyUm9sZSI6ImFkbWluaXN0cmF0b3IiLCJpYXQiOjE2ODI2MTQ2OTksImV4cCI6MTY4MjcwMTA5OX0.GismXrULlWdrQFFhC1xJERYUiYH_Rxbh_uDerN78-Kc'
-
 const fetchAllPets = async (bodyRequest) => {
-  return await fetch(`${API_URL}/pets/search?limit=20&page=1`, {
+  return await fetch(`${process.env.API_URL}/pets/search?limit=20&page=1`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -23,7 +18,7 @@ const fetchAllPets = async (bodyRequest) => {
 }
 
 const fetchOnePet = async (id) => {
-  return await fetch(`${API_URL}/pets/${id}`, {
+  return await fetch(`${process.env.API_URL}/pets/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -36,7 +31,7 @@ const fetchOnePet = async (id) => {
 }
 
 const logMeIn = async (email, password) => {
-  const response = await fetch(`${API_URL}/auth/login`, {
+  const response = await fetch(`${process.env.API_URL}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
@@ -46,7 +41,7 @@ const logMeIn = async (email, password) => {
 }
 
 const signMeUp = async (email, password) => {
-  const response = await fetch(`${API_URL}/auth/register`, {
+  const response = await fetch(`${process.env.API_URL}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),

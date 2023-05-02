@@ -123,7 +123,7 @@ export default function SignIn() {
         <div className='mx-auto mt-2 w-3/4 text-center text-gray-400'>
           <p>Don't have an account yet?</p>
           <Link
-            href='/register'
+            href='/auth/register'
             className='text-green-500 hover:text-green-800'
           >
             Sign Up

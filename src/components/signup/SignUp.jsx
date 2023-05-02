@@ -156,7 +156,7 @@ export default function SignUp() {
         <div className='mt-2 text-center text-gray-400'>
           Have an account?{' '}
           <Link
-            href='/login'
+            href='/auth/login'
             className='inline-block align-baseline text-sm text-green-500 hover:text-green-800'
           >
             Sign In

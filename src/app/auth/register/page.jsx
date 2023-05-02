@@ -1,6 +1,5 @@
-import '../../styles/globals.css'
 import Image from 'next/image'
-import SignUp from '../../components/signup/SignUp'
+import SignUp from '../../../components/signup/SignUp'
 
 export const metadata = {
   title: 'PetMatch. Join the PetMatch Community.',
