@@ -126,7 +126,7 @@ export default function SignUp() {
         <div className={styles.input_group}>
           <textarea
             name='message'
-            rows='10'
+            rows='5'
             placeholder='Your message here...'
             className={styles.input_text}
             {...formik.getFieldProps('message')}
