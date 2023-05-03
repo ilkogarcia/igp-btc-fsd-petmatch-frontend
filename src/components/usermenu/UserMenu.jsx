@@ -6,8 +6,7 @@ import Image from 'next/image'
 
 export default function UserMenu() {
   const { data: session } = useSession()
-  console.log('session', session);
-
+  
   return (
     <div className=' mx-auto flex h-fit w-fit items-center justify-between gap-6'>
       {session?.user ? (

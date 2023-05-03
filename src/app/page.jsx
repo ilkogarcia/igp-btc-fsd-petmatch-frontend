@@ -1,8 +1,12 @@
+'use client'
 import '../styles/globals.css'
 import PetCard from '../components/petcard/PetCard'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
+
 
 export default function HomePage() {
+  const { data: session } = useSession()
 
   return (
     <main className='relative'>
@@ -29,14 +33,18 @@ export default function HomePage() {
             </span>
           </p>
         </div>
-        <div className='mx-auto mt-10 w-4/5 text-center'>
-          <Link
-            className='mx-auto rounded-full bg-green-500 px-10 py-5 text-lg text-white outline-none ring ring-green-300 hover:bg-green-700 active:bg-green-900'
-            href='/auth/register'
-          >
-            Register now. It's free!
-          </Link>
-        </div>
+        {session?.user === undefined  ? (
+          <div className='mx-auto mt-10 w-4/5 text-center'>
+            <Link
+              className='mx-auto rounded-full bg-green-500 px-10 py-5 text-lg text-white outline-none ring ring-green-300 hover:bg-green-700 active:bg-green-900'
+              href='/auth/register'
+            >
+              Register now. It's free!
+            </Link>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
       <div className='mt-48'>
         <h2 className='mb-12 text-center text-6xl font-extralight text-white'>
