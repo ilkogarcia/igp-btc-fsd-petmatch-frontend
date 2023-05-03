@@ -5,9 +5,9 @@
 
 import '../styles/globals.css'
 import Header from '../components/header/Header'
-import { font } from './fonts'
+import { font } from '../fonts'
 import Footer from '@/components/footer/Footer'
-import { NextAuthProvider } from './providers'
+import { NextAuthProvider } from '../providers'
 import { Toaster } from 'react-hot-toast'
 
 export const metadata = {

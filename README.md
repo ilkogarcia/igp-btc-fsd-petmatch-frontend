@@ -49,5 +49,8 @@ Foto de Renee Bigelow: https://www.pexels.com/es-es/foto/fotografia-macro-de-gat
 
 Foto de Dorte: https://www.pexels.com/es-es/foto/fotografia-en-primer-plano-de-perro-de-pelo-corto-blanco-y-negro-179221/
 
+Foto de <a href="https://unsplash.com/@ericjamesward?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Eric Ward</a> en <a href="https://unsplash.com/es/fotos/ISg37AI2A-s?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+
 We appreciate the work of these authors and their contributions to the open source community.
   
