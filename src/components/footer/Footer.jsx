@@ -134,13 +134,13 @@ export default function Footer() {
                 className='block text-sm hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4'
                 href='/'
               >
-                Donations
+                Donation Center
               </Link>
               <Link
                 className='block text-sm hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4'
                 href='/'
               >
-                Volunteering
+                Volunteer Opportunities
               </Link>
             </div>
           </div>

@@ -1,0 +1,19 @@
+  .button {
+    @apply w-1/2 rounded-md border-green-400 border-2;
+    @apply py-1 text-sm font-semibold text-green-400;
+  }
+  
+  .button:hover {
+    @apply border-2 border-white bg-green-600;
+    @apply text-white;
+  }
+
+  .bigButton {
+    @apply w-1/2 rounded-md border-green-400 border-2;
+    @apply py-3 text-sm font-semibold text-green-400;
+  }
+  
+  .bigButton:hover {
+    @apply border-2 border-white bg-green-600;
+    @apply text-white;
+  }

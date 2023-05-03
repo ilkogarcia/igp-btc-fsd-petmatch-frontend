@@ -26,7 +26,7 @@ export default function UserMenu() {
             </span>
           )}
           <h2 className='text-gray-900'>
-            <Link href='/'>{session.user.data.username || 'Unknow'}</Link>
+            <Link href='/user'>{session.user.data.username || 'Unknow'}</Link>
           </h2>
         </div>
       ) : (
