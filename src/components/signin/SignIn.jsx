@@ -116,8 +116,8 @@ export default function SignIn() {
 
         {/* bottom */}
         <div className='mt-2 text-center text-gray-400'>
-          <Link href='#' className='text-green-500 hover:text-green-800'>
-            Forgot you password?
+          <Link href='/auth/forgot-password' className='text-green-500 hover:text-green-800'>
+            Forgot your password?
           </Link>
         </div>
         <div className='mx-auto mt-2 w-3/4 text-center text-gray-400'>

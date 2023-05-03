@@ -26,7 +26,7 @@ export async function getStaticProps({ params }) {
 
 function Post({ source, frontmatter }) {
   return (
-    <BlogLayout>
+    <BlogLayout metadata={frontmatter}>
       <div className='h-fit bg-white'>
         <MDXRemote {...source} />
       </div>

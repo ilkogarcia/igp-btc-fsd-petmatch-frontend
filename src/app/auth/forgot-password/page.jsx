@@ -1,9 +1,9 @@
 'use client'
+import ForgotPassword from '@/components/fogotpassword/ForgotPassword'
 import Image from 'next/image'
-import SignIn from '../../../components/signin/SignIn'
 
-export default function LoginPage() {  
-  const petImage = '/assets/michaelG_V7J3CSg5LY4_1920x2880.jpg'
+function forgotPassword() {  
+  const petImage = '/assets/michaelG_KuDi137PY4I_1920x2880.jpg'
 
   return (
       <div className='flex h-screen bg-green-400'>
@@ -18,16 +18,18 @@ export default function LoginPage() {
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               style={{
                 objectFit: 'cover',
-                objectPosition: 'center',
+                objectPosition: 'top center',
               }}
             />
           </div>
           <div className='right flex flex-col justify-evenly'>
             <div className='py-10 text-center'>
-              <SignIn />
+             <ForgotPassword />
             </div>
           </div>
         </div>
     </div>
   )
 }
+
+export default forgotPassword

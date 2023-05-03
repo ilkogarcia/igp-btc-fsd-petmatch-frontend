@@ -12,7 +12,7 @@ export const metadata = {
     'Read the latest articles on pet care, training, adoption, and more. Our blog offers insights and advice for pet owners and animal lovers.',
 }
 
-function BlogLayout({ children }) {
+function BlogLayout({ children, metadata = {} }) {
   return (
     <html lang='en'>
       <Head>
