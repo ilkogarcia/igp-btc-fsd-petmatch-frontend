@@ -1,5 +1,4 @@
 import '../../styles/globals.css'
-import Image from 'next/image'
 import ContactUs from '../../components/form-contact-us'
 
 export const metadata = {
@@ -9,7 +8,6 @@ export const metadata = {
 }
 
 export default function ContactPage() {
-  const catImage = '/assets/reneebigelow_51439_640x640.jpg'
 
   return (
     <div className='h-fit bg-white'>
@@ -25,18 +23,9 @@ export default function ContactPage() {
           <p className='text-xl text-gray-400'>
             If you have any questions, comments, or suggestions, please don't hesitate to contact us using the form below. 
           </p>
-          <ContactUs />
         </div>
-        <div className='right flex flex-col pt-20 items-center justify-items-center'>
-          <Image
-            className='shadow aspect-square overflow-clip rounded-full'
-            alt='This pet is looking for a home'
-            src={catImage}
-            quality={85}
-            priority
-            width={400}
-            height={400}
-          />
+        <div className='right flex flex-col pt-2 items-center justify-items-center'>
+          <ContactUs />
         </div>
       </div>
 
