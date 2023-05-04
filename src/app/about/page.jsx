@@ -1,9 +1,7 @@
+import TeamPlayer from '@/components/team-player'
 import '../../styles/globals.css'
 import Image from 'next/image'
 import {
-  FaLinkedinIn,
-  FaTwitter,
-  FaFacebookF,
   FaRegHeart,
   FaRegClock,
   FaRegHandshake,
@@ -18,6 +16,65 @@ export const metadata = {
 export default function AboutPage() {
   const petImage1 = '/assets/pexelsdorte_179221_640x640.jpg'
   const petImage2 = '/assets/pexels_davidbrown_13993706_640x640.jpg'
+
+  const teamPlayers = [
+    {
+      name: 'Gabriel Ramirez',
+      role: 'CEO & Founder',
+      picture: '/assets/team/pexels-bruno-salvadori-2269872.jpg',
+      socialLinks: {
+        twitterUrl: 'https://twitter.com/',
+        linkedinUrl: 'https://www.linkedin.com/',
+      },
+    },
+    {
+      name: 'Sophia García',
+      role: 'COO',
+      picture: '/assets/team/pexels-mwabonje-1820575.jpg',
+      socialLinks: {
+        facebookUrl: 'https://www.facebook.com/',
+        linkedinUrl: 'https://www.linkedin.com/',
+      },
+    },
+    {
+      name: 'Isabella López',
+      role: 'CTO & Co-Founder',
+      picture: '/assets/team/pexels-yuri-manei-2766408.jpg',
+      socialLinks: {
+        facebookUrl: 'https://www.facebook.com/',
+        twitterUrl: 'https://twitter.com/',
+        linkedinUrl: 'https://www.linkedin.com/',
+      },
+    },
+    {
+      name: 'Alexander Davis',
+      role: 'Designer',
+      picture: '/assets/team/pexels-erik-mclean-4061512.jpg',
+      socialLinks: {
+        twitterUrl: 'https://twitter.com/',
+        linkedinUrl: 'https://www.linkedin.com/',
+      },
+    },
+    {
+      name: 'Antonio Johnson',
+      role: 'Content Creator',
+      picture: '/assets/team/pexels-spencer-selover-428328.jpg',
+      socialLinks: {
+        twitterUrl: 'https://twitter.com/',
+        linkedinUrl: 'https://www.linkedin.com/',
+      },
+    },
+    {
+      name: 'Benjamin Martinez',
+      role: 'Photographer',
+      picture: '/assets/team/pexels-waseem-kahlool-673021.jpg',
+      socialLinks: {
+        facebookUrl: 'https://www.facebook.com/',
+        linkedinUrl: 'https://www.linkedin.com/',
+      },
+    }
+  ]
+
 
   return (
     <div className='h-fit bg-white'>
@@ -191,63 +248,15 @@ export default function AboutPage() {
             </p>
           </div>
           <div className='grid gap-20 lg:grid-cols-3'>
-            <div className='flex flex-col items-center justify-items-center text-center'>
-              <Image
-                className='aspect-square shadow'
-                alt='Brandom Smith'
-                src='https://loremflickr.com/400/400/man'
-                quality={85}
-                width={400}
-                height={400}
+            {teamPlayers.map((player, index) => (
+              <TeamPlayer
+                key={index}
+                name={player.name}
+                role={player.role}
+                picture={player.picture}
+                socialLinks={player.socialLinks}
               />
-              <p className='mt-6 text-sm font-bold text-green-500'>CTO</p>
-              <h3 className='mt-4 text-2xl text-gray-600'>Brandon Smith</h3>
-              <div className='mt-8 flex space-x-4'>
-                <FaLinkedinIn className='text-xl text-gray-300' />
-                <FaTwitter className='text-xl text-gray-300' />
-                <FaFacebookF className='text-xl text-gray-300' />
-              </div>
-            </div>
-
-            <div className='flex flex-col items-center justify-items-center text-center'>
-              <Image
-                className='aspect-square shadow'
-                alt='Jhon Smith'
-                src='https://loremflickr.com/400/400/man'
-                quality={85}
-                width={400}
-                height={400}
-              />
-              <p className='mt-6 text-sm font-bold text-green-500'>
-                CFO/FOUNDER
-              </p>
-              <h3 className='mt-4 text-2xl text-gray-600'>Miguel Perez</h3>
-              <div className='mt-8 flex space-x-4'>
-                <FaLinkedinIn className='text-xl text-gray-300' />
-                <FaTwitter className='text-xl text-gray-300' />
-                <FaFacebookF className='text-xl text-gray-300' />
-              </div>
-            </div>
-
-            <div className='flex flex-col items-center justify-items-center text-center'>
-              <Image
-                className='aspect-square shadow'
-                alt='Jhon Smith'
-                src='https://loremflickr.com/400/400/girl'
-                quality={85}
-                width={400}
-                height={400}
-              />
-              <p className='mt-6 text-sm font-bold text-green-500'>
-                CEO/FOUNDER
-              </p>
-              <h3 className='mt-4 text-2xl text-gray-600'>Dalia Gomez</h3>
-              <div className='mt-8 flex space-x-4'>
-                <FaLinkedinIn className='text-xl text-gray-300' />
-                <FaTwitter className='text-xl text-gray-300' />
-                <FaFacebookF className='text-xl text-gray-300' />
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

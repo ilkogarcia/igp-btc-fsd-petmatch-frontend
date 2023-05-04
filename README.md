@@ -52,5 +52,19 @@ Foto de Dorte: https://www.pexels.com/es-es/foto/fotografia-en-primer-plano-de-p
 Foto de <a href="https://unsplash.com/@ericjamesward?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Eric Ward</a> en <a href="https://unsplash.com/es/fotos/ISg37AI2A-s?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
 
+Foto de Mwabonje: https://www.pexels.com/es-es/foto/foto-de-mujer-con-panuelo-en-la-cabeza-1820575/
+
+Foto de Spencer Selover: https://www.pexels.com/es-es/foto/hombre-vestido-con-mochila-al-lado-de-la-planta-428328/
+
+Foto de Bruno Salvadori: https://www.pexels.com/es-es/foto/foto-de-enfoque-superficial-del-hombre-en-camisa-de-vestir-de-lunares-blanco-y-negro-con-gafas-de-sol-negras-2269872/
+
+Foto de waseem kahlool: https://www.pexels.com/es-es/foto/persona-sosteniendo-una-camara-dslr-673021/
+
+Foto de Erik Mclean: https://www.pexels.com/es-es/foto/hombre-en-camiseta-azul-y-roja-con-cuello-redondo-con-gorra-roja-4061512/
+
+Foto de Yuri Manei: https://www.pexels.com/es-es/foto/foto-de-mujer-vistiendo-calentador-de-orejas-2766408/
+
+
+
 We appreciate the work of these authors and their contributions to the open source community.
   
