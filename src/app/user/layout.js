@@ -1,7 +1,7 @@
 'use client'
 
 import '../../styles/globals.css'
-import { NextAuthProvider } from '../../providers'
+import { NextAuthProvider } from '../providers'
 import MenuUser from '@/components/menu-left-users'
 
 function UserLayout({ children }) {

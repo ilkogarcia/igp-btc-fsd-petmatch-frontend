@@ -1,9 +1,8 @@
 'use client'
-import BlogLayout from '@/components/bloglayout'
 import '../styles/globals.css'
-import { getAllFilesMetadata } from '../utils/mdx'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getAllFilesMetadata } from '../utils/mdx'
 
 export async function getStaticProps() {
   const posts = await getAllFilesMetadata()
@@ -16,7 +15,6 @@ export async function getStaticProps() {
 
 function BlogPage({ posts }) {
   return (
-    <BlogLayout>
       <div className='h-fit bg-white'>
         {/* main section  */}
         <div className='mx-auto mt-40 grid w-3/5 gap-20 lg:grid-cols-2'>
@@ -48,7 +46,7 @@ function BlogPage({ posts }) {
               <div className='relative overflow-hidden rounded-t-md'>
                 <Image
                   alt='This pet is looking for a home'
-                  src={post.image}
+                  src={post.coverImage}
                   quality={85}
                   width={640}
                   height={480}
@@ -59,15 +57,15 @@ function BlogPage({ posts }) {
                 />
               </div>
               <div className='p-6'>
-                <Link href={`/blog/${post.slug}`}>
+                <Link href={`/posts/${post.slug}`}>
                   <h3 className='text-3xl font-extrabold text-gray-600'>
                     {post.title}
                   </h3>
                 </Link>
-                <p className='mt-6 text-gray-500'>{post.description}</p>
+                <p className='mt-6 text-gray-500'>{post.excerpt}</p>
                 <div className='mt-12 flex justify-end'>
                   <p className='text-sm text-gray-300'>
-                    {post.author}{' '}
+                    {post.author.name}{' '}
                     <span className='italic'>( {post.date} )</span>
                   </p>
                 </div>
@@ -76,7 +74,6 @@ function BlogPage({ posts }) {
           ))}
         </div>
       </div>
-    </BlogLayout>
   )
 }
 

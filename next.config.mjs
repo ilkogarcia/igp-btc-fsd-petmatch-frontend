@@ -1,5 +1,20 @@
+import nextMDX from '@next/mdx'
+
+const withMDX = nextMDX({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+})
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  experimental: {
+    appDir: true,
+    mdxRs: true,
+  },
   images: {
     domains: [
       'loremflickr.com',
@@ -12,10 +27,7 @@ const nextConfig = {
       'xsgames.co',
     ],
   },
-  experimental: {
-    appDir: true,
-  },
   reactStrictMode: false,
 }
 
-module.exports = nextConfig
+export default withMDX(nextConfig)

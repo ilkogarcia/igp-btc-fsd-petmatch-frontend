@@ -6,12 +6,12 @@ import { serialize } from 'next-mdx-remote/serialize'
 const root = process.cwd()
 
 export function getFiles() {
-  return fs.readdirSync(path.join(root, 'src/data'))
+  return fs.readdirSync(path.join(root, 'src/_posts'))
 }
 
 export async function getFileBySlug(slug) {
   const mdxSource = fs.readFileSync(
-    path.join(path.join(root, 'src/data'), `${slug}.mdx`),
+    path.join(path.join(root, 'src/_posts'), `${slug}.mdx`),
     'utf8'
   )
 
@@ -32,7 +32,7 @@ export function getAllFilesMetadata() {
 
   return files.reduce((allPosts, postSlug) => {
     const mdxSource = fs.readFileSync(
-      path.join(root, 'src/data', postSlug),
+      path.join(root, 'src/_posts', postSlug),
       'utf8'
     )
     const { data } = matter(mdxSource)

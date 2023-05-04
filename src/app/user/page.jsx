@@ -1,5 +1,5 @@
 'use client'
-import styles from './UserPage.module.css'
+import styles from './styles.module.css'
 import { useSession } from 'next-auth/react'
 
 function UserPage() {

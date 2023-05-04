@@ -1,8 +1,5 @@
-import { font } from '../fonts'
+import { font } from '../app/fonts'
 import Head from 'next/head'
-import Header from './header'
-import Footer from '@/components/footer'
-import { NextAuthProvider } from '../providers'
 
 export const metadata = {
   title:
@@ -22,11 +19,7 @@ function BlogLayout({ children, metadata = {} }) {
       <body
         className={`${font.variable} flex min-h-screen flex-col bg-green-400 antialiased`}
       >
-        <NextAuthProvider>
-          <Header />
           {children}
-          <Footer />
-        </NextAuthProvider>
       </body>
     </html>
   )

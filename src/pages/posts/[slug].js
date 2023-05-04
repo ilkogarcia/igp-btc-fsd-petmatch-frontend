@@ -1,3 +1,4 @@
+import '../../styles/globals.css'
 import { getFileBySlug, getFiles } from '../../utils/mdx'
 import { MDXRemote } from 'next-mdx-remote'
 import BlogLayout from '@/components/bloglayout'
