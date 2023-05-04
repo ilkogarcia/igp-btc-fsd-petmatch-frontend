@@ -25,7 +25,7 @@ function AccountPage() {
         <p className='text-md text-gray-400'>
         Keeping your information up-to-date is important, and we want to make it as simple as possible for you to do so. Using the form below you can update your profile information, including your name, email address, and many other details.
         </p>
-        <UserProfile />
+        <UserProfile className='w-3/4 mt-8'/>
       </div>
     </div>
   )

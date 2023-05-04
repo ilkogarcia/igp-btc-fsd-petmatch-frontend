@@ -9,19 +9,19 @@ const mainMenu = [
   },
   {
     label: 'My Applications',
-    route: '/user/applications',
+    route: '/user',
   },
   {
     label: 'My Favorites',
-    route: '/user/favorites',
+    route: '/user',
   },
   {
     label: 'My Messages',
-    route: '/user/messages',
+    route: '/user',
   },
   {
     label: 'My Donations',
-    route: '/user/donations',
+    route: '/user',
   },
   {
     label: 'My Account',
@@ -34,14 +34,14 @@ function MenuUser() {
     <nav>
       <h2 className='mb-2 text-xl font-bold text-green-600'>Menu</h2>
       {mainMenu.map(({ label, route }) => (
-        <p key={route} className='mb-2'>
+        <span key={route} className='mb-2 text-sm sm:block sm:align-baseline'>
         <Link
           className='hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4 text-green-600 hover:text-green-800'
           href={route}
         >
-          {label}
+          {label}{' '}
         </Link>
-        </p>
+        </span>
       ))}
     </nav>
   )

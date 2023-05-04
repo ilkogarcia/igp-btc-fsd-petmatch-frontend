@@ -23,7 +23,7 @@
 }
 
 .button {
-  @apply w-full rounded-md bg-gradient-to-r from-green-400 to-green-600;
+  @apply w-full rounded-md bg-gradient-to-r from-green-400 to-green-600 text-center;
   @apply py-3 text-lg font-semibold text-gray-50;
 }
 

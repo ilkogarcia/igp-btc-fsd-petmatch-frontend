@@ -7,10 +7,12 @@ import MenuUser from '@/components/menu-left-users'
 function UserLayout({ children }) {
   return (
     <NextAuthProvider>
-      <div className='grid h-screen w-screen grid-cols-12 bg-white pb-40 pt-10'>
-        <div className='col-span-10 grid px-10'>{children}</div>
-        <div className='col-span-2 grid pt-10'>
+      <div className='flex flex-col bg-white pb-40 pt-10 sm:grid sm:grid-cols-12'>
+        <div className='mx-10 flex flex-row sm:col-span-2 sm:grid'>
           <MenuUser />
+        </div>
+        <div className='mx-10 flex flex-col sm:col-span-10 sm:grid'>
+          {children}
         </div>
       </div>
     </NextAuthProvider>
