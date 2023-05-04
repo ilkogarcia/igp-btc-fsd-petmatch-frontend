@@ -1,9 +1,8 @@
-import '../../styles/globals.css'
-import { font } from '../../fonts'
+import { font } from '../fonts'
 import Head from 'next/head'
-import Header from '../header/Header'
-import Footer from '@/components/footer/Footer'
-import { NextAuthProvider } from '../../providers'
+import Header from './header'
+import Footer from '@/components/footer'
+import { NextAuthProvider } from '../providers'
 
 export const metadata = {
   title:

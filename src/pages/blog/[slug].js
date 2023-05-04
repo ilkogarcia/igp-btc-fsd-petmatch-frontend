@@ -1,6 +1,6 @@
 import { getFileBySlug, getFiles } from '../../utils/mdx'
 import { MDXRemote } from 'next-mdx-remote'
-import BlogLayout from '@/components/bloglayout/BlogLayout'
+import BlogLayout from '@/components/bloglayout'
 
 export async function getStaticPaths() {
   const posts = await getFiles()

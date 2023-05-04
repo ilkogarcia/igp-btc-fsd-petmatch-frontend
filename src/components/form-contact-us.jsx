@@ -1,19 +1,12 @@
 'use client'
-// Import styles sheet
-import styles from './ContactUs.module.css'
+import styles from './styles.module.css'
 
-// Import hooks needed
 import { useFormik } from 'formik'
-
-// Import components used on this page
 import { HiOutlineAtSymbol } from 'react-icons/hi2'
 import toast from 'react-hot-toast'
+import validateContactUs from '../utils/validateContactUs'
+import SendEmail from '../services/SendEmail'
 
-// Import utilities used
-import validateContactUs from '../../utils/validateContactUs'
-import SendEmail from '../../services/SendEmail'
-
-// Main component
 export default function SignUp() {
   // Formik hook
   const formik = useFormik({

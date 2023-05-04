@@ -3,7 +3,7 @@
  * @description Page where the list of pets is displayed.
  */
 
-import { PetsList } from '../../components/petlist/PetsList'
+import { PetsList } from '../../components/pets-list'
 
 export default async function PetsPage () {
   return (

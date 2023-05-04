@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
-import MainMenu from '../mainmenu/MainMenu'
-import UserMenu from '../usermenu/UserMenu'
+import MainMenu from './menu-top-main'
+import UserMenu from './menu-top-user'
 
 export default function Header() {
 

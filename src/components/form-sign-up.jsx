@@ -1,7 +1,7 @@
 'use client'
 
 // Import styles sheet
-import styles from './SignUp.module.css'
+import styles from './styles.module.css'
 
 // Import hooks needed
 import { useState } from 'react'
@@ -14,11 +14,11 @@ import {
   HiOutlineAtSymbol,
   HiOutlineEye,
 } from 'react-icons/hi2'
-import { signMeUp } from '../../services/PetMatch'
+import { signMeUp } from '../services/PetMatch'
 import toast from 'react-hot-toast'
 
 // Import utilities used
-import validateSignUp  from '../../utils/validateSignUp'
+import validateSignUp  from '../utils/validateSignUp'
 
 // Main component
 export default function SignUp() {

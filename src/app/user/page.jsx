@@ -4,7 +4,6 @@ import { useSession } from 'next-auth/react'
 
 function UserPage() {
   const { data: session } = useSession()
-  console.log('session', session)
 
   return (
     <div className='flex flex-col space-y-8 place-content-start'>

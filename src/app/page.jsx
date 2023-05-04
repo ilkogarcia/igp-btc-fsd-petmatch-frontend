@@ -1,6 +1,6 @@
 'use client'
 import '../styles/globals.css'
-import PetCard from '../components/petcard/PetCard'
+import PetCard from '../components/pet-card'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 

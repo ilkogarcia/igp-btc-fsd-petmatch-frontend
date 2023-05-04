@@ -1,5 +1,5 @@
 'use client'
-import BlogLayout from '@/components/bloglayout/BlogLayout'
+import BlogLayout from '@/components/bloglayout'
 import '../styles/globals.css'
 import { getAllFilesMetadata } from '../utils/mdx'
 import Image from 'next/image'

@@ -1,7 +1,7 @@
 'use client'
 
 // Import styles sheet
-import styles from './SignIn.module.css'
+import styles from './styles.module.css'
 
 // Import hooks needed and libraries
 import { useState } from 'react'
@@ -15,7 +15,7 @@ import { signIn } from 'next-auth/react'
 import toast from 'react-hot-toast'
 
 // Import utilities used
-import validateSignIn from '../../utils/validateSignIn'
+import validateSignIn from '../utils/validateSignIn'
 
 // Main component
 export default function SignIn() {

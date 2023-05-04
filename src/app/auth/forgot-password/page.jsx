@@ -1,5 +1,5 @@
 'use client'
-import ForgotPassword from '@/components/fogotpassword/ForgotPassword'
+import ForgotPassword from '@/components/forgotpassword'
 import Image from 'next/image'
 
 function forgotPassword() {  

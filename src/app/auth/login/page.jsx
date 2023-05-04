@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import SignIn from '../../../components/signin/SignIn'
+import SignIn from '../../../components/form-sign-in'
 
 export default function LoginPage() {  
   const petImage = '/assets/michaelG_V7J3CSg5LY4_1920x2880.jpg'

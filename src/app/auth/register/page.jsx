@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import SignUp from '../../../components/signup/SignUp'
+import SignUp from '../../../components/form-sign-up'
 
 export default function RegisterPage() {
   const petImage = '/assets/michaelG_kpbHRhlSHHA_1920x2880.jpg'

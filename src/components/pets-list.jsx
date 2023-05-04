@@ -1,11 +1,6 @@
-/**
- * @module src/components/petlist/PetsList
- * @description Component to show a list of pets
- */
-
-import { fetchAllPets } from '../../services/PetMatch'
+import { fetchAllPets } from '../services/PetMatch'
 import Link from 'next/link'
-import { LikeButton } from '../like/LikeButton'
+import { LikeButton } from './likebutton'
 
 export async function PetsList() {
   const bodyRequest = {

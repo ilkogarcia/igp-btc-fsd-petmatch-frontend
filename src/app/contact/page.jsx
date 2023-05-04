@@ -1,6 +1,6 @@
 import '../../styles/globals.css'
 import Image from 'next/image'
-import ContactUs from '../../components/contactus/ContactUs'
+import ContactUs from '../../components/form-contact-us'
 
 export const metadata = {
   title: 'PetMatch. Contact us. Adopt a Pet and Save a Life',

@@ -1,7 +1,7 @@
 'use client'
 
 // Import styles sheet
-import styles from './ForgotPassword.module.css'
+import styles from './styles.module.css'
 
 // Import hooks needed and libraries
 import { useFormik } from 'formik'
@@ -13,8 +13,8 @@ import { HiOutlineAtSymbol } from 'react-icons/hi2'
 import toast from 'react-hot-toast'
 
 // Import utilities used
-import validateForgotPassword from '../../utils/validateForgotPassword'
-import { forgotMyPassword } from '../../services/PetMatch'
+import validateForgotPassword from '../utils/validateForgotPassword'
+import { forgotMyPassword } from '../services/PetMatch'
 
 // Main component
 export default function ForgotPassword() {

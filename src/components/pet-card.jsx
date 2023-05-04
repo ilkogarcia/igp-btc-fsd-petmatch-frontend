@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import '../../styles/globals.css'
-import { fetchOnePet } from '../../services/PetMatch'
+import { fetchOnePet } from '../services/PetMatch'
 
 export default async function PetCard(params) {
   const { id } = params
