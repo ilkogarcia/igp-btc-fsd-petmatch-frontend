@@ -8,10 +8,11 @@ function TeamPlayer({
   picture,
   socialLinks: { facebookUrl, twitterUrl, linkedinUrl },
 }) {
+  
   return (
     <div className='flex flex-col items-center justify-items-center text-center'>
       <Image
-        className='aspect-square shadow'
+        className='aspect-square rounded-lg shadow-none transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-black/30'
         alt={name}
         src={picture}
         quality={100}

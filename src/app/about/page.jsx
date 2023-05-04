@@ -14,9 +14,12 @@ export const metadata = {
 }
 
 export default function AboutPage() {
+
+  // Static images used on the page
   const petImage1 = '/assets/pexelsdorte_179221_640x640.jpg'
   const petImage2 = '/assets/pexels_davidbrown_13993706_640x640.jpg'
 
+  // Teams members data
   const teamPlayers = [
     {
       name: 'Gabriel Ramirez',
@@ -97,7 +100,7 @@ export default function AboutPage() {
         </div>
         <div className='right flex flex-col items-center justify-items-center pt-20'>
           <Image
-            className='aspect-square overflow-clip rounded-full shadow'
+            className='aspect-square overflow-clip rounded-full shadow-lg shadow-black/20 dark:shadow-black/40'
             alt='This pet is looking for a home'
             src={petImage1}
             quality={85}
@@ -164,7 +167,7 @@ export default function AboutPage() {
       <div className='mx-auto my-40 grid w-3/5 gap-20 lg:grid-cols-2'>
         <div className='left flex flex-col items-center justify-items-center pt-20'>
           <Image
-            className='aspect-square overflow-clip rounded-full shadow'
+            className='aspect-square overflow-clip rounded-full shadow-lg shadow-black/20 dark:shadow-black/40'
             alt='This pet is looking for a home'
             src={petImage2}
             quality={85}
