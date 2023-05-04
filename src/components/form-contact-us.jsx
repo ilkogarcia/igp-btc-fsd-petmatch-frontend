@@ -5,7 +5,7 @@ import { useFormik } from 'formik'
 import { HiOutlineAtSymbol } from 'react-icons/hi2'
 import toast from 'react-hot-toast'
 import validateContactUs from '../utils/validateContactUs'
-import SendEmail from '../services/SendEmail'
+import SendEmail from '../services/sendemail.service'
 
 export default function SignUp() {
   // Formik hook

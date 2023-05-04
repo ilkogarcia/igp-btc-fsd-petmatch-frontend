@@ -1,4 +1,4 @@
-import { fetchAllPets } from '../services/PetMatch'
+import { fetchAllPets } from '../services/pet.services'
 import Link from 'next/link'
 import { LikeButton } from './likebutton'
 

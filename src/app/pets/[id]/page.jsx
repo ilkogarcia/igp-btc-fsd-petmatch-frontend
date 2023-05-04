@@ -3,7 +3,7 @@
  * @description - Pet page
  */
 
-import { fetchOnePet } from '../../../services/PetMatch'
+import { fetchOnePet } from '../../../services/pet.services'
 import Image from 'next/image'
 
 export default async function PetPage ({ params }) {

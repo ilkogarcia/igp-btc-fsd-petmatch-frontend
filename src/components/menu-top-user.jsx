@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { HiOutlineUserCircle } from 'react-icons/hi2'
 import { signOut, useSession } from 'next-auth/react'
-import Image from 'next/image'
+import Avatar from './avatar'
 
 export default function UserMenu() {
   const { data: session } = useSession()
@@ -12,20 +12,13 @@ export default function UserMenu() {
       {session?.user ? (
         <div className='flex items-center justify-between space-x-2'>
           {session.user.data.image ? ( 
-            <Image
-              className='w-10 h-10 rounded-full ring-1 ring-green-900'
-              alt={session.user.data.username}
-              src={session.user.data.image}
-              quality={85}
-              width={10}
-              height={10}
-            />
+            <Avatar src={session.user.data.image} alt={session.user.data.username} size={10} />
           ) : (
             <span className='icon flex items-center px-2'>
-              <HiOutlineUserCircle size={22} />
+              <HiOutlineUserCircle size={20} />
             </span>
           )}
-          <h2 className='text-gray-900'>
+          <h2 className='text-gray-600'>
             <Link href='/user'>{session.user.data.username || 'Unknow'}</Link>
           </h2>
         </div>

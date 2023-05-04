@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { resetMyPassword } from '../../../services/PetMatch'
+import { resetMyPassword } from '../../../services/pet.services'
 
 // Main component
 export default async function VerifyEmailPage() {

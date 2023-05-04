@@ -14,7 +14,7 @@ import toast from 'react-hot-toast'
 
 // Import utilities used
 import validateForgotPassword from '../utils/validateForgotPassword'
-import { updateOneUser } from '../services/User.services'
+import { updateOneUser } from '../services/user.services'
 
 // Main component
 function UserProfile() {

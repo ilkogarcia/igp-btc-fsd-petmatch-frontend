@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { fetchOnePet } from '../services/PetMatch'
+import { fetchOnePet } from '../services/pet.services'
 
 export default async function PetCard(params) {
   const { id } = params

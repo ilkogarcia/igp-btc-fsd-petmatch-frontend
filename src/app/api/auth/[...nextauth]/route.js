@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { logMeIn } from '../../../../services/PetMatch'
+import { logMeIn } from '../../../../services/auth.services'
 
 export const authOptions = {
   // Configure one or more authentication providers

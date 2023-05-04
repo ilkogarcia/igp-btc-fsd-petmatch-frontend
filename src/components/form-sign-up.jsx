@@ -14,7 +14,7 @@ import {
   HiOutlineAtSymbol,
   HiOutlineEye,
 } from 'react-icons/hi2'
-import { signMeUp } from '../services/PetMatch'
+import { signMeUp } from '../services/auth.services'
 import toast from 'react-hot-toast'
 
 // Import utilities used

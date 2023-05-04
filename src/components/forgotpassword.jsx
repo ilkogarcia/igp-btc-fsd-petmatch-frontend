@@ -14,7 +14,7 @@ import toast from 'react-hot-toast'
 
 // Import utilities used
 import validateForgotPassword from '../utils/validateForgotPassword'
-import { forgotMyPassword } from '../services/PetMatch'
+import { forgotMyPassword } from '../services/auth.services'
 
 // Main component
 export default function ForgotPassword() {
