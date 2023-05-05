@@ -1,7 +1,6 @@
-.error_message {
-  @apply relative top-0 left-0 ml-2 mt-2;
-  @apply text-xs text-rose-400;
-  @apply transition-all duration-300;
+.input_group {
+  @apply flex rounded-lg border bg-white;
+  position: relative;
 }
 
 .input_label {
@@ -10,9 +9,10 @@
   @apply transition-all duration-300;
 }
 
-.input_group {
-  @apply flex rounded-lg border bg-white;
-  position: relative;
+.error_message {
+  @apply relative top-0 left-0 ml-2 mt-2;
+  @apply text-xs text-rose-400;
+  @apply transition-all duration-300;
 }
 
 .input_text {
@@ -32,6 +32,12 @@
 .input_text:not([type=email]) ∼ span:hover *{
     color:rgb(16, 185, 129);
     cursor: pointer;
+}
+
+.input_select {
+  @apply w-5/6 rounded-lg border bg-white px-6 py-4;
+  @apply border-none focus:outline-none;
+  @apply text-gray-500;
 }
 
 .button {
