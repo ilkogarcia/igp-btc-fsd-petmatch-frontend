@@ -9,6 +9,12 @@
   @apply transition-all duration-300;
 }
 
+.input_footer {
+  @apply relative top-0 left-0 ml-2 mt-2;
+  @apply text-xs text-gray-400;
+  @apply transition-all duration-300;
+}
+
 .error_message {
   @apply relative top-0 left-0 ml-2 mt-2;
   @apply text-xs text-rose-400;

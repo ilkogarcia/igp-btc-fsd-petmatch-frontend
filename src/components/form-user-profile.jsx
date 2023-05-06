@@ -16,6 +16,7 @@ import * as Yup from 'yup'
 import { updateOneUser } from '../services/user.services'
 import FormikSelect from './formik-select'
 import FormikInput from './formik-input'
+import FormikDatePicker from './formik-datepicker'
 
 // Main component
 function UserProfile(params) {
@@ -94,7 +95,7 @@ function UserProfile(params) {
     addressLine2: 'Esca. A. Piso 2 Puerta 1',
     postalCode: '37001',
     phoneNumber: '666666666',
-    birthday: '2021-09-01',
+    birthday: '1974-08-05T00:00:00.000Z',
     gender: 'Male',
   }
 
@@ -139,6 +140,7 @@ function UserProfile(params) {
       ),
     birthday: Yup.date()
       .notRequired()
+      .nullable()
       .max(
         new Date(new Date().setFullYear(new Date().getFullYear() - 18)),
         'You must be at least 18 years old'
@@ -295,11 +297,9 @@ function UserProfile(params) {
 
               {/* birthday */}
               <div className='col-span-6 md:col-span-4'>
-                <FormikInput
+                <FormikDatePicker
                   label='Birthday'
                   name='birthday'
-                  type='date'
-                  placeholder='Birthday'
                   disabled={!editMode}
                 />
               </div>
