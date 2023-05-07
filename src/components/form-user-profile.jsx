@@ -95,7 +95,7 @@ function UserProfile(params) {
     addressLine2: 'Esca. A. Piso 2 Puerta 1',
     postalCode: '37001',
     phoneNumber: '666666666',
-    birthday: '1974-08-05T00:00:00.000Z',
+    birthday: '1974-08-05',
     gender: 'Male',
   }
 
