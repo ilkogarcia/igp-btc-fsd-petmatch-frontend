@@ -46,6 +46,31 @@
   @apply text-gray-500;
 }
 
+.input_date {
+  @apply w-full rounded-lg border bg-white px-6 py-4;
+  @apply border-none focus:outline-none;
+  @apply text-gray-500;
+}
+
+.input_date + * {
+  color: rgb(209, 213, 219);
+}
+
+.input_date:focus + * {
+  color: rgb(16, 185, 129);
+}
+
+.input_icon {
+  @apply flex items-center px-4;
+  color: rgb(209, 213, 219);
+}
+
+.input_icon:focus {
+  color: rgb(16, 185, 129);
+}
+
+
+
 .button {
   @apply w-full rounded-md bg-gradient-to-r from-green-400 to-green-600 text-center;
   @apply py-3 text-lg font-semibold text-gray-50;

@@ -14,7 +14,6 @@ const nextConfig = {
   experimental: {
     appDir: true,
     mdxRs: true,
-    edgeFunctions: false,
   },
   images: {
     domains: [
