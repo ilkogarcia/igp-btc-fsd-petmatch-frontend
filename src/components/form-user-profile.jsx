@@ -5,7 +5,9 @@ import styles from './styles.module.css'
 
 // Import hooks needed and libraries
 import { Formik, Form } from 'formik'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSession } from 'next-auth/react'
+
 
 // Import components used on this page
 import toast from 'react-hot-toast'
@@ -13,57 +15,159 @@ import Image from 'next/image'
 
 // Import utilities used
 import * as Yup from 'yup'
-import { updateOneUser } from '../services/user.services'
+import { getOneUser, updateOneUser } from '../services/user.services'
 import FormikSelect from './formik-select'
 import FormikInput from './formik-input'
 import FormikDatePicker from './formik-datepicker'
 
 // Main component
 function UserProfile(params) {
-  const [formValues, setFormValues] = useState({})
+  const { data: session } = useSession()
 
+  const [formValues, setFormValues] = useState({})
   const [editMode, setEditMode] = useState(false)
 
   const countries = [ 
-    { key: 'Spain', value: '9' },
-    { key: 'United States', value: '1' },
-    { key: 'United Kingdom', value: '2' },
-    { key: 'France', value: '3' },
-    { key: 'Germany', value: '4' },
-    { key: 'Italy', value: '5' },
-    { key: 'Netherlands', value: '6' },
-    { key: 'Belgium', value: '7' },
-    { key: 'Portugal', value: '8' },
+    { 
+      key: 'Spain',
+      value: '9',
+      states: [
+        { 
+          key: 'Andalusia',
+          value: '40',
+          cities: [
+            { key: 'Almería', value: '1' },
+            { key: 'Cádiz', value: '2' },
+            { key: 'Córdoba', value: '3' },
+            { key: 'Granada', value: '4' },
+            { key: 'Huelva', value: '5' },
+            { key: 'Jaén', value: '6' },
+            { key: 'Málaga', value: '7' },
+          ],
+        },
+        { 
+          key: 'Aragon',
+          value: '41',
+          cities: [
+            { key: 'Huesca', value: '8' },
+            { key: 'Teruel', value: '9' },
+            { key: 'Zaragoza', value: '10' },
+          ],
+        },
+        { 
+          key: 'Asturias',
+          value: '42',
+          cities: [
+            { key: 'Oviedo', value: '11' },
+            { key: 'Gijón', value: '12' },
+            { key: 'Avilés', value: '13' },
+          ],
+        },
+        { 
+          key: 'Castile-La Mancha',
+          value: '47',
+          cities: [
+            { key: 'Albacete', value: '12' },
+            { key: 'Ciudad Real', value: '13' },
+            { key: 'Cuenca', value: '14' },
+            { key: 'Guadalajara', value: '15' },
+            { key: 'Toledo', value: '16' },
+          ],
+        },
+      ],
+    },
+    { 
+      key: 'Germany',
+      value: '4',
+      states: [
+        {
+          key: 'Baden-Württemberg',
+          value: '43',
+          cities: [
+            { key: 'Stuttgart', value: '17' },
+            { key: 'Karlsruhe', value: '18' },
+            { key: 'Freiburg im Breisgau', value: '19' },
+            { key: 'Heidelberg', value: '20' },
+            { key: 'Heilbronn', value: '21' },
+            { key: 'Pforzheim', value: '22' },
+            { key: 'Ulm', value: '23' },
+          ],
+        },
+        {
+          key: 'Bavaria',
+          value: '44',
+          cities: [
+            { key: 'Munich', value: '24' },
+            { key: 'Augsburg', value: '25' },
+            { key: 'Bamberg', value: '26' },
+            { key: 'Bayreuth', value: '27' },
+            { key: 'Erlangen', value: '28' },
+            { key: 'Ingolstadt', value: '29' },
+            { key: 'Nuremberg', value: '30' },
+            { key: 'Regensburg', value: '31' },
+            { key: 'Würzburg', value: '32' },
+          ],
+        },
+      ],
+    },
+    {
+      key: 'United Kingdom',
+      value: '10',
+      states: [
+        {
+          key: 'England',
+          value: '45',
+          cities: [
+            { key: 'Bath', value: '33' },
+            { key: 'Birmingham', value: '34' },
+            { key: 'Bradford', value: '35' },
+            { key: 'Brighton & Hove', value: '36' },
+            { key: 'Bristol', value: '37' },
+            { key: 'Cambridge', value: '38' },
+            { key: 'Canterbury', value: '39' },
+          ],
+        },
+        {
+          key: 'Scotland',
+          value: '46',
+          cities: [
+            { key: 'Aberdeen', value: '40' },
+            { key: 'Dundee', value: '41' },
+            { key: 'Edinburgh', value: '42' },
+            { key: 'Glasgow', value: '43' },
+            { key: 'Inverness', value: '44' },
+            { key: 'Stirling', value: '45' },
+          ],
+        },
+      ],
+    },
   ]
 
-  const states = [
-    { key: 'Andalusia', value: '40' },
-    { key: 'Aragon', value: '41' },
-    { key: 'Asturias', value: '42' },
-    { key: 'Balearic Islands', value: '43' },
-    { key: 'Canary Islands', value: '44' },
-    { key: 'Cantabria', value: '45' },
-    { key: 'Castile and León', value: '46' },
-    { key: 'Castile-La Mancha', value: '47' },
-    { key: 'Catalonia', value: '48' },
-    { key: 'Ceuta', value: '49' }
-  ]
+  const [country, setCountry] = useState('')
+  // const [stateProvince, setStateProvince] = useState('')
+  // const [city, setCity] = useState('')
 
-  const cities = [
-    { key: 'Almería', value: '2' },
-    { key: 'Cádiz', value: '3' },
-    { key: 'Córdoba', value: '4' },
-    { key: 'Granada', value: '5' },
-    { key: 'Huelva', value: '6' },
-    { key: 'Jaén', value: '7' },
-    { key: 'Málaga', value: '8' },
-    { key: 'Seville', value: '9' },
-    { key: 'Huesca', value: '10' },
-    { key: 'Teruel', value: '11' },
-    { key: 'Zaragoza', value: '12' },
-    { key: 'Asturias', value: '13' },
-    { key: 'Balearic Islands', value: '14' }
-  ]
+  const [states, setStates] = useState([])
+  const [cities, setCities] = useState([])
+
+  const handleCountryChange = (event) => {
+    const country = countries.find((country) => country.value === event.target.value)
+    setCountry(country)
+    savedValues.countryId = country.value
+    setFormValues(savedValues)
+
+    setStates(country.states)
+    // setStateProvince(country.states[0])
+    setCities(country.states[0].cities)
+    // setCity(country.states[0].cities[0])
+  }
+
+  const handleStateProvinceChange = (event) => {
+    const stateProvince = country.states.find((stateProvince) => stateProvince.value === event.target.value)
+    // setStateProvince(stateProvince)
+    setCities(stateProvince.cities)
+    // setCity(stateProvince.cities[0])
+  }
 
   const initialValues = {
     cityId: '',
@@ -83,9 +187,9 @@ function UserProfile(params) {
   }
 
   const savedValues = {
-    cityId: '2',
+    cityId: '4',
     stateProvinceId: '40',
-    countryId: '9',
+    countryId: '10',
     username: 'ilkogarcia',
     email: 'okli@gmail.com',
     profilePicture: '/assets/blog/authors/ilko.jpeg',
@@ -154,9 +258,32 @@ function UserProfile(params) {
       .notRequired(),
   })
 
+  // Load user profile data when component mounts
+  useEffect(() => {
+    async function loadUserProfile() {
+      console.log('session', session);
+      const response = await getOneUser(session?.user.data.id, session?.user.data.token)
+      if (response.sucess) {
+        setFormValues(response.data)
+      } else {
+        toast.error(
+          <div>
+            <span>Load user profile failed!</span>
+            <span className='block align-baseline text-sm'>
+              {response.message}
+            </span>
+          </div>,
+          { duration: 5000 }
+        )
+      }
+    }
+    loadUserProfile()
+  }, [session])
+
+
   // Handle form submission
   async function onSubmit(values) {
-    const response = await updateOneUser(values)
+    const response = await updateOneUser(session?.user.data.id, values, session?.user.data.token)
     if (response.sucess) {
       toast.success(
         <div>
@@ -182,13 +309,11 @@ function UserProfile(params) {
 
   // Handle edit mode
   function handleEditMode() {
-    setFormValues(savedValues)
     setEditMode(!editMode)
   }
 
   // Handle reset form
   function handleResetForm() {
-    // formik.resetForm()
     setEditMode(false)
   }
 
@@ -377,6 +502,7 @@ function UserProfile(params) {
                   name='countryId'
                   options={countries}
                   disabled={!editMode}
+                  onChange={handleCountryChange}
                 />
               </div>
 
@@ -387,6 +513,7 @@ function UserProfile(params) {
                   name='stateProvinceId'
                   options={states}
                   disabled={!editMode}
+                  onChange={handleStateProvinceChange}
                 />
               </div>
 

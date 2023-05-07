@@ -10,7 +10,6 @@ const DatePicker = dynamic(() => import('react-datepicker'), { ssr: false })
 
 function FormikDatePicker(props) {
   const { label, name, ...rest } = props
-  console.log('props', props)
 
   return (
     <>

@@ -1,8 +1,9 @@
-const getOneUser = async (id) => {
+const getOneUser = async (id, token) => {
   return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
     next: {
       revalidate: 60,
@@ -10,11 +11,12 @@ const getOneUser = async (id) => {
   }).then((res) => res.json())
 }
 
-const updateOneUser = async (id, data) => {
+const updateOneUser = async (id, data, token) => {
   return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
   }).then((res) => res.json())
 }
