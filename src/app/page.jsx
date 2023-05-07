@@ -3,14 +3,16 @@ import '../styles/globals.css'
 import PetCard from '../components/pet-card'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
-
+import Image from 'next/image'
+import { RiNumber1, RiNumber2, RiNumber3 } from 'react-icons/ri'
 
 export default function HomePage() {
   const { data: session } = useSession()
+  const petImage = '/assets/michaelG_kpbHRhlSHHA_1920x2880.jpg'
 
   return (
     <main className='relative'>
-      <div className='mt-48 flex w-full flex-wrap content-center justify-center px-16'>
+      <div className='flex w-full flex-wrap content-center justify-center px-16 py-48'>
         <div className='mx-auto w-4/5 text-center'>
           <h1 className='font-headline tracking-snug leading-12 sm:leading-15 md:leading-19 lg:leading-26 pb-6 text-center text-4xl font-black sm:text-5xl md:text-6xl lg:text-8xl'>
             <span className='text-white'>Find your new</span>
@@ -20,20 +22,15 @@ export default function HomePage() {
             </span>
           </h1>
         </div>
-        <div className='mx-auto mt-10 w-4/5 text-center'>
+        <div className='mx-auto mt-6 w-4/5 text-center'>
           <p className='pb-10 text-center text-lg leading-normal tracking-wide text-green-950 md:text-xl md:leading-normal lg:text-2xl lg:leading-9 lg:tracking-tight'>
             <span>
-              Register for a PetMatch account, and be part of a growing
-              community of pet lovers who are committed to helping animals in
-              need.
-            </span>
-            <br className='hidden md:block' />
-            <span>
-              Join us today and help make a difference in the lives of animals!
+              Let PetMatch's AI algorithm help you find the perfect pet for your
+              lifestyle!
             </span>
           </p>
         </div>
-        {session?.user === undefined  ? (
+        {session?.user === undefined ? (
           <div className='mx-auto mt-10 w-4/5 text-center'>
             <Link
               className='mx-auto rounded-full bg-green-500 px-10 py-5 text-lg text-white outline-none ring ring-green-300 hover:bg-green-700 active:bg-green-900'
@@ -46,10 +43,55 @@ export default function HomePage() {
           <></>
         )}
       </div>
-      <div className='mt-48'>
-        <h2 className='mb-12 text-center text-6xl font-extralight text-white'>
-          Adoptable Pets
-        </h2>
+
+      {/* Who We Are */}
+      <div className='w-full bg-white py-10'>
+        <div className='mx-auto my-40 grid w-4/5 gap-20 lg:grid-cols-12'>
+          <div className='col-span-8 grid flex-col space-y-6 text-left'>
+            <span className='text-green-600'>Who We Are</span>
+            <h2 className='text-6xl font-extrabold text-gray-600'>
+              We are a trusted intermediary for safe and successful pet
+              adoptions.
+            </h2>
+            <p className='text-xl text-gray-400'>
+              At PetMatch, we believe in making the pet adoption process easier,
+              safer, and more reliable. Our AI algorithm uses advanced data
+              analysis to match pets with potential adopters based on their
+              specific needs and preferences. We work with shelters and rescue
+              organizations throughout Europe to ensure that all pets find their
+              forever homes with loving families. With PetMatch, you can trust
+              that your new furry friend will be the perfect fit for your
+              lifestyle and home.
+            </p>
+            <Link
+              className='w-fit rounded-full bg-green-500 px-6 py-3 text-lg text-white outline-none ring ring-green-300 hover:bg-green-700 active:bg-green-900'
+              href='/about'
+            >
+              Learn More About Us!
+            </Link>
+          </div>
+          <div className='col-span-4 grid items-center'>
+            <Image
+              className='overflow-clip shadow-md shadow-black/10 dark:shadow-black/20'
+              alt='This pet is looking for a home'
+              src={petImage}
+              quality={85}
+              priority
+              width={400}
+              height={400}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Adoptable pets */}
+      <div className='w-full py-40'>
+        <div className='mx-auto flex w-4/5 flex-col space-y-6 text-center'>
+          <span className='text-gray-50'>Adoptable pets</span>
+          <h2 className='text-6xl font-extrabold text-gray-700'>
+            One of these pets could be your new best friend!
+          </h2>
+        </div>
         <div className='mt-10 flex flex-wrap justify-center gap-10'>
           <div className='w-1/4'>
             <PetCard id={19} />
@@ -61,17 +103,200 @@ export default function HomePage() {
             <PetCard id={13} />
           </div>
         </div>
+        <div className='mx-auto mt-8 flex w-4/5 flex-col space-y-6 text-center'>
+          <p className='text-xl text-gray-50'>
+            We have many more pets available for adoption. Click the button
+            below to see them all!
+          </p>
+          <Link
+            className='w-fit self-center rounded-full bg-white px-6 py-3 text-lg text-gray-700 outline-none ring ring-gray-300 hover:bg-gray-700 hover:text-white active:bg-gray-900'
+            href='/'
+          >
+            Find Your Perfect Furry Match!
+          </Link>
+        </div>
       </div>
-      <div className='mx-auto max-w-screen-xl px-12 pt-16 lg:pt-28 pb-16 md:pb-24'>
-        <h2 className='mb-12 text-center text-6xl font-extralight text-white'>
-          Happy Tails
-        </h2>
-        <p className='mx-auto mt-10 text-center text-2xl text-white'>
-          Welcome to PetMatch, your go-to platform for adopting a pet and
-          changing a life forever. Our mission is to connect animals in need of
-          a loving home with caring and responsible pet parents, while also
-          promoting responsible pet ownership and animal welfare.
-        </p>
+
+      {/* Adoption Process Section */}
+      <div className='w-full bg-white py-10'>
+        <div className='mx-auto flex w-4/5 flex-col py-40 text-center'>
+          <div className='mb-12 space-y-6'>
+            <span className='text-green-600'>Our Adoption Process</span>
+            <h2 className='text-6xl font-extrabold text-gray-600'>
+              Find your perfect match in just a few easy steps
+            </h2>
+            <p className='text-xl text-gray-400'>
+              PetMatch's adoption process is designed to{' '}
+              <span className='text-green-500'>
+                be simple, safe, and stress-free.
+              </span>
+            </p>
+          </div>
+          <div className='grid gap-20 lg:grid-cols-3'>
+            <div className='flex cursor-pointer flex-col items-center justify-items-center text-center transition duration-500 hover:scale-125'>
+              <span className='icon mb-4 flex items-center rounded-full bg-gray-50 p-4 text-green-600'>
+                <RiNumber1 size={25} />
+              </span>
+              <h2 className='text-xl font-bold text-gray-600'>
+                Create your profile
+              </h2>
+              <p className='text-md text-gray-500'>
+                Answer a few questions about your lifestyle and home
+                environment.
+              </p>
+            </div>
+            <div className='flex cursor-pointer flex-col items-center justify-items-center text-center transition duration-500 hover:scale-125'>
+              <span className='icon mb-4 flex items-center rounded-full bg-gray-50 p-4 text-green-600'>
+                <RiNumber2 size={25} />
+              </span>
+              <h2 className='text-xl font-bold text-gray-600'>
+                Let the AI search for you
+              </h2>
+              <p className='text-md text-gray-500'>
+                Our AI algorithm will suggest the best pet matches for you.
+              </p>
+            </div>
+            <div className='flex cursor-pointer flex-col items-center justify-items-center text-center transition duration-500 hover:scale-125'>
+              <span className='icon mb-4 flex items-center rounded-full bg-gray-50 p-4 text-green-600'>
+                <RiNumber3 size={25} />
+              </span>
+              <h2 className='text-xl font-bold text-gray-600'>We conect you</h2>
+              <p className='text-md text-gray-500'>
+                We connect you with the shelter or rescue organization to start
+                the adoption process.
+              </p>
+            </div>
+          </div>
+          <div className='mx-auto mt-8 flex w-4/5 flex-col space-y-6 text-center'>
+            <p className='text-xl text-gray-400'>
+              We also provide ongoing support throughout the adoption process,
+              from legal advice to specialized logistic services, as well as
+              resources to help you and your new pet adjust to your new life
+              together.
+            </p>
+            <Link
+              className='w-fit self-center rounded-full bg-green-500 px-6 py-3 text-lg text-white outline-none ring ring-green-300 hover:bg-green-700 active:bg-green-900'
+              href='/'
+            >
+              Start Your Adoption Process Now!
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Success Stories Section */}
+      <div className='w-full py-40'>
+        <div className='mx-auto flex w-4/5 flex-col space-y-6 text-center'>
+          <span className='text-gray-50'>Success Stories</span>
+          <h2 className='text-6xl font-extrabold text-gray-700'>
+            See how PetMatch has changed lives for pets and families
+          </h2>
+        </div>
+        <div className='mx-auto mt-10 grid w-4/5 gap-10 lg:grid-cols-12'>
+          <div className='col-span-4 overflow-clip rounded-xl border border-gray-200 bg-white p-5 shadow-md shadow-black/10 dark:shadow-black/20'>
+            <p className='text-md mb-4 font-bold text-gray-600'>
+              A Second Chance <span className='text-green-600'>for Max</span>
+            </p>
+            <p className='text-sm text-gray-400'>
+              Max had been bounced around from home to home before finding his
+              forever family on PetMatch. Now, he's thriving in his new home and
+              has even become a therapy dog, bringing joy and comfort to people
+              in need.
+            </p>
+          </div>
+
+          <div className='col-span-4 overflow-clip rounded-xl border border-gray-200 bg-white p-5 shadow-md shadow-black/10 dark:shadow-black/20'>
+            <p className='text-md mb-4 font-bold text-gray-600'>
+              Katie and Shadow:{' '}
+              <span className='text-green-600'>A Match Made in Heaven!</span>
+            </p>
+            <p className='text-sm text-gray-400'>
+              Katie had been searching for the perfect dog to adopt for months,
+              but nothing seemed to click. That was until she met Shadow, a
+              sweet and playful pup with a heart of gold. Now, Katie and Shadow
+              are inseparable and spend their days exploring new parks and
+              cuddling up on the couch together.
+            </p>
+          </div>
+
+          <div className='col-span-4 overflow-clip rounded-xl border border-gray-200 bg-white p-5 shadow-md shadow-black/10 dark:shadow-black/20'>
+            <p className='text-md mb-4 font-bold text-gray-600'>
+              The Jones Family{' '}
+              <span className='text-green-600'>Finds Their Forever Cat</span>
+            </p>
+            <p className='text-sm text-gray-400'>
+              The Jones family had always wanted a cat, but they never expected
+              to find the perfect one on PetMatch. But when they came across a
+              little black and white kitten named Luna, they knew she was the
+              one. Now, Luna has become a beloved member of the family and
+              brings joy to their lives every day.
+            </p>
+          </div>
+
+          <div className='col-span-4 overflow-clip rounded-xl border border-gray-200 bg-white p-5 shadow-md shadow-black/10 dark:shadow-black/20'>
+            <p className='text-md mb-4 font-bold text-gray-600'>
+              From Shelter to Showstopper:{' '}
+              <span className='text-green-600'>The Story of Bella</span>
+            </p>
+            <p className='text-sm text-gray-400'>
+              Bella was just another dog in a crowded shelter until she was
+              discovered by a loving couple on PetMatch. With their help, Bella
+              has blossomed into a confident and well-behaved pup who loves
+              showing off her tricks at the local dog park.
+            </p>
+          </div>
+
+          <div className='col-span-4 overflow-clip rounded-xl border border-gray-200 bg-white p-5 shadow-md shadow-black/10 dark:shadow-black/20'>
+            <p className='text-md mb-4 font-bold text-gray-600'>
+              Sophie and Lily:{' '}
+              <span className='text-green-600'>The Best of Friends</span>
+            </p>
+            <p className='text-sm text-gray-400'>
+              Sophie was feeling lonely after her longtime feline companion
+              passed away, but she wasn't sure if she was ready for another cat.
+              That was until she met Lily, a sweet and affectionate kitten who
+              stole her heart. Now, Sophie and Lily are the best of friends and
+              keep each other company during the long winter months.
+            </p>
+          </div>
+
+          <div className='col-span-4 overflow-clip rounded-xl border border-gray-200 bg-white p-5 shadow-md shadow-black/10 dark:shadow-black/20'>
+            <blockquote className='mb-8 text-xl text-gray-600'>
+              "We are proud of the thousands of successful adoptions that have
+              happened through PetMatch. From dogs and cats to rabbits and
+              birds, we have helped families find their perfect furry match".
+            </blockquote>
+            <Link href='/'>Read More...</Link>
+
+          </div>
+        </div>
+      </div>
+
+      {/* Contact Us Section */}
+      <div className='w-full bg-white py-10'>
+        <div className='mx-auto flex w-4/5 flex-col py-40 text-center'>
+          <div className='mb-12 space-y-6'>
+            <span className='text-green-600'>Get in Touch</span>
+            <h2 className='text-6xl font-extrabold text-gray-600'>
+              We're always here to help
+            </h2>
+            <p className='text-xl text-gray-400'>
+              Do you have questions or need assistance with your adoption
+              process?{' '}
+              <span className='text-green-500'>
+                Our customer support team is available to help you every step of
+                the way. Contact us by phone, email, or live chat and we'll be
+                happy to assist you."
+              </span>
+            </p>
+          </div>
+          <Link
+            className='w-fit self-center rounded-full bg-green-500 px-6 py-3 text-lg text-white outline-none ring ring-green-300 hover:bg-green-700 active:bg-green-900'
+            href='/contact'
+          >
+            Contact Us
+          </Link>
+        </div>
       </div>
     </main>
   )
