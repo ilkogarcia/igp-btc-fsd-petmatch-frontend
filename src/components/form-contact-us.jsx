@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 import validateContactUs from '../utils/validateContactUs'
 import SendEmail from '../services/sendemail.service'
 
-export default function SignUp() {
+function ContactUs() {
   // Formik hook
   const formik = useFormik({
     initialValues: {
@@ -151,3 +151,5 @@ export default function SignUp() {
     </div>
   )
 }
+
+export default ContactUs

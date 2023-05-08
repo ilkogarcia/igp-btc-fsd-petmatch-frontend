@@ -1,5 +1,5 @@
 import '../../styles/globals.css'
-import ContactUs from '../../components/form-contact-us'
+import ContactUs from '@/components/form-contact-us'
 
 export const metadata = {
   title: 'PetMatch. Contact us. Adopt a Pet and Save a Life',

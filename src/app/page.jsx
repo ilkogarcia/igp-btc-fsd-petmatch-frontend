@@ -1,10 +1,10 @@
 'use client'
 import '../styles/globals.css'
-import PetCard from '../components/pet-card'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { RiNumber1, RiNumber2, RiNumber3 } from 'react-icons/ri'
+import PetList from '@/components/pet-list'
 
 export default function HomePage() {
   const { data: session } = useSession()
@@ -93,15 +93,7 @@ export default function HomePage() {
           </h2>
         </div>
         <div className='mt-10 flex flex-wrap justify-center gap-10'>
-          <div className='w-1/4'>
-            <PetCard id={19} />
-          </div>
-          <div className='w-1/4'>
-            <PetCard id={2} />
-          </div>
-          <div className='w-1/4'>
-            <PetCard id={13} />
-          </div>
+          <PetList count={3} />
         </div>
         <div className='mx-auto mt-8 flex w-4/5 flex-col space-y-6 text-center'>
           <p className='text-xl text-gray-50'>
