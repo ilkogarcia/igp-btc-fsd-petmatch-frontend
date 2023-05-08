@@ -13,7 +13,7 @@ export const metadata = {
     'The PetMatch platform is designed to make the adoption process as simple and stress-free as possible for both pets and their new families.',
 }
 
-export default function AboutPage() {
+function AboutPage() {
 
   // Static images used on the page
   const petImage1 = '/assets/pexelsdorte_179221_640x640.jpg'
@@ -80,14 +80,14 @@ export default function AboutPage() {
 
 
   return (
-    <div className='h-fit bg-white'>
+    <div className='h-fit bg-white pb-40'>
       {/* main section  */}
-      <div className='mx-auto my-40 grid w-3/5 gap-20 lg:grid-cols-2'>
-        <div className='left flex flex-col space-y-6'>
+      <div className='mx-auto pb-20 pt-40 grid w-4/5 gap-20 lg:grid-cols-12'>
+        <div className='col-span-8 flex flex-col space-y-6'>
           <span className='text-green-600'>About Us</span>
-          <h1 className='text-6xl font-extrabold text-gray-600'>
+          <h2 className='text-6xl font-extrabold text-gray-600'>
             Adopt a Pet and <span className='text-green-600'>Save a Life!</span>
-          </h1>
+          </h2>
           <p className='text-xl text-gray-400'>
             At PetMatch, we understand the importance of the bond between humans
             and animals. We believe that every pet deserves a happy and healthy
@@ -98,7 +98,7 @@ export default function AboutPage() {
             make the world a better place for animals.
           </p>
         </div>
-        <div className='right flex flex-col items-center justify-items-center pt-20'>
+        <div className='col-span-4 flex flex-col items-center justify-center'>
           <Image
             className='aspect-square overflow-clip rounded-full shadow-lg shadow-black/20 dark:shadow-black/40'
             alt='This pet is looking for a home'
@@ -112,7 +112,7 @@ export default function AboutPage() {
       </div>
 
       {/* our story */}
-      <div className='mx-auto my-40 w-3/5'>
+      <div className='mx-auto py-20 w-4/6'>
         <div className='flex flex-col text-center'>
           <div className='mb-12 space-y-6'>
             <span className='text-green-600'>Our Story</span>
@@ -164,8 +164,8 @@ export default function AboutPage() {
       </div>
 
       {/* our mission  */}
-      <div className='mx-auto my-40 grid w-3/5 gap-20 lg:grid-cols-2'>
-        <div className='left flex flex-col items-center justify-items-center pt-20'>
+      <div className='mx-auto pb-20 pt-40 grid w-4/5 gap-20 lg:grid-cols-12'>
+        <div className='col-span-4 flex flex-col items-center justify-center'>
           <Image
             className='aspect-square overflow-clip rounded-full shadow-lg shadow-black/20 dark:shadow-black/40'
             alt='This pet is looking for a home'
@@ -176,7 +176,7 @@ export default function AboutPage() {
             height={400}
           />
         </div>
-        <div className='right flex flex-col space-y-6 text-right'>
+        <div className='col-span-8 flex flex-col space-y-6 text-right'>
           <span className='text-green-600'>Our Mission</span>
           <h1 className='text-6xl font-extrabold text-gray-600'>Our Mision</h1>
           <p className='text-xl text-gray-400'>
@@ -188,7 +188,7 @@ export default function AboutPage() {
       </div>
 
       {/* our values */}
-      <div className='mx-auto my-40 w-3/5'>
+      <div className='mx-auto py-20 w-4/6'>
         <div className='flex flex-col text-center'>
           <div className='mb-12 space-y-6'>
             <span className='text-green-600'>Our Values</span>
@@ -202,8 +202,8 @@ export default function AboutPage() {
               </span>
             </p>
           </div>
-          <div className='grid gap-20 lg:grid-cols-3'>
-            <div className='flex cursor-pointer flex-col items-center justify-items-center text-center transition duration-500 hover:scale-125'>
+          <div className='mx-auto grid gap-10 lg:grid-cols-12'>
+            <div className='col-span-4 flex cursor-pointer flex-col items-center justify-items-center text-center transition duration-500 hover:scale-125'>
               <span className='icon mb-4 flex items-center rounded-full bg-gray-50 p-4 text-green-600'>
                 <FaRegHeart size={25} />
               </span>
@@ -212,7 +212,7 @@ export default function AboutPage() {
                 We care deeply about every animal.
               </p>
             </div>
-            <div className='flex cursor-pointer flex-col items-center justify-items-center text-center transition duration-500 hover:scale-125'>
+            <div className='col-span-4 flex cursor-pointer flex-col items-center justify-items-center text-center transition duration-500 hover:scale-125'>
               <span className='icon mb-4 flex items-center rounded-full bg-gray-50 p-4 text-green-600'>
                 <FaRegClock size={25} />
               </span>
@@ -223,7 +223,7 @@ export default function AboutPage() {
                 We act quickly to meet needs.
               </p>
             </div>
-            <div className='flex cursor-pointer flex-col items-center justify-items-center text-center transition duration-500 hover:scale-125'>
+            <div className='col-span-4 flex cursor-pointer flex-col items-center justify-items-center text-center transition duration-500 hover:scale-125'>
               <span className='icon mb-4 flex items-center rounded-full bg-gray-50 p-4 text-green-600'>
                 <FaRegHandshake size={25} />
               </span>
@@ -237,7 +237,7 @@ export default function AboutPage() {
       </div>
 
       {/* our team */}
-      <div className='mx-auto my-40 w-3/5'>
+      <div className='mx-auto pt-20 w-4/6'>
         <div className='flex flex-col text-center'>
           <div className='mb-12 space-y-6'>
             <span className='text-green-600'>Our Team</span>
@@ -266,3 +266,5 @@ export default function AboutPage() {
     </div>
   )
 }
+
+export default AboutPage

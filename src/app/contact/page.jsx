@@ -7,24 +7,23 @@ export const metadata = {
     'The PetMatch platform is designed to make the adoption process as simple and stress-free as possible for both pets and their new families.',
 }
 
-export default function ContactPage() {
+function ContactPage() {
 
   return (
-    <div className='h-fit bg-white'>
-
+    <div className='h-fit bg-white pb-40'>
       {/* first section with a contact form */}
-      <div className='mx-auto my-40 grid w-3/5 gap-20 lg:grid-cols-2'>
-        <div className='left flex flex-col space-y-6'>
+      <div className='mx-auto pb-40 pt-40 grid w-4/5 gap-20 lg:grid-cols-12'>
+        <div className='col-span-5 flex flex-col space-y-6'>
           <span className='text-green-600'>Contact Us</span>
-          <h1 className='text-6xl font-extrabold text-gray-600'>
+          <h2 className='text-6xl font-extrabold text-gray-600'>
             We would love to{' '}
             <span className='text-green-600'>hear from you!</span>
-          </h1>
+          </h2>
           <p className='text-xl text-gray-400'>
             If you have any questions, comments, or suggestions, please don't hesitate to contact us using the form below. 
           </p>
         </div>
-        <div className='right flex flex-col pt-2 items-center justify-items-center'>
+        <div className='col-span-7 flex flex-col pt-2 items-center justify-items-center'>
           <ContactUs />
         </div>
       </div>
@@ -43,7 +42,7 @@ export default function ContactPage() {
       </div>
 
       {/* second section with a map */}
-      <div className='mx-auto my-40 w-3/5'>
+      <div className='mx-auto pt-40 w-4/5'>
         <div className='flex flex-col text-center space-y-6'>
           <span className='text-green-600'>Locations</span>
           <h1 className='text-6xl font-extrabold text-gray-600'>
@@ -54,33 +53,33 @@ export default function ContactPage() {
            <span className='baseline inline-block'>Visit us at one of our many locations and find your perfect match today.</span> 
           </p>
         </div>
-        <div className='mt-16 grid gap-20 lg:grid-cols-3'>
-          <div className='flex flex-col text-center items-center justify-items-center'>
+        <div className='mt-16 h-full grid gap-20 lg:grid-cols-12'>
+          <div className='col-span-4 flex flex-col text-center items-center'>
             <h2 className='text-2xl font-bold text-gray-600'>London</h2>
             <p className='text-lg text-gray-500'>123 Main Street. London, UK</p>
             <p className='mt-6 text-sm text-gray-400'>+44 123 456 7890 - london@petmatch.es</p>
           </div>
-          <div className='flex flex-col text-center items-center justify-items-center'>
+          <div className='col-span-4 flex flex-col text-center items-center'>
             <h2 className='text-2xl font-bold text-gray-600'>Paris</h2>
             <p className='text-lg text-gray-500'>123 Main Street. Paris, France</p>
             <p className='mt-6 text-sm text-gray-400'>+33 123 456 7890 - paris@petmatch.es</p>
           </div>
-          <div className='flex flex-col text-center items-center justify-items-center'>
+          <div className='col-span-4 flex flex-col text-center items-center'>
             <h2 className='text-2xl font-bold text-gray-600'>Berlin</h2>
             <p className='text-lg text-gray-500'>123 Main Street. Berlin, Germany</p>
             <p className='mt-6 text-sm text-gray-400'>+49 123 456 7890 - berlin@petmatch.es</p>
           </div>
-          <div className='flex flex-col text-center items-center justify-items-center'>
+          <div className='col-span-4 flex flex-col text-center items-center'>
             <h2 className='text-2xl font-bold text-gray-600'>Madrid</h2>
             <p className='text-lg text-gray-500'>123 Main Street. Madrid, Spain</p>
             <p className='mt-6 text-sm text-gray-400'>+34 123 456 7890 - madrid@petmatch.es</p>
           </div>
-          <div className='flex flex-col text-center items-center justify-items-center'>
+          <div className='col-span-4 flex flex-col text-center items-center'>
             <h2 className='text-2xl font-bold text-gray-600'>Rome</h2>
             <p className='text-lg text-gray-500'>123 Main Street. Rome, Italy</p>
             <p className='mt-6 text-sm text-gray-400'>+39 123 456 7890 - rome@petmatch.es</p>
           </div>
-          <div className='flex flex-col text-center items-center justify-items-center'>
+          <div className='col-span-4 flex flex-col text-center items-center'>
             <h2 className='text-2xl font-bold text-gray-600'>Lisbon</h2>
             <p className='text-lg text-gray-500'>123 Main Street. Lisbon, Portugal</p>
             <p className='mt-6 text-sm text-gray-400'>+351 123 456 7890 - lisbon@petmatch.es</p>
@@ -91,3 +90,5 @@ export default function ContactPage() {
     </div>
   )
 }
+
+export default ContactPage
