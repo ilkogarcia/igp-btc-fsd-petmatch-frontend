@@ -25,6 +25,7 @@ const nextConfig = {
       'picsum.photos',
       'fastly.picsum.photos',
       'xsgames.co',
+      'images.dog.ceo',
     ],
   },
   reactStrictMode: false,

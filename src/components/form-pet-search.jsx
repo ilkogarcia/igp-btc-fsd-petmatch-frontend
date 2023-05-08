@@ -51,15 +51,15 @@ function PetSearch() {
           { duration: 5000 }
         )
       } else {
-        toast.success(
-          <div>
-            <span>Pets found!</span>
-            <span className='block align-baseline text-sm'>
-              We found {res.data.pets.length} pets.
-            </span>
-          </div>,
-          { duration: 5000 }
-        )
+        // toast.success(
+        //   <div>
+        //     <span>Pets found!</span>
+        //     <span className='block align-baseline text-sm'>
+        //       We found {res.data.pets.length} pets.
+        //     </span>
+        //   </div>,
+        //   { duration: 5000 }
+        // )
         setPetsList(res.data.pets)
       }
     }

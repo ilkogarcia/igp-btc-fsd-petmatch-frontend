@@ -7,7 +7,7 @@ import { fetchAllPets } from '@/services/pet.services'
 import PetCard from './pet-card'
 
 function PetList({ count }) {
-  const [petsList, setPetsList] = useState([])
+  const [pets, setPets] = useState([])
 
   useEffect(() => {
     async function loadPets() {
@@ -25,7 +25,7 @@ function PetList({ count }) {
 
       const res = await fetchAllPets(request, count, 1)
       if (res.sucess) {
-        setPetsList(res.data.pets)
+        setPets(res.data.pets)
       }
     }
     loadPets()
@@ -33,12 +33,17 @@ function PetList({ count }) {
 
   return (
     <div className='mx-auto grid w-4/5 justify-center gap-10 lg:grid-cols-12'>
-      {petsList.length > 0 && 
-        petsList.map((pet) => 
-            <div key={pet.id} className='col-span-4'>
-                <PetCard pet={pet} />
-            </div>
-        )}
+      {
+        pets.map((pet, index) => (
+          <div key={pet.id} className='col-span-4'>
+            <PetCard
+              pet={pet}
+              isLast={index === pets.length - 1}
+              newLimit={() => {}}
+            />
+          </div>
+        ))
+      }
     </div>
   )
 }

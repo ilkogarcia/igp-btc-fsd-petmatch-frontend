@@ -1,13 +1,31 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+'use client'
+
+import { useEffect, useRef } from 'react'
 import { PropTypes } from 'prop-types'
 import Image from 'next/image'
 
-const PetCard = ({ pet }) => {
+function PetCard({ pet, newLimit, isLast }) {
   const { PetBreed, name, age, imageUrl, description } = pet
   const  { breedName, PetSpecie } = PetBreed
   const { specieCommonName } = PetSpecie
 
+  const cardRef = useRef()
+
+  useEffect(() => {
+    if (!cardRef.current) return
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && isLast) {
+        newLimit()
+        observer.unobserve(entry.target)
+      }
+    })
+
+    observer.observe(cardRef.current)
+  }, [isLast])
+
   return (
-    <div className='flex h-full w-full flex-col rounded-md bg-white shadow-md'>
+    <div className='flex h-full w-full flex-col rounded-md bg-white shadow-md' ref={cardRef}>
       <div className='relative h-80 w-full overflow-hidden rounded-t-md'>
         <Image
           alt={name + ' ' + specieCommonName + ' ' + breedName}
@@ -22,7 +40,7 @@ const PetCard = ({ pet }) => {
         />
       </div>
       <div className='w-full px-6 py-4'>
-        <div className='text-md mb-2 space-y-2 font-bold text-gray-400'>
+        <div className='text-md mb-2 space-y-2 font-bold text-gray-400 text-left'>
           <p className='text-2xl font-extrabold text-gray-600'>
             {name}{' '}
             <span className='text-sm font-light text-gray-400'>({age} years old)</span>
@@ -40,13 +58,9 @@ const PetCard = ({ pet }) => {
 }
 
 PetCard.propTypes = {
-  pet: PropTypes.shape({
-    specieCommonName: PropTypes.string,
-    breedName: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    age: PropTypes.number,
-    imageUrl: PropTypes.string,
-  }),
+  pet: PropTypes.array,
+  newLimit: PropTypes.func,
+  isLast: PropTypes.bool,
 }
 
 export default PetCard

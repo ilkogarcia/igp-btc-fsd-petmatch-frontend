@@ -102,7 +102,7 @@ export default function HomePage() {
           </p>
           <Link
             className='w-fit self-center rounded-full bg-white px-6 py-3 text-lg text-gray-700 outline-none ring ring-gray-300 hover:bg-gray-700 hover:text-white active:bg-gray-900'
-            href='/'
+            href='/pets'
           >
             Find Your Perfect Furry Match!
           </Link>
