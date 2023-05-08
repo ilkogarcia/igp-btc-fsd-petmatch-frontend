@@ -3,13 +3,13 @@
  * @description Page where the list of pets is displayed.
  */
 
-import PetsList from '@/components/pets-list'
+import PetList from '@/components/pet-list/'
 
 async function PetsPage (props) {
   console.log('PetsPage props', props);
   return (
     <>
-      <PetsList />
+      <PetList count={20} />
     </>
   )
 }

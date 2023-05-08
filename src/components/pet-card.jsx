@@ -7,7 +7,7 @@ const PetCard = ({ pet }) => {
   const { specieCommonName } = PetSpecie
 
   return (
-    <div className='flex w-full flex-col rounded-md bg-white shadow-md'>
+    <div className='flex h-full w-full flex-col rounded-md bg-white shadow-md'>
       <div className='relative h-80 w-full overflow-hidden rounded-t-md'>
         <Image
           alt={name + ' ' + specieCommonName + ' ' + breedName}
@@ -21,11 +21,11 @@ const PetCard = ({ pet }) => {
           }}
         />
       </div>
-      <div className='h-2/3 w-full px-6 py-4'>
+      <div className='w-full px-6 py-4'>
         <div className='text-md mb-2 space-y-2 font-bold text-gray-400'>
           <p className='text-2xl font-extrabold text-gray-600'>
             {name}{' '}
-            <span className='text-base font-light text-gray-400'>({age} years old)</span>
+            <span className='text-sm font-light text-gray-400'>({age} years old)</span>
             <span className='block align-baseline text-sm font-bold text-green-400 uppercase'>
               {breedName + ' / ' + specieCommonName}
             </span>

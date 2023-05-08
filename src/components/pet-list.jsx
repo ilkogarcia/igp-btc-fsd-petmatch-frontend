@@ -1,4 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+'use client'
+
 import { PropTypes } from 'prop-types'
 import { useEffect, useState } from 'react'
 import { fetchAllPets } from '@/services/pet.services'
