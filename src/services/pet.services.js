@@ -3,19 +3,15 @@
  * @description Service layer for handling pet related requests.
  */
 
-const fetchAllPets = async (bodyRequest) => {
+const fetchAllPets = async (bodyRequest, limit, page) => {
   return await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/pets/search?limit=20&page=1`,
+    `${process.env.NEXT_PUBLIC_API_URL}/pets/search?limit=${limit}&page=${page}`,
     {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
       },
       body: JSON.stringify(bodyRequest),
-      next: {
-        revalidate: 60,
-      },
     }
   ).then((res) => res.json())
 }

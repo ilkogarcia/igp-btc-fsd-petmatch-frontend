@@ -3,12 +3,15 @@
  * @description Page where the list of pets is displayed.
  */
 
-import { PetsList } from '../../components/pets-list'
+import PetsList from '@/components/pets-list'
 
-export default async function PetsPage () {
+async function PetsPage (props) {
+  console.log('PetsPage props', props);
   return (
-    <section>
+    <>
       <PetsList />
-    </section>
+    </>
   )
 }
+
+export default PetsPage
