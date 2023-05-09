@@ -11,7 +11,6 @@ function ButtonApply(props) {
 
   useEffect(() => {
     (session === null) ? toggleIsDisabled(true) : toggleIsDisabled(false)
-    console.log(session)
   }, [session])
 
   return (

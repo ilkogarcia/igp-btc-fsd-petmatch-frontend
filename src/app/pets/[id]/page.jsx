@@ -3,25 +3,33 @@ import { TbReportMedical } from 'react-icons/tb'
 
 // Import components
 import Image from 'next/image'
-import PetSpecie from '@/components/pet-specie'
-import PetBreed from '@/components/pet-breed'
-import PetStatus from '@/components/pet-status'
+import PetSpecie from '@/components/pets/petSpecie'
+import PetBreed from '@/components/pets/petBreed'
+import PetStatus from '@/components/pets/petStatus'
 import Shelter from '@/components/pet-shelter'
 import ButtonApply from '@/components/button-apply'
 
+
 // Import services and helpers
-import { fetchOnePet } from '@/services/pet.services'
 import { format } from 'date-fns'
 
-async function PetPage({ params }) {
-  const { id } = params
+async function fetchOnePet (id) {
+  return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pets/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    next: {
+      revalidate: 60,
+    },
+  }).then((res) => res.json())
+}
 
-  // Fetch pet data
-  const response = await fetchOnePet(id)
-  const { success, message, data } = response
-  if (success === false) {
-    return <div>{message}</div>
-  }
+export default async function PetPage ({params}) {
+  const { id } = params
+  const { data } = await fetchOnePet(id)
+
+  console.log(data)
 
   // Calculate the days on shelter
   const daysOnShelter = Math.floor(
@@ -61,7 +69,7 @@ async function PetPage({ params }) {
         </div>
 
         {/* apply for adoption */}
-        <ButtonApply buttonType='button' buttonText='Apply for adoption' buttonLink='/adoption' />
+        <ButtonApply buttonType='button' buttonText='Adopt Me' buttonLink='/adoption' />
 
 
         {/* pet statistics */}
@@ -101,5 +109,3 @@ async function PetPage({ params }) {
     </div>
   )
 }
-
-export default PetPage
