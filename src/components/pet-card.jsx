@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
+import styles from './styles.module.css'
 import { useEffect, useRef } from 'react'
 import { PropTypes } from 'prop-types'
 import Image from 'next/image'
-import Link from 'next/link'
 
 function PetCard({ pet, newLimit, isLast }) {
   const { PetBreed, name, age, imageUrl, description } = pet
@@ -56,12 +56,15 @@ function PetCard({ pet, newLimit, isLast }) {
         <p className='text-lg font-extralight text-gray-400'>{description}</p>
       </div>
       <div className='mb-4 mt-auto px-6 flex h-auto w-full text-left'>
-        <Link
-          className='text-sm text-green-400 hover:text-green-700 active:text-green-900'
-          href={`/pets/${pet.id}`}
+        <button 
+          type='button'
+          className={styles.apply_button}
+          disabled={false}
+          onClick={() => window.open(`/pets/${pet.id}`, '_parent')}
         >
-          View more...
-        </Link>
+          Get to know me
+        </button>
+
       </div>
     </div>
   )
