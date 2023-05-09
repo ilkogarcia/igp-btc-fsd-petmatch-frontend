@@ -19,7 +19,7 @@ function PetStatus({ id }) {
     <>
       {status && (
         <div className='flex h-auto w-auto flex-col space-y-2'>
-          <p className='upercase text-xs font-bold text-green-600'>Staus</p>
+          <p className='upercase text-xs font-bold text-green-600'>Status</p>
           <p className='text-xl font-semibold text-gray-500'>
             {status.statusName}
           </p>

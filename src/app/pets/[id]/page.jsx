@@ -1,15 +1,22 @@
-import { fetchOnePet } from '@/services/pet.services'
-import Image from 'next/image'
-import { format } from 'date-fns'
+// Import styles and icons
 import { TbReportMedical } from 'react-icons/tb'
-import styles from './styles.module.css'
+
+// Import components
+import Image from 'next/image'
 import PetSpecie from '@/components/pet-specie'
 import PetBreed from '@/components/pet-breed'
 import PetStatus from '@/components/pet-status'
 import Shelter from '@/components/pet-shelter'
+import ButtonApply from '@/components/button-apply'
+
+// Import services and helpers
+import { fetchOnePet } from '@/services/pet.services'
+import { format } from 'date-fns'
 
 async function PetPage({ params }) {
   const { id } = params
+
+  // Fetch pet data
   const response = await fetchOnePet(id)
   const { success, message, data } = response
   if (success === false) {
@@ -54,11 +61,8 @@ async function PetPage({ params }) {
         </div>
 
         {/* apply for adoption */}
-        <div className=''>
-          <button type='button' className={styles.apply_button}>
-            Apply for adoption
-          </button>
-        </div>
+        <ButtonApply buttonType='button' buttonText='Apply for adoption' buttonLink='/adoption' />
+
 
         {/* pet statistics */}
         <p className='text-sm text-gray-400'>

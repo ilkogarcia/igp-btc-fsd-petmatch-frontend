@@ -1,11 +1,11 @@
 .error_message {
-  @apply relative top-0 left-0 ml-2 mt-2;
+  @apply relative left-0 top-0 ml-2 mt-2;
   @apply text-xs text-rose-400;
   @apply transition-all duration-300;
 }
 
 .input_label {
-  @apply relative top-0 left-0 ml-2 mb-2;
+  @apply relative left-0 top-0 mb-2 ml-2;
   @apply text-xs text-gray-400;
   @apply transition-all duration-300;
 }
@@ -29,9 +29,9 @@
   color: rgb(16, 185, 129);
 }
 
-.input_text:not([type=email]) ∼ span:hover *{
-    color:rgb(16, 185, 129);
-    cursor: pointer;
+.input_text:not([type='email']) ∼ span:hover * {
+  color: rgb(16, 185, 129);
+  cursor: pointer;
 }
 
 .button {
@@ -58,7 +58,7 @@
 }
 
 .save_button {
-  @apply inline-flex items-center justify-center rounded-md border border-transparent bg-green-400;;
+  @apply inline-flex items-center justify-center rounded-md border border-transparent bg-green-400;
   @apply px-4 py-2 text-sm font-medium text-white shadow-sm;
 }
 
@@ -81,4 +81,23 @@
 
 .cancel_button:hover {
   @apply bg-gray-400;
+}
+
+/* apply button style */
+.apply_button {
+  @apply inline-flex cursor-pointer items-center justify-center rounded-md border border-transparent bg-green-400;
+  @apply px-4 py-2 text-sm font-medium text-white shadow-sm;
+}
+
+.apply_button:focus {
+  @apply outline-none;
+}
+
+.apply_button:hover {
+  @apply bg-green-200 text-gray-700;
+}
+
+.apply_button:disabled {
+  @apply inline-flex pointer-events-none items-center justify-center rounded-md border border-transparent bg-gray-100;
+  @apply px-4 py-2 text-sm font-medium text-gray-400;
 }
