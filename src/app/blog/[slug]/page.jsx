@@ -3,6 +3,8 @@ import path from 'path'
 import Markdown from 'markdown-to-jsx'
 import matter from 'gray-matter'
 import getPostMetadata from '@/components/posts/getPostMetadata'
+import { format } from 'date-fns'
+import Avatar from '@/components/avatar'
 
 const getPostContent = (slug) => {
   const root = process.cwd()
@@ -33,9 +35,20 @@ const PostPage = (props) => {
           <h2 className='text-6xl font-extrabold text-gray-600'>
             {post.data.title}
           </h2>
-          <p className='text-lg text-gray-400'>
-            by {post.data.author.name}, {post.data.date}
-          </p>
+          <div className='flex items-center'>
+            <Avatar
+              alt={post.data.author.name}
+              src={post.data.author.picture}
+              size={45}
+              className='rounded-full border-2 border-green-300'
+            />
+            <p className='ml-2 text-base text-gray-400'>
+              {post.data.author.name}
+              <span className='block align-baseline text-sm italic text-gray-300'>
+                {format(new Date(post.data.date), 'MM/dd/yyyy')}
+              </span>
+            </p>
+          </div>
         </div>
       </div>
 

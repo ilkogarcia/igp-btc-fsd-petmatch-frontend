@@ -16,6 +16,7 @@ export default function UserMenu() {
               src={session.user.data.image}
               alt={session.user.data.username}
               size={30}
+              className='rounded-full border border-gray-400'
             />
           ) : (
             <span className='icon flex items-center px-2'>
