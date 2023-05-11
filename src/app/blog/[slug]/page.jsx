@@ -40,9 +40,29 @@ const PostPage = (props) => {
       </div>
 
       {/* blog posts */}
-      <article className='tex-gray-400 mx-auto flex w-4/5 flex-col pt-20 text-lg'>
-        <Markdown>{post.content}</Markdown>
-      </article>
+      <div className='mx-auto flex w-4/5 flex-col mt-4'>
+        <article 
+          className='
+          prose
+          max-w-none
+          dark:prose-invert
+          text-gray-500
+          prose-xl
+          prose-h2:text-gray-500
+          prose-h2:font-extrabold
+          prose-h2:text-2xl
+          md:prose-h2:text-3xl
+          prose-a:text-green-600
+          prose-blockquote:text-green-600
+          prose-blockquote:italic
+          prose-blockquote:font-light
+          prose-blockquote:text-2xl
+          prose-img:rounded-md
+          prose-img:shadow-md'
+        >
+          <Markdown>{post.content}</Markdown>
+        </article>
+      </div>
     </div>
   )
 }

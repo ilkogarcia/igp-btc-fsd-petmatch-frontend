@@ -1,5 +1,4 @@
 'use client'
-import '../styles/globals.css'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
