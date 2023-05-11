@@ -71,7 +71,8 @@ const PostPage = (props) => {
           prose-blockquote:font-light
           prose-blockquote:text-2xl
           prose-img:rounded-md
-          prose-img:shadow-md'
+          prose-img:shadow-md
+          prose-th:text-green-600'
         >
           <Markdown>{post.content}</Markdown>
         </article>
