@@ -11,17 +11,16 @@ export default function HomePage() {
 
   return (
     <main className='relative'>
-      <div className='flex w-full flex-wrap content-center justify-center px-16 py-48'>
-        <div className='mx-auto w-4/5 text-center'>
-          <h1 className='font-headline tracking-snug leading-12 sm:leading-15 md:leading-19 lg:leading-26 pb-6 text-center text-4xl font-black sm:text-5xl md:text-6xl lg:text-8xl'>
-            <span className='text-white'>Find your new</span>
-            <br className='hidden sm:block' />
-            <span className='bg-gradient-to-br from-green-600 to-green-800 bg-clip-text text-transparent'>
+      <div className='flex w-full flex-col content-center justify-center bg-green-400 py-48'>
+        <div className='mx-auto flex w-4/5 flex-col text-center'>
+          <h1 className='leading-12 sm:leading-15 md:leading-19 lg:leading-26 text-center text-5xl font-black tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl'>
+            Find your new
+            <span className='block bg-gradient-to-br from-green-600 to-green-800 bg-clip-text align-baseline text-transparent'>
               best friend today!
             </span>
           </h1>
         </div>
-        <div className='mx-auto mt-6 w-4/5 text-center'>
+        <div className='mx-auto mt-8 flex w-4/5 flex-col text-center'>
           <p className='pb-10 text-center text-lg leading-normal tracking-wide text-green-950 md:text-xl md:leading-normal lg:text-2xl lg:leading-9 lg:tracking-tight'>
             <span>
               Let PetMatch's AI algorithm help you find the perfect pet for your
@@ -30,7 +29,7 @@ export default function HomePage() {
           </p>
         </div>
         {session?.user === undefined ? (
-          <div className='mx-auto mt-10 w-4/5 text-center'>
+          <div className='mx-auto mt-10 w-4/5 bg-green-400 text-center'>
             <Link
               className='mx-auto rounded-full bg-green-500 px-10 py-5 text-lg text-white outline-none ring ring-green-300 hover:bg-green-700 active:bg-green-900'
               href='/auth/register'
@@ -44,15 +43,15 @@ export default function HomePage() {
       </div>
 
       {/* Who We Are */}
-      <div className='w-full bg-white py-10'>
-        <div className='mx-auto my-40 grid w-4/5 gap-20 lg:grid-cols-12'>
-          <div className='col-span-8 grid flex-col space-y-6 text-left'>
+      <div className='flex w-full bg-white py-10'>
+        <div className='mx-auto my-40 flex w-4/5 flex-col gap-20 lg:grid lg:grid-cols-12'>
+          <div className='flex flex-col space-y-6 text-left lg:col-span-8'>
             <span className='text-green-600'>Who We Are</span>
-            <h2 className='text-6xl font-extrabold text-gray-600'>
+            <h2 className='text-4xl font-extrabold text-gray-600 sm:text-5xl md:text-6xl lg:text-7xl'>
               We are a trusted intermediary for safe and successful pet
               adoptions.
             </h2>
-            <p className='text-xl text-gray-400'>
+            <p className='text-normal text-gray-400 md:text-lg lg:text-xl'>
               At PetMatch, we believe in making the pet adoption process easier,
               safer, and more reliable. Our AI algorithm uses advanced data
               analysis to match pets with potential adopters based on their
@@ -69,9 +68,9 @@ export default function HomePage() {
               Learn More About Us!
             </Link>
           </div>
-          <div className='col-span-4 grid items-center'>
+          <div className='flex flex-col col-span-4 lg:col-span-4 items-center'>
             <Image
-              className='overflow-clip shadow-md shadow-black/10 dark:shadow-black/20'
+              className='hidden lg:block overflow-clip rounded-md shadow-md shadow-black/10 dark:shadow-black/20'
               alt='This pet is looking for a home'
               src={petImage}
               quality={85}
@@ -84,10 +83,10 @@ export default function HomePage() {
       </div>
 
       {/* Adoptable pets */}
-      <div className='w-full py-40'>
+      <div className='flex w-full flex-col py-40'>
         <div className='mx-auto flex w-4/5 flex-col space-y-6 text-center'>
           <span className='text-gray-50'>Adoptable pets</span>
-          <h2 className='text-6xl font-extrabold text-gray-700'>
+          <h2 className='text-4xl font-extrabold text-gray-700 sm:text-5xl md:text-6xl lg:text-7xl'>
             One of these pets could be your new best friend!
           </h2>
         </div>
@@ -95,7 +94,7 @@ export default function HomePage() {
           <PetList count={3} />
         </div>
         <div className='mx-auto mt-8 flex w-4/5 flex-col space-y-6 text-center'>
-          <p className='text-xl text-gray-50'>
+          <p className='text-normal text-gray-50 md:text-lg lg:text-xl'>
             We have many more pets available for adoption. Click the button
             below to see them all!
           </p>
@@ -109,14 +108,14 @@ export default function HomePage() {
       </div>
 
       {/* Adoption Process Section */}
-      <div className='w-full bg-white py-10'>
+      <div className='flex w-full bg-white py-10'>
         <div className='mx-auto flex w-4/5 flex-col py-40 text-center'>
           <div className='mb-12 space-y-6'>
             <span className='text-green-600'>Our Adoption Process</span>
-            <h2 className='text-6xl font-extrabold text-gray-600'>
+            <h2 className='text-4xl font-extrabold text-gray-600 sm:text-5xl md:text-6xl lg:text-7xl'>
               Find your perfect match in just a few easy steps
             </h2>
-            <p className='text-xl text-gray-400'>
+            <p className='text-normal text-gray-400 md:text-lg lg:text-xl'>
               PetMatch's adoption process is designed to{' '}
               <span className='text-green-500'>
                 be simple, safe, and stress-free.
@@ -159,7 +158,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className='mx-auto mt-8 flex w-4/5 flex-col space-y-6 text-center'>
-            <p className='text-xl text-gray-400'>
+            <p className='text-normal text-gray-400 md:text-lg lg:text-xl'>
               We also provide ongoing support throughout the adoption process,
               from legal advice to specialized logistic services, as well as
               resources to help you and your new pet adjust to your new life
@@ -176,10 +175,10 @@ export default function HomePage() {
       </div>
 
       {/* Success Stories Section */}
-      <div className='w-full py-40'>
+      <div className='flex w-full flex-col py-40'>
         <div className='mx-auto flex w-4/5 flex-col space-y-6 text-center'>
           <span className='text-gray-50'>Success Stories</span>
-          <h2 className='text-6xl font-extrabold text-gray-700'>
+          <h2 className='text-4xl font-extrabold text-gray-700 sm:text-5xl md:text-6xl lg:text-7xl'>
             See how PetMatch has changed lives for pets and families
           </h2>
         </div>
@@ -258,20 +257,19 @@ export default function HomePage() {
               birds, we have helped families find their perfect furry match".
             </blockquote>
             <Link href='/'>Read More...</Link>
-
           </div>
         </div>
       </div>
 
       {/* Contact Us Section */}
-      <div className='w-full bg-white py-10'>
+      <div className='flex w-full bg-white py-10'>
         <div className='mx-auto flex w-4/5 flex-col py-40 text-center'>
           <div className='mb-12 space-y-6'>
             <span className='text-green-600'>Get in Touch</span>
-            <h2 className='text-6xl font-extrabold text-gray-600'>
+            <h2 className='text-4xl font-extrabold text-gray-600 sm:text-5xl md:text-6xl lg:text-7xl'>
               We're always here to help
             </h2>
-            <p className='text-xl text-gray-400'>
+            <p className='text-normal text-gray-400 md:text-lg lg:text-xl'>
               Do you have questions or need assistance with your adoption
               process?{' '}
               <span className='text-green-500'>
