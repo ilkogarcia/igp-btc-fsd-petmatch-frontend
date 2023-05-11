@@ -68,15 +68,15 @@ export default function HomePage() {
               Learn More About Us!
             </Link>
           </div>
-          <div className='flex flex-col col-span-4 lg:col-span-4 items-center'>
+          <div className='flex flex-col h-full col-span-4 lg:col-span-4 items-center justify-start lg:mt-20'>
             <Image
               className='hidden lg:block overflow-clip rounded-md shadow-md shadow-black/10 dark:shadow-black/20'
               alt='This pet is looking for a home'
               src={petImage}
               quality={85}
               priority
-              width={400}
-              height={400}
+              width={640}
+              height={480}
             />
           </div>
         </div>

@@ -12,10 +12,10 @@ function ContactPage() {
   return (
     <div className='h-fit bg-white pb-40'>
       {/* first section with a contact form */}
-      <div className='mx-auto pb-40 pt-40 grid w-4/5 gap-20 lg:grid-cols-12'>
-        <div className='col-span-5 flex flex-col space-y-6'>
+      <div className='mx-auto flex flex-col pb-40 pt-40 lg:grid w-4/5 gap-20 lg:grid-cols-12'>
+        <div className='lg:col-span-5 flex flex-col space-y-6'>
           <span className='text-green-600'>Contact Us</span>
-          <h2 className='text-6xl font-extrabold text-gray-600'>
+          <h2 className='text-5xl font-extrabold text-gray-600 sm:text-6xl md:text-7xl lg:text-8xl'>
             We would love to{' '}
             <span className='text-green-600'>hear from you!</span>
           </h2>
@@ -23,7 +23,7 @@ function ContactPage() {
             If you have any questions, comments, or suggestions, please don't hesitate to contact us using the form below. 
           </p>
         </div>
-        <div className='col-span-7 flex flex-col pt-2 items-center justify-items-center'>
+        <div className='lg:col-span-7 flex flex-col lg:pt-2 items-center justify-items-center'>
           <ContactUs />
         </div>
       </div>
@@ -45,10 +45,10 @@ function ContactPage() {
       <div className='mx-auto pt-40 w-4/5'>
         <div className='flex flex-col text-center space-y-6'>
           <span className='text-green-600'>Locations</span>
-          <h1 className='text-6xl font-extrabold text-gray-600'>
+          <h1 className='text-4xl font-extrabold text-gray-600 sm:text-5xl md:text-6xl lg:text-7xl'>
             Our Offices
           </h1>
-          <p className='text-xl text-gray-400'>
+          <p className='text-normal text-gray-400 md:text-lg lg:text-xl'>
            Find us in cities all across Europe! 
            <span className='baseline inline-block'>Visit us at one of our many locations and find your perfect match today.</span> 
           </p>

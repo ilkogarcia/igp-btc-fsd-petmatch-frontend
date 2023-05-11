@@ -1,11 +1,7 @@
 import TeamPlayer from '@/components/team-player'
 import '../../styles/globals.css'
 import Image from 'next/image'
-import {
-  FaRegHeart,
-  FaRegClock,
-  FaRegHandshake,
-} from 'react-icons/fa'
+import { FaRegHeart, FaRegClock, FaRegHandshake } from 'react-icons/fa'
 
 export const metadata = {
   title: 'PetMatch. About us. Adopt a Pet and Save a Life',
@@ -14,7 +10,6 @@ export const metadata = {
 }
 
 function AboutPage() {
-
   // Static images used on the page
   const petImage1 = '/assets/pexelsdorte_179221_640x640.jpg'
   const petImage2 = '/assets/pexels_davidbrown_13993706_640x640.jpg'
@@ -75,30 +70,29 @@ function AboutPage() {
         facebookUrl: 'https://www.facebook.com/',
         linkedinUrl: 'https://www.linkedin.com/',
       },
-    }
+    },
   ]
-
 
   return (
     <div className='h-fit bg-white pb-40'>
       {/* main section  */}
-      <div className='mx-auto pb-20 pt-40 grid w-4/5 gap-20 lg:grid-cols-12'>
-        <div className='col-span-8 flex flex-col space-y-6'>
+      <div className='mx-auto flex w-4/5 flex-col gap-20 pb-20 pt-40 lg:grid lg:grid-cols-12'>
+        <div className='flex flex-col space-y-6 lg:col-span-8'>
           <span className='text-green-600'>About Us</span>
-          <h2 className='text-6xl font-extrabold text-gray-600'>
+          <h2 className='text-5xl font-extrabold text-gray-600 sm:text-6xl md:text-7xl lg:text-8xl'>
             Adopt a Pet and <span className='text-green-600'>Save a Life!</span>
           </h2>
-          <p className='text-xl text-gray-400'>
+          <p className='text-normal text-gray-400 md:text-lg lg:text-xl'>
             At PetMatch, we understand the importance of the bond between humans
             and animals. We believe that every pet deserves a happy and healthy
             life, and we work tirelessly to make this a reality.
           </p>
-          <p className='mt-10 text-sm text-gray-400'>
+          <p className='md:text-normal mt-10 text-sm text-gray-400'>
             Thank you for choosing PetMatch and joining us in our mission to
             make the world a better place for animals.
           </p>
         </div>
-        <div className='col-span-4 flex flex-col items-center justify-center'>
+        <div className='flex flex-col items-center justify-center lg:col-span-4'>
           <Image
             className='aspect-square overflow-clip rounded-full shadow-lg shadow-black/20 dark:shadow-black/40'
             alt='This pet is looking for a home'
@@ -112,15 +106,15 @@ function AboutPage() {
       </div>
 
       {/* our story */}
-      <div className='mx-auto py-20 w-4/6'>
+      <div className='mx-auto flex w-4/6 py-20'>
         <div className='flex flex-col text-center'>
           <div className='mb-12 space-y-6'>
             <span className='text-green-600'>Our Story</span>
-            <h1 className='text-6xl font-extrabold text-gray-600'>
+            <h1 className='text-4xl font-extrabold text-gray-600 sm:text-5xl md:text-6xl lg:text-7xl'>
               We aim to make a change
             </h1>
           </div>
-          <div className='flex flex-col space-y-8 text-ellipsis text-left text-lg italic text-gray-400 antialiased'>
+          <div className='flex flex-col space-y-8 text-ellipsis text-left text-normal md:text-lg lg:text-xl italic text-gray-400 antialiased'>
             <p>
               PetMatch was founded in 2015 by a group of animal lovers who were
               passionate about finding homes for pets in need. After seeing the
@@ -164,8 +158,8 @@ function AboutPage() {
       </div>
 
       {/* our mission  */}
-      <div className='mx-auto pb-20 pt-40 grid w-4/5 gap-20 lg:grid-cols-12'>
-        <div className='col-span-4 flex flex-col items-center justify-center'>
+      <div className='mx-auto flex flex-col w-4/5 gap-20 pb-20 lg:grid lg:grid-cols-12'>
+        <div className='flex flex-col items-center justify-center lg:col-span-4'>
           <Image
             className='aspect-square overflow-clip rounded-full shadow-lg shadow-black/20 dark:shadow-black/40'
             alt='This pet is looking for a home'
@@ -176,10 +170,10 @@ function AboutPage() {
             height={400}
           />
         </div>
-        <div className='col-span-8 flex flex-col space-y-6 text-right'>
+        <div className='flex flex-col space-y-6 text-center lg:text-right lg:col-span-8'>
           <span className='text-green-600'>Our Mission</span>
-          <h1 className='text-6xl font-extrabold text-gray-600'>Our Mision</h1>
-          <p className='text-xl text-gray-400'>
+          <h1 className='text-4xl font-extrabold text-gray-600 sm:text-5xl md:text-6xl lg:text-7xl'>Our Mision</h1>
+          <p className='text-normal md:text-lg lg:text-xl text-gray-400'>
             Our mission at PetMatch is to connect loving families with pets in
             need, while promoting responsible pet ownership and reducing the
             number of animals in shelters.
@@ -188,14 +182,14 @@ function AboutPage() {
       </div>
 
       {/* our values */}
-      <div className='mx-auto py-20 w-4/6'>
+      <div className='mx-auto flex w-4/6 py-20'>
         <div className='flex flex-col text-center'>
           <div className='mb-12 space-y-6'>
             <span className='text-green-600'>Our Values</span>
-            <h1 className='text-6xl font-extrabold text-gray-600'>
+            <h1 className='text-4xl font-extrabold text-gray-600 sm:text-5xl md:text-6xl lg:text-7xl'>
               We live by these
             </h1>
-            <p className='text-xl text-gray-400'>
+            <p className='text-normal md:text-lg lg:text-xl text-gray-400'>
               Our work is guided by a set of core values that reflect{' '}
               <span className='text-green-500'>
                 our commitment to animal welfare and responsible pet ownership.
@@ -237,14 +231,14 @@ function AboutPage() {
       </div>
 
       {/* our team */}
-      <div className='mx-auto pt-20 w-4/6'>
+      <div className='mx-auto flex w-4/6 pt-20'>
         <div className='flex flex-col text-center'>
           <div className='mb-12 space-y-6'>
             <span className='text-green-600'>Our Team</span>
-            <h1 className='text-6xl font-extrabold text-gray-600'>
+            <h1 className='text-4xl font-extrabold text-gray-600 sm:text-5xl md:text-6xl lg:text-7xl'>
               Meet these fine folks
             </h1>
-            <p className='text-xl text-gray-400'>
+            <p className='text-normal md:text-lg lg:text-xl text-gray-400'>
               We have a dedicated team of animal welfare experts, software
               engineers, and customer support specialists who are passionate
               about helping pets and families find their perfect matc
