@@ -29,7 +29,7 @@ export default async function RootLayout({ children }) {
       >
         <NextAuthProvider>
           <Header />
-          {children}
+          <div className='z-0'>{children}</div>
           <Footer />
           <Toaster />
         </NextAuthProvider>

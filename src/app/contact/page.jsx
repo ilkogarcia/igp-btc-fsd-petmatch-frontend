@@ -48,7 +48,7 @@ function ContactPage() {
           <h1 className='text-4xl font-extrabold text-gray-600 sm:text-5xl md:text-6xl lg:text-7xl'>
             Our Offices
           </h1>
-          <p className='text-normal text-gray-400 md:text-lg lg:text-xl'>
+          <p className='text-base text-gray-400 md:text-lg lg:text-xl'>
            Find us in cities all across Europe! 
            <span className='baseline inline-block'>Visit us at one of our many locations and find your perfect match today.</span> 
           </p>

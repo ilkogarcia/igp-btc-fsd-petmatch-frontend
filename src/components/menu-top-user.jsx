@@ -6,16 +6,20 @@ import Avatar from './avatar'
 
 export default function UserMenu() {
   const { data: session } = useSession()
-  
+
   return (
-    <div className=' mx-auto flex h-fit w-fit items-center justify-between gap-6'>
+    <div className=' mx-auto flex h-fit w-fit items-center justify-between gap-2 md:gap-4 lg:gap-8'>
       {session?.user ? (
         <div className='flex items-center justify-between space-x-2'>
-          {session.user.data.image ? ( 
-            <Avatar src={session.user.data.image} alt={session.user.data.username} size={10} />
+          {session.user.data.image ? (
+            <Avatar
+              src={session.user.data.image}
+              alt={session.user.data.username}
+              size={30}
+            />
           ) : (
             <span className='icon flex items-center px-2'>
-              <HiOutlineUserCircle size={20} />
+              <HiOutlineUserCircle size={22} />
             </span>
           )}
           <h2 className='text-gray-600'>
@@ -26,16 +30,22 @@ export default function UserMenu() {
         <></>
       )}
       {session?.user ? (
-        <button className='rounded-full border bg-green-500 px-4 py-2 text-sm text-white hover:bg-green-700 focus:outline-none focus:ring focus:ring-green-300 active:bg-green-900' onClick={() => signOut()}>
+        <button
+          className='rounded-md bg-green-600 px-3 py-2 text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600'
+          onClick={() => signOut()}
+        >
           Log out
         </button>
       ) : (
         <div className='flex items-center justify-between gap-6'>
-          <Link className='hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4 text-green-900 hover:text-white' href='/auth/login'>
+          <Link
+            className='text-green-900 hover:text-white hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4'
+            href='/auth/login'
+          >
             Log in
           </Link>
           <Link
-            className='rounded-full border bg-green-500 px-4 py-2 text-sm text-white hover:bg-green-700 focus:outline-none focus:ring focus:ring-green-300 active:bg-green-900'
+            className='rounded-md bg-green-600 px-3 py-2 text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600'
             href='/auth/register'
           >
             Register

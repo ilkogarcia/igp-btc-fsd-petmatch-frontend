@@ -85,8 +85,8 @@
 
 /* apply button style */
 .apply_button {
-  @apply inline-flex cursor-pointer items-center justify-center rounded-md border border-transparent bg-green-400;
-  @apply w-full px-4 py-2 text-sm font-medium text-white shadow-sm;
+  @apply w-full inline-flex cursor-pointer rounded-md bg-green-400 items-center justify-center;
+  @apply px-3 py-2 text-base font-medium text-green-200 shadow-sm;
 }
 
 .apply_button:focus {
@@ -94,7 +94,7 @@
 }
 
 .apply_button:hover {
-  @apply bg-green-200 text-gray-700;
+  @apply transition duration-300 ease-in-out hover:bg-green-200 hover:text-green-400;
 }
 
 .apply_button:disabled {

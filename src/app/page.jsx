@@ -51,7 +51,7 @@ export default function HomePage() {
               We are a trusted intermediary for safe and successful pet
               adoptions.
             </h2>
-            <p className='text-normal text-gray-400 md:text-lg lg:text-xl'>
+            <p className='text-base text-gray-400 md:text-lg lg:text-xl'>
               At PetMatch, we believe in making the pet adoption process easier,
               safer, and more reliable. Our AI algorithm uses advanced data
               analysis to match pets with potential adopters based on their
@@ -94,7 +94,7 @@ export default function HomePage() {
           <PetList count={3} />
         </div>
         <div className='mx-auto mt-8 flex w-4/5 flex-col space-y-6 text-center'>
-          <p className='text-normal text-gray-50 md:text-lg lg:text-xl'>
+          <p className='text-base text-gray-50 md:text-lg lg:text-xl'>
             We have many more pets available for adoption. Click the button
             below to see them all!
           </p>
@@ -115,7 +115,7 @@ export default function HomePage() {
             <h2 className='text-4xl font-extrabold text-gray-600 sm:text-5xl md:text-6xl lg:text-7xl'>
               Find your perfect match in just a few easy steps
             </h2>
-            <p className='text-normal text-gray-400 md:text-lg lg:text-xl'>
+            <p className='text-base text-gray-400 md:text-lg lg:text-xl'>
               PetMatch's adoption process is designed to{' '}
               <span className='text-green-500'>
                 be simple, safe, and stress-free.
@@ -158,7 +158,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className='mx-auto mt-8 flex w-4/5 flex-col space-y-6 text-center'>
-            <p className='text-normal text-gray-400 md:text-lg lg:text-xl'>
+            <p className='text-base text-gray-400 md:text-lg lg:text-xl'>
               We also provide ongoing support throughout the adoption process,
               from legal advice to specialized logistic services, as well as
               resources to help you and your new pet adjust to your new life
@@ -269,7 +269,7 @@ export default function HomePage() {
             <h2 className='text-4xl font-extrabold text-gray-600 sm:text-5xl md:text-6xl lg:text-7xl'>
               We're always here to help
             </h2>
-            <p className='text-normal text-gray-400 md:text-lg lg:text-xl'>
+            <p className='text-base text-gray-400 md:text-lg lg:text-xl'>
               Do you have questions or need assistance with your adoption
               process?{' '}
               <span className='text-green-500'>

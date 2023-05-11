@@ -26,16 +26,17 @@ const mainMenu = [
 
 export default function MainMenu() {
   return (
-    <nav>
-      <ul className='flex list-none gap-8'>
-        {mainMenu.map(({ label, route }) => (
-          <li key={route}>
-            <Link className='hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4 text-green-900 hover:text-white' href={route}>
-              {label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <ul className='flex list-none gap-2 md:gap-4 lg:gap-8'>
+      {mainMenu.map(({ label, route }) => (
+        <li key={route}>
+          <Link
+            className='text-green-900 hover:text-white hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4'
+            href={route}
+          >
+            {label}
+          </Link>
+        </li>
+      ))}
+    </ul>
   )
 }

@@ -82,12 +82,12 @@ function AboutPage() {
           <h2 className='text-5xl font-extrabold text-gray-600 sm:text-6xl md:text-7xl lg:text-8xl'>
             Adopt a Pet and <span className='text-green-600'>Save a Life!</span>
           </h2>
-          <p className='text-normal text-gray-400 md:text-lg lg:text-xl'>
+          <p className='text-base text-gray-400 md:text-lg lg:text-xl'>
             At PetMatch, we understand the importance of the bond between humans
             and animals. We believe that every pet deserves a happy and healthy
             life, and we work tirelessly to make this a reality.
           </p>
-          <p className='md:text-normal mt-10 text-sm text-gray-400'>
+          <p className='md:text-base mt-10 text-sm text-gray-400'>
             Thank you for choosing PetMatch and joining us in our mission to
             make the world a better place for animals.
           </p>
@@ -114,7 +114,7 @@ function AboutPage() {
               We aim to make a change
             </h1>
           </div>
-          <div className='flex flex-col space-y-8 text-ellipsis text-left text-normal md:text-lg lg:text-xl italic text-gray-400 antialiased'>
+          <div className='flex flex-col space-y-8 text-ellipsis text-left text-base md:text-lg lg:text-xl italic text-gray-400 antialiased'>
             <p>
               PetMatch was founded in 2015 by a group of animal lovers who were
               passionate about finding homes for pets in need. After seeing the
@@ -173,7 +173,7 @@ function AboutPage() {
         <div className='flex flex-col space-y-6 text-center lg:text-right lg:col-span-8'>
           <span className='text-green-600'>Our Mission</span>
           <h1 className='text-4xl font-extrabold text-gray-600 sm:text-5xl md:text-6xl lg:text-7xl'>Our Mision</h1>
-          <p className='text-normal md:text-lg lg:text-xl text-gray-400'>
+          <p className='text-base md:text-lg lg:text-xl text-gray-400'>
             Our mission at PetMatch is to connect loving families with pets in
             need, while promoting responsible pet ownership and reducing the
             number of animals in shelters.
@@ -189,7 +189,7 @@ function AboutPage() {
             <h1 className='text-4xl font-extrabold text-gray-600 sm:text-5xl md:text-6xl lg:text-7xl'>
               We live by these
             </h1>
-            <p className='text-normal md:text-lg lg:text-xl text-gray-400'>
+            <p className='text-base md:text-lg lg:text-xl text-gray-400'>
               Our work is guided by a set of core values that reflect{' '}
               <span className='text-green-500'>
                 our commitment to animal welfare and responsible pet ownership.
@@ -238,7 +238,7 @@ function AboutPage() {
             <h1 className='text-4xl font-extrabold text-gray-600 sm:text-5xl md:text-6xl lg:text-7xl'>
               Meet these fine folks
             </h1>
-            <p className='text-normal md:text-lg lg:text-xl text-gray-400'>
+            <p className='text-base md:text-lg lg:text-xl text-gray-400'>
               We have a dedicated team of animal welfare experts, software
               engineers, and customer support specialists who are passionate
               about helping pets and families find their perfect matc
