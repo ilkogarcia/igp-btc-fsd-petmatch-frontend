@@ -23,14 +23,24 @@ export const generateStaticParams = async () => {
 const PostPage = (props) => {
   const slug = props.params.slug
   const post = getPostContent(slug)
+
   return (
-    <div>
-      <div className='my-12 text-center'>
-        <h1 className='text-2xl text-slate-600'>{post.data.title}</h1>
-        <p className='mt-2 text-slate-400'>{post.data.date}</p>
+    <div className='h-fit bg-white pb-40'>
+      {/* article top header  */}
+      <div className='mx-auto flex w-4/5 flex-col pt-40'>
+        <div className='flex flex-col space-y-6 lg:col-span-8'>
+          <span className='text-green-600'>Blog Posts</span>
+          <h2 className='text-6xl font-extrabold text-gray-600'>
+            {post.data.title}
+          </h2>
+          <p className='text-lg text-gray-400'>
+            by {post.data.author.name}, {post.data.date}
+          </p>
+        </div>
       </div>
 
-      <article className='prose'>
+      {/* blog posts */}
+      <article className='tex-gray-400 mx-auto flex w-4/5 flex-col pt-20 text-lg'>
         <Markdown>{post.content}</Markdown>
       </article>
     </div>
