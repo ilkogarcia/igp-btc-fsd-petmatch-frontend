@@ -1,4 +1,5 @@
 import FormikInput from './formik-input'
+import FormikTextArea from './formik-textarea'
 
 function FormikControl(props) {
     const { control, ...rest } = props
@@ -6,6 +7,7 @@ function FormikControl(props) {
         case 'input':
             return <FormikInput {...rest} />
         case 'textarea':
+            return <FormikTextArea {...rest} />
         case 'select':
         case 'radio':
         case 'checkbox':
