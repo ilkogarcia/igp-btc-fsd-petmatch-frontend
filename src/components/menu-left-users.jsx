@@ -9,19 +9,19 @@ const mainMenu = [
   },
   {
     label: 'My Applications',
-    route: '/user',
+    route: '/user/applications',
   },
   {
     label: 'My Favorites',
-    route: '/user',
+    route: '/user/favorites',
   },
   {
     label: 'My Messages',
-    route: '/user',
+    route: '/user/messages',
   },
   {
     label: 'My Donations',
-    route: '/user',
+    route: '/user/donations',
   },
   {
     label: 'My Account',
@@ -31,7 +31,7 @@ const mainMenu = [
 
 function MenuUser() {
   return (
-    <nav>
+    <nav className='hidden sm:flex sm:flex-col'>
       <h2 className='mb-2 text-xl font-bold text-green-600'>Menu</h2>
       {mainMenu.map(({ label, route }) => (
         <span key={route} className='mb-2 text-sm sm:block sm:align-baseline'>

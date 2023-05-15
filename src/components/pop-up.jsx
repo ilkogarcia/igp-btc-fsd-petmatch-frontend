@@ -1,4 +1,4 @@
-'use cient'
+'use client'
 
 export default function PopUp() {
   return (
