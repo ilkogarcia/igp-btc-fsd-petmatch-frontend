@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 
 function ButtonApply(props) {
-  const { buttonType, buttonText, buttonLink } = props
+  const { buttonType, buttonText, handleClick } = props
   const [isDisabled, toggleIsDisabled] = useState(true)
   const { data: session } = useSession()
 
@@ -18,7 +18,7 @@ function ButtonApply(props) {
         type={buttonType}
         className={styles.apply_button}
         disabled={isDisabled}
-        onClick={() => window.open(buttonLink, '_parent')}
+        onClick={handleClick}
     >
         {buttonText}
     </button>

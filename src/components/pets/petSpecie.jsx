@@ -18,7 +18,7 @@ export default async function PetSpecie (params) {
 
   return (
     <div className='flex h-auto w-auto flex-col space-y-2'>
-      <p className='upercase text-xs font-bold text-green-600'>Specie</p>
+      <p className='uppercase text-xs font-bold text-green-600'>Specie</p>
       <p className='text-xl font-semibold text-gray-500'>
         {petSpecie.specieScientificName} ({petSpecie.specieCommonName})
       </p>

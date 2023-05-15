@@ -24,7 +24,7 @@ function Shelter({ id }) {
     <>
       {(shelter != null) ? (
         <div className='flex flex-col space-y-4'>
-          <p className='upercase text-xs font-bold text-green-600'>Location & Contact</p>
+          <p className='uppercase text-xs font-bold text-green-600'>Location & Contact</p>
           <p className='text-xl font-semibold text-gray-500'>{shelter.name}</p>
           <p className='text-normal text-gray-400'>
             {shelter.addressLine1 && `${shelter.addressLine1}`}

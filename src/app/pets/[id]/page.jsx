@@ -3,11 +3,11 @@ import { TbReportMedical } from 'react-icons/tb'
 
 // Import components
 import Image from 'next/image'
+import Link from 'next/link'
 import PetSpecie from '@/components/pets/petSpecie'
 import PetBreed from '@/components/pets/petBreed'
 import PetStatus from '@/components/pets/petStatus'
 import Shelter from '@/components/pet-shelter'
-import ButtonApply from '@/components/button-apply'
 
 
 // Import services and helpers
@@ -28,8 +28,6 @@ async function fetchOnePet (id) {
 export default async function PetPage ({params}) {
   const { id } = params
   const { data } = await fetchOnePet(id)
-
-  console.log(data)
 
   // Calculate the days on shelter
   const daysOnShelter = Math.floor(
@@ -69,7 +67,17 @@ export default async function PetPage ({params}) {
         </div>
 
         {/* apply for adoption */}
-        <ButtonApply buttonType='button' buttonText='Adopt Me' buttonLink='/adoption' />
+        {/* <ButtonApply buttonType='button' buttonText='Adopt Me' handleClick={handleAdoption} /> */}
+        <Link href={{
+          pathname: '/adoption',
+          query: {
+            petId: data.id,
+            petShelterId: data.shelterId,
+          }
+          }}
+        >
+          Adopt Me
+        </Link>
 
 
         {/* pet statistics */}
