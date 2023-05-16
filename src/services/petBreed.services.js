@@ -10,6 +10,19 @@ const fetchOneBreed = async (id) => {
   }).then((res) => res.json())
 }
 
+const fetchAllBreeds = async () => {
+  return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pet-breeds`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    next: {
+      revalidate: 60,
+    },
+  }).then((res) => res.json())
+}
+
 module.exports = {
   fetchOneBreed,
+  fetchAllBreeds,
 }

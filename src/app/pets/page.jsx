@@ -12,9 +12,12 @@ function PetsPage() {
   const [page, setPage] = useState(1)
   const [openFilter, setOpenFilter] = useState(false)
 
+  const filter = {}
+  const [filterParams, setFilterParams] = useState(filter)
+
   const loadPets = async () => {
     const request = {
-      filterParams: {},
+      filterParams,
       orderParams: [
         {
           field: 'updatedAt',
@@ -23,7 +26,6 @@ function PetsPage() {
       ],
     }
     const res = await fetchAllPets(request, 10, page)
-    console.log(res)
     if (res.sucess) {
       setPets((prev) => [...prev, ...res.data.pets])
     }
@@ -32,6 +34,10 @@ function PetsPage() {
   useEffect(() => {
     loadPets()
   }, [page])
+
+  useEffect(() => {
+    console.log(filterParams)
+  }, [filterParams])
 
   return (
     <div className='h-fit space-y-6 bg-white pb-40'>
@@ -52,14 +58,15 @@ function PetsPage() {
             scroll, you can easily find the pet you've been looking for.
           </p>
           <button 
+            className='rounded-md font-semibold bg-green-600 px-6 py-4 text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600'
             onClick={() => setOpenFilter(true)}
-            className='w-4/5 rounded-md font-semibold bg-green-600 px-3 py-4 text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600'
           >
             <HiOutlineFunnel className='inline-block mr-3 h-6 w-6'/>
             Filter
           </button>
+          <span className='text-sm italic text-gray-300'>Current filter applied: {JSON.stringify(filterParams)}</span>
         </div>
-        {openFilter ? <PetFilter close={() => setOpenFilter(false)} /> : <></>}
+        {openFilter ? <PetFilter close={() => setOpenFilter(false)} filter={() => setFilterParams(filter)}/> : <></>}
       </div>
 
       <div className='w-full bg-white'>
