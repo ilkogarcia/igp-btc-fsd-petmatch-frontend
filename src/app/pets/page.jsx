@@ -11,33 +11,35 @@ function PetsPage() {
   const [pets, setPets] = useState([])
   const [page, setPage] = useState(1)
   const [openFilter, setOpenFilter] = useState(false)
+  const [filterParams, setFilterParams] = useState({
+    petStatus: 'Available for adoption',
+  })
 
-  const filter = {}
-  const [filterParams, setFilterParams] = useState(filter)
+  useEffect(() => {
+    setPets([])
+  }, [filterParams])
 
-  const loadPets = async () => {
-    const request = {
-      filterParams,
-      orderParams: [
-        {
-          field: 'updatedAt',
-          direction: 'DESC',
-        },
-      ],
-    }
-    const res = await fetchAllPets(request, 10, page)
-    if (res.sucess) {
+  useEffect(() => {
+    const loadPets = async () => {
+      const request = {
+        filterParams: { ...filterParams },
+        orderParams: [
+          {
+            field: 'updatedAt',
+            direction: 'DESC',
+          },
+        ],
+      }
+      const res = await fetchAllPets(request, 10, page)
       setPets((prev) => [...prev, ...res.data.pets])
     }
-  }
-
-  useEffect(() => {
     loadPets()
-  }, [page])
+  }, [filterParams, page])
 
-  useEffect(() => {
-    console.log(filterParams)
-  }, [filterParams])
+  const setNewFilter = (filter) => {
+    setFilterParams(filter)
+    setPage(1)
+  }
 
   return (
     <div className='h-fit space-y-6 bg-white pb-40'>
@@ -57,16 +59,25 @@ function PetsPage() {
             down your search based on your preferences. With our infinite
             scroll, you can easily find the pet you've been looking for.
           </p>
-          <button 
-            className='rounded-md font-semibold bg-green-600 px-6 py-4 text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600'
+          <button
+            className='rounded-md bg-green-600 px-6 py-4 font-semibold text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600'
             onClick={() => setOpenFilter(true)}
           >
-            <HiOutlineFunnel className='inline-block mr-3 h-6 w-6'/>
+            <HiOutlineFunnel className='mr-3 inline-block h-6 w-6' />
             Filter
           </button>
-          <span className='text-sm italic text-gray-300'>Current filter applied: {JSON.stringify(filterParams)}</span>
+          <span className='text-sm italic text-gray-300'>
+            Current filter applied: {JSON.stringify(filterParams)}
+          </span>
         </div>
-        {openFilter ? <PetFilter close={() => setOpenFilter(false)} filter={() => setFilterParams(filter)}/> : <></>}
+        {openFilter ? (
+          <PetFilter
+            onClose={() => setOpenFilter(false)}
+            onFilterChange={(filter) => setNewFilter(filter)}
+          />
+        ) : (
+          <></>
+        )}
       </div>
 
       <div className='w-full bg-white'>
