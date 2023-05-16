@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 import styles from '../styles.module.css'
@@ -48,20 +49,33 @@ export default function PetFilter({ onClose, onFilterChange }) {
     }
   }
 
+  const checkboxOptions = [{ key: 'Available for adoption', value: '1' }]
   const initialValues = {
     specie: '',
+    checkboxOption: ['1'],
   }
 
   async function onSubmit(values) {
-    // eslint-disable-next-line eqeqeq
-    const selectedSpecie = species.find(({ value }) => value == values.specie).key
-    const speciesCondition = (selectedSpecie !== '...') ? { speciesName: selectedSpecie } : {}
+    // form the species condition for the filter
+    const selectedSpecie = species.find(
+      ({ value }) => value == values.specie
+    ).key
+    console.log(selectedSpecie)
+
+    const speciesCondition =
+      selectedSpecie !== '...' ? { speciesName: selectedSpecie } : {}
+    console.log(speciesCondition)
+
+    // form the status condition for the filter
+    const statusCondition =
+      (values.checkboxOption.length > 0) ? { petStatus: checkboxOptions[0].key } : {}
+    console.log(statusCondition)
 
     const newFilter = {
-      // eslint-disable-next-line eqeqeq
       ...speciesCondition,
-      petStatus: 'Available for adoption'
+      ...statusCondition
     }
+
     onFilterChange(newFilter)
     onClose()
   }
@@ -85,7 +99,7 @@ export default function PetFilter({ onClose, onFilterChange }) {
 
           <div className='mx-auto w-full p-5'>
             <Formik initialValues={initialValues} onSubmit={onSubmit}>
-              <Form className='grid gap-2 grid-cols-12'>
+              <Form className='grid grid-cols-12 gap-2'>
                 <div className='col-span-12'>
                   <FormikControl
                     control='select'
@@ -94,8 +108,16 @@ export default function PetFilter({ onClose, onFilterChange }) {
                     options={species}
                   />
                 </div>
+                <div className='col-span-12'>
+                  <FormikControl
+                    control='checkbox'
+                    label='Status'
+                    name='checkboxOption'
+                    options={checkboxOptions}
+                  />
+                </div>
                 <div className='col-span-12 my-2'>
-                    <hr className="bg-gray-200 border-0 dark:bg-gray-700" />
+                  <hr className='border-0 bg-gray-200 dark:bg-gray-700' />
                 </div>
                 <div className='col-span-12 md:col-span-8'>
                   <button

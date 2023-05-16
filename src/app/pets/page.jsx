@@ -37,6 +37,7 @@ function PetsPage() {
   }, [filterParams, page])
 
   const setNewFilter = (filter) => {
+    console.log(filter)
     setFilterParams(filter)
     setPage(1)
   }
