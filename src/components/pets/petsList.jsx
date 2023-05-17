@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { fetchAllPets, deleteOnePet } from '@/services/pet.services'
 import toast from 'react-hot-toast'
+import PopUpMessageConfirmation from '../popup-message-confirmation'
 
 export default function PetsList() {
   const { data: session } = useSession()
@@ -14,6 +15,9 @@ export default function PetsList() {
   const [lastPage, setLastPage] = useState(false)
   const [selected, setSelected] = useState([])
   const [listUpdated, setListUpdated] = useState(false)
+
+  const [openConfirmation, setOpenConfirmation] = useState(false)
+  const [confirmationMessage, setConfirmationMessage] = useState('')
 
   useEffect(() => {
     const loadPets = async () => {
@@ -57,6 +61,12 @@ export default function PetsList() {
 
   const handleEdit = () => {
     console.log('Edit')
+  }
+
+  const handleConfirmation = () => {
+    const message = `Are you sure you want to delete pet with the id ${selected[0]}?`
+    setConfirmationMessage(message)
+    setOpenConfirmation(true)
   }
 
   const handleDelete = async () => {
@@ -108,7 +118,7 @@ export default function PetsList() {
         <button
           className='rounded-md bg-rose-600 px-4 py-2 text-rose-300 shadow-sm transition duration-300 ease-in-out hover:bg-rose-300 hover:text-rose-600 disabled:bg-gray-200  disabled:text-gray-300'
           disabled={selected.length === 0}
-          onClick={handleDelete}
+          onClick={handleConfirmation}
         >
           Delete
         </button>
@@ -200,6 +210,10 @@ export default function PetsList() {
           </div>
         </div>
       </div>
+      {/* modal */}
+      { openConfirmation && (
+        <PopUpMessageConfirmation message={confirmationMessage} onClose={() => setOpenConfirmation(false)} onConfirmation={() => handleDelete()} />
+      )}
     </div>
   )
 }
