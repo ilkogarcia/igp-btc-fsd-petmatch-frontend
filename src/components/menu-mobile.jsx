@@ -55,6 +55,29 @@ const userMenu = [
   },
 ]
 
+const adminMenu = [
+  {
+    label: 'Dashboard',
+    route: '/admin',
+  },
+  {
+    label: 'Pets Management',
+    route: '/admin/pets',
+  },
+  {
+    label: 'Shelters Management',
+    route: '/admin/shelters',
+  },
+  {
+    label: 'Users Management',
+    route: '/admin/users',
+  },
+  {
+    label: 'Settings',
+    route: '/admin/settings',
+  },
+]
+
 export default function MobileMenu({ close }) {
   const [animation, setAnimation] = useState(false)
   const { data: session } = useSession()
@@ -89,8 +112,10 @@ export default function MobileMenu({ close }) {
             animation ? 'scale-100' : 'scale-90'
           }`}
         >
-          <div className='flex w-full px-6 mx-auto items-center justify-between'>
-            <h1>Navigation</h1>
+          <div className='mx-auto flex w-full items-center justify-between px-6'>
+            <h3 className='text-sm font-semibold text-gray-400'>
+              Navigation...
+            </h3>
             <HiXMark
               size={25}
               className='h-7 w-7 cursor-pointer transition-all hover:scale-110'
@@ -98,11 +123,15 @@ export default function MobileMenu({ close }) {
             />
           </div>
 
-          <div className='w-full px-6 mx-auto mt-5 grid gap-20 grid-cols-2'>
+          <div className='mx-auto mt-5 grid w-full grid-cols-4 px-2'>
+            {/* Main Menu */}
             <div className='col-span-1'>
+              <h4 className='text-xs font-semibold uppercase text-gray-400 underline underline-offset-4'>
+                Main Menu
+              </h4>
               <ul className='list-none gap-2 md:gap-4 lg:gap-8'>
                 {mainMenu.map(({ label, route }) => (
-                  <li key={route} className='block py-2'>
+                  <li key={route} className='block py-1'>
                     <Link
                       className='text-sm text-green-600 hover:text-green-800 hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4'
                       href={route}
@@ -114,12 +143,16 @@ export default function MobileMenu({ close }) {
               </ul>
             </div>
 
-            <div className='col-span-1'>
-              {session?.user ? (
+            {/* User Menu */}
+            {session?.user ? (
+              <div className='col-span-1'>
                 <div className='flex flex-col justify-between'>
+                  <h4 className='text-xs font-semibold uppercase text-gray-400 underline underline-offset-4'>
+                    User Menu
+                  </h4>
                   <ul className='list-none gap-2 md:gap-4 lg:gap-8'>
                     {userMenu.map(({ label, route }) => (
-                      <li key={route} className='block py-2'>
+                      <li key={route} className='block py-1'>
                         <Link
                           className='text-sm text-green-600 hover:text-green-800 hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4'
                           href={route}
@@ -129,16 +162,49 @@ export default function MobileMenu({ close }) {
                       </li>
                     ))}
                   </ul>
-                  <button
-                    className='w-2/3 rounded-md bg-green-600 px-3 py-2 text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600'
-                    onClick={() => signOut()}
-                  >
-                    Log out
-                  </button>
                 </div>
-              ) : (
+              </div>
+            ) : (
+              <></>
+            )}
+
+            {/* Admin Menu */}
+            {session?.user?.data.role === 3 ? (
+              <div className='col-span-1'>
+                <h4 className='text-xs font-semibold uppercase text-gray-400 underline underline-offset-4'>
+                  Admin Menu
+                </h4>
                 <ul className='list-none gap-2 md:gap-4 lg:gap-8'>
-                  <li key='/auth/login' className='block px-4 py-2'>
+                  {adminMenu.map(({ label, route }) => (
+                    <li key={route} className='block py-1'>
+                      <Link
+                        className='text-sm text-green-600 hover:text-green-800 hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4'
+                        href={route}
+                      >
+                        {label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <></>
+            )}
+
+            {/* Auth Menu */}
+            {session?.user ? (
+              <div className='col-span-1 mx-auto'>
+                <button
+                  className='rounded-md bg-green-600 px-3 py-2 text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600'
+                  onClick={() => signOut()}
+                >
+                  Log out
+                </button>
+              </div>
+            ) : (
+              <div className='col-span-1'>
+                <ul className='list-none gap-2 md:gap-4 lg:gap-8'>
+                  <li key='/auth/login' className='block px-4 py-1'>
                     <Link
                       className='text-sm text-green-600 hover:text-green-800 hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4'
                       href='/auth/login'
@@ -146,7 +212,7 @@ export default function MobileMenu({ close }) {
                       Log in
                     </Link>
                   </li>
-                  <li key='/auth/register' className='block px-4 py-2'>
+                  <li key='/auth/register' className='block px-4 py-1'>
                     <Link
                       className='text-sm text-green-600 hover:text-green-800 hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4'
                       href='/auth/register'
@@ -155,8 +221,8 @@ export default function MobileMenu({ close }) {
                     </Link>
                   </li>
                 </ul>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

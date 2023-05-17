@@ -1,14 +1,8 @@
-'use client'
-import { useSession } from 'next-auth/react'
-
 export default function FavoritesPage() {
-  const { data: session } = useSession()
-
   return (
     <div className='flex min-h-screen flex-col place-content-start space-y-8'>
       {/* header */}
       <div className='flex flex-col'>
-        <span className='text-green-600'>{session?.user.data.username}</span>
         <h1 className='text-4xl font-extrabold text-gray-600'>
           My <span className='text-green-600'>Favorites</span>
         </h1>

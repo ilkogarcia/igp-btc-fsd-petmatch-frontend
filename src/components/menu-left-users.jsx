@@ -1,10 +1,8 @@
-'use client'
-
 import Link from 'next/link'
 
-const mainMenu = [
+const userMenu = [
   {
-    label: 'Dashboard',
+    label: 'My Dashboard',
     route: '/user',
   },
   {
@@ -31,10 +29,10 @@ const mainMenu = [
 
 function MenuUser() {
   return (
-    <nav className='hidden sm:flex sm:flex-col'>
-      <h2 className='mb-2 text-xl font-bold text-green-600'>Menu</h2>
-      {mainMenu.map(({ label, route }) => (
-        <span key={route} className='mb-2 text-sm sm:block sm:align-baseline'>
+    <nav className='hidden md:flex md:flex-col'>
+      <h2 className='mb-4 text-xs font-bold text-gray-500 uppercase underline underline-offset-4'>User Menu</h2>
+      {userMenu.map(({ label, route }) => (
+        <span key={route} className='mb-2 text-sm md:block md:align-baseline'>
         <Link
           className='hover:underline hover:decoration-solid hover:decoration-2 hover:underline-offset-4 text-green-600 hover:text-green-800'
           href={route}

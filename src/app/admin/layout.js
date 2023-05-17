@@ -1,18 +1,32 @@
+'use client'
 import '../../styles/globals.css'
+import { NextAuthProvider } from '../providers'
+import { useSession } from 'next-auth/react'
+import MenuUser from '@/components/menu-left-users'
+import MenuAdmin from '@/components/menu-left-admin'
 
-export default function AdminLayout({ children }) {
+function AdminLayout({ children }) {
+  const { data: session } = useSession()
+
   return (
-    <div className='flex h-screen w-screen bg-green-200'>
-      <div className='m-auto grid h-3/4 w-3/5 rounded-md bg-slate-50 lg:grid-cols-2'>
-        <div className='left flex'>{children}</div>
-        <div className='right flex'>
-          <div className='py-10 text-center'>
-            <h1 className='text-3xl font-bold text-gray-700'>
-              Lateral panel for menu and more info...
-            </h1>
+    <NextAuthProvider>
+      <div className='h-fit min-h-screen bg-white pt-20'>
+        {/* page top section  */}
+        <div className='mx-auto flex w-10/12 flex-col md:grid md:grid-cols-12'>
+          <div className='flex flex-col items-start justify-start space-y-6 md:col-span-3'>
+            {session?.user.data.role === 3 && <MenuAdmin />}
+            <MenuUser />
+          </div>
+          <div className='flex flex-col items-start justify-start md:col-span-9'>
+            <span className='text-green-600'>
+              {session?.user.data.username}
+            </span>
+            {children}
           </div>
         </div>
       </div>
-    </div>
+    </NextAuthProvider>
   )
 }
+
+export default AdminLayout

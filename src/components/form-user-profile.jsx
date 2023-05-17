@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
 // Import styles sheet
@@ -25,6 +26,7 @@ function UserProfile(params) {
   const { data: session } = useSession()
 
   const [formValues, setFormValues] = useState({})
+  const [savedValues, setSavedValues] = useState({})
   const [editMode, setEditMode] = useState(false)
 
   const countries = [ 
@@ -186,23 +188,6 @@ function UserProfile(params) {
     gender: '',
   }
 
-  const savedValues = {
-    cityId: '4',
-    stateProvinceId: '40',
-    countryId: '10',
-    username: 'ilkogarcia',
-    email: 'okli@gmail.com',
-    profilePicture: '/assets/blog/authors/ilko.jpeg',
-    firstName: 'Ilko',
-    lastName: 'Fernández',
-    addressLine1: 'Calle de la Palma 73',
-    addressLine2: 'Esca. A. Piso 2 Puerta 1',
-    postalCode: '37001',
-    phoneNumber: '666666666',
-    birthday: '1974-08-05',
-    gender: 'Male',
-  }
-
   const validationSchema = Yup.object({
     cityId: Yup.string().notRequired(),
     stateProvinceId: Yup.string().notRequired(),
@@ -261,10 +246,10 @@ function UserProfile(params) {
   // Load user profile data when component mounts
   useEffect(() => {
     async function loadUserProfile() {
-      console.log('session', session);
-      const response = await getOneUser(session?.user.data.id, session?.user.data.token)
+      const response = await getOneUser(session?.user?.data.id, session?.user?.data.token)
       if (response.sucess) {
         setFormValues(response.data)
+        setSavedValues(response.data)
       } else {
         toast.error(
           <div>
@@ -278,7 +263,7 @@ function UserProfile(params) {
       }
     }
     loadUserProfile()
-  }, [session])
+  }, [])
 
 
   // Handle form submission
@@ -314,6 +299,7 @@ function UserProfile(params) {
 
   // Handle reset form
   function handleResetForm() {
+    setFormValues(savedValues)
     setEditMode(false)
   }
 

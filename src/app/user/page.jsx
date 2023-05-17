@@ -1,17 +1,12 @@
-'use client'
 import styles from './styles.module.css'
-import { useSession } from 'next-auth/react'
 
 function UserPage() {
-  const { data: session } = useSession()
-
   return (
-    <div className='flex flex-col space-y-8 place-content-start'>
+    <div className='flex min-h-screen flex-col place-content-start space-y-8'>
       {/* User Dashboard */}
       <div className='flex flex-col'>
-        <span className='text-green-600'>{session?.user.data.username}</span>
         <h1 className='text-4xl font-extrabold text-gray-600'>
-          User <span className='text-green-600'>Dashboard</span>
+          My <span className='text-green-600'>Dashboard</span>
         </h1>
         <p className='text-lg text-gray-600'>
           Here you can manage your account, keep track of your adoption status,
