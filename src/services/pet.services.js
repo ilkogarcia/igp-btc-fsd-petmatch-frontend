@@ -21,7 +21,6 @@ const fetchOnePet = async (id) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Accept: 'application/json',
     },
     next: {
       revalidate: 60,
@@ -29,7 +28,18 @@ const fetchOnePet = async (id) => {
   }).then((res) => res.json())
 }
 
+const deleteOnePet = async (id, token) => {
+  return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pets/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => res.json())
+}
+
 module.exports = {
   fetchAllPets,
   fetchOnePet,
+  deleteOnePet,
 }

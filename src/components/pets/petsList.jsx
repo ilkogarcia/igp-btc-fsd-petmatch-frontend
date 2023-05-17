@@ -1,14 +1,19 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import { fetchAllPets } from '@/services/pet.services'
+import { fetchAllPets, deleteOnePet } from '@/services/pet.services'
+import toast from 'react-hot-toast'
 
 export default function PetsList() {
+  const { data: session } = useSession()
+
   const [pets, setPets] = useState([])
   const [info, setInfo] = useState({})
   const [page, setPage] = useState(1)
   const [lastPage, setLastPage] = useState(false)
   const [selected, setSelected] = useState([])
+  const [listUpdated, setListUpdated] = useState(false)
 
   useEffect(() => {
     const loadPets = async () => {
@@ -26,7 +31,7 @@ export default function PetsList() {
       setInfo(res.info)
     }
     loadPets()
-  }, [page])
+  }, [page, listUpdated])
 
   const handleNextPage = () => {
     const newOffset = info.offset + info.limit
@@ -35,6 +40,7 @@ export default function PetsList() {
       return
     }
     setPage((prev) => prev + 1)
+    setSelected([])
   }
 
   const handlePreviousPage = () => {
@@ -42,6 +48,7 @@ export default function PetsList() {
       return
     }
     setPage((prev) => prev - 1)
+    setSelected([])
   }
 
   const handleAdd = () => {
@@ -52,18 +59,34 @@ export default function PetsList() {
     console.log('Edit')
   }
 
-  const handleDelete = () => {
-    console.log('Delete this pets:')
-    console.log(selected)
+  const handleDelete = async () => {
+    const res = await deleteOnePet(selected, session?.user?.data.token)
+    if (res.sucess) {
+      toast.success(res.message, { duration: 3000 })
+      setSelected([])
+      setListUpdated((prev) => !prev)
+    } else {
+      toast.error(
+        <div>
+          <span>Something went wrong!</span>
+          <br />
+          <span className='text-sm'>{res.message}</span>
+        </div>,
+        { duration: 3000 }
+      )
+    }
   }
 
   const handleSelect = (e) => {
-    if (e.checked) {
-      setSelected((prev) => [...prev, e.id])
+    if (selected.includes(e.id)) {
+      setSelected(selected.filter((id) => id !== e.id))
     } else {
-      setSelected((prev) => prev.filter((id) => id !== e.id))
+      if (e.id !== selected[0]) {
+        if (e.checked) {
+          setSelected([e.id])
+        }
+      }
     }
-    console.log(selected)
   }
 
   return (
@@ -83,7 +106,8 @@ export default function PetsList() {
           Edit
         </button>
         <button
-          className='rounded-md bg-rose-600 px-4 py-2 text-rose-300 shadow-sm transition duration-300 ease-in-out hover:bg-rose-300 hover:text-rose-600'
+          className='rounded-md bg-rose-600 px-4 py-2 text-rose-300 shadow-sm transition duration-300 ease-in-out hover:bg-rose-300 hover:text-rose-600 disabled:bg-gray-200  disabled:text-gray-300'
+          disabled={selected.length === 0}
           onClick={handleDelete}
         >
           Delete
@@ -94,10 +118,10 @@ export default function PetsList() {
       <div className='flex flex-col justify-between'>
         {pets.map((pet) => (
           <div key={pet.id} className='border'>
-            <input 
-              type='checkbox' 
-              id={pet.id} 
-              className='inline align-middle mr-2'
+            <input
+              type='checkbox'
+              id={pet.id}
+              className='mr-2 inline align-middle'
               onChange={(e) => handleSelect(e.target)}
             />
             <p className='inline align-middle'>

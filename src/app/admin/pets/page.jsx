@@ -1,6 +1,13 @@
+'use client'
+import { useSession } from 'next-auth/react'
 import PetList from "@/components/pets/petsList";
 
 export default function PetsManagementPage () {
+  const { status } = useSession()
+  if (status === 'unauthenticated') {
+    return <div>Access Denied</div>
+  }
+
   return (
     <div className='flex flex-col place-content-start space-y-8'>
       {/* header */}
