@@ -1,6 +1,16 @@
+'use client'
 import styles from './styles.module.css'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 function UserPage() {
+  const { status } = useSession()
+  const router = useRouter()
+
+  if (status === 'unauthenticated') {
+    router.push('/auth/login')
+  }
+
   return (
     <div className='flex min-h-screen flex-col place-content-start space-y-8'>
       {/* User Dashboard */}

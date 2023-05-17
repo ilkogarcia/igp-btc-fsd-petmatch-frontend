@@ -1,5 +1,5 @@
 export default function Loading () {
   return (
-    <p>Cargando comentarios...</p>
+    <p>Loading pets information from the platform backend...</p>
   )
 }

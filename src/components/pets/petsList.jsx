@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { fetchAllPets, deleteOnePet } from '@/services/pet.services'
 import toast from 'react-hot-toast'
 import PopUpMessageConfirmation from '../popup-message-confirmation'
+import { format } from 'date-fns'
 
 export default function PetsList() {
   const { data: session } = useSession()
@@ -126,21 +127,38 @@ export default function PetsList() {
 
       {/* table */}
       <div className='flex flex-col justify-between'>
-        {pets.map((pet) => (
-          <div key={pet.id} className='border'>
-            <input
-              type='checkbox'
-              id={pet.id}
-              className='mr-2 inline align-middle'
-              onChange={(e) => handleSelect(e.target)}
-            />
-            <p className='inline align-middle'>
-              {pet.id} {pet.name} {pet.PetBreed.breedName}{' '}
-              {pet.PetBreed.PetSpecie.specieCommonName} {pet.gender} {pet.age}{' '}
-              {pet.petStatus} {pet.updatedAt} {pet.createdAt}
-            </p>
-          </div>
-        ))}
+        <table className='shadow-lg bg-white border-collapse text-sm font-light table-auto'>
+          <tr>
+            <th className='bg-green-100 border text-left px-4 py-2'>#</th>
+            <th className='bg-green-100 border text-left px-4 py-2'>Name</th>
+            <th className='bg-green-100 border text-left px-4 py-2'>Specie</th>
+            <th className='bg-green-100 border text-left px-4 py-2'>Breed</th>
+            <th className='hidden md:table-cell bg-green-100 border text-left px-4 py-2'>Gender</th>
+            <th className='hidden md:table-cell bg-green-100 border text-left px-4 py-2'>Age</th>
+            <th className='hidden lg:table-cell bg-green-100 border text-left px-4 py-2'>Status</th>
+            <th className='hidden lg:table-cell bg-green-100 border text-left px-4 py-2'>Updated At</th>
+          </tr>
+          {pets.map((pet) => (
+            <tr key={pet.id}>
+              <td className='border px-4 py-2'>
+                <input
+                  type='checkbox'
+                  id={pet.id}
+                  className='mr-2 inline align-middle'
+                  onChange={(e) => handleSelect(e.target)}
+                />
+              </td>
+              <td className='border px-4 py-2'>{pet.name}</td>
+              <td className='border px-4 py-2'>{pet.PetBreed.PetSpecie.specieCommonName}</td>
+              <td className='border px-4 py-2'>{pet.PetBreed.breedName}</td>
+              <td className='hidden md:table-cell border px-4 py-2'>{pet.gender}</td>
+              <td className='hidden md:table-cell border px-4 py-2'>{pet.age}</td>
+              <td className='hidden lg:table-cell border px-4 py-2'>{pet.PetStatus.statusName}</td>
+              <td className='hidden lg:table-cell border px-4 py-2'>{format(new Date(pet.updatedAt), 'MM/dd/yyyy')}</td>
+
+            </tr>
+          ))}
+        </table>
       </div>
       {/* pagination controls */}
       <div className='mt-6 flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6'>
