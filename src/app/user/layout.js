@@ -1,4 +1,5 @@
 'use client'
+
 import '../../styles/globals.css'
 import { NextAuthProvider } from '../providers'
 import { useSession } from 'next-auth/react'

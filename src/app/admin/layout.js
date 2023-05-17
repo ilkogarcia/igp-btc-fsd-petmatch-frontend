@@ -1,4 +1,5 @@
 'use client'
+
 import '../../styles/globals.css'
 import { NextAuthProvider } from '../providers'
 import { useSession } from 'next-auth/react'
@@ -7,10 +8,11 @@ import MenuAdmin from '@/components/menu-left-admin'
 
 function AdminLayout({ children }) {
   const { data: session } = useSession()
+  console.log('session', session?.user?.data)
 
   return (
     <NextAuthProvider>
-      <div className='h-fit min-h-screen bg-white pt-20'>
+      <div className='h-full min-h-screen bg-white pb-40 pt-20'>
         {/* page top section  */}
         <div className='mx-auto flex w-10/12 flex-col md:grid md:grid-cols-12'>
           <div className='flex flex-col items-start justify-start space-y-6 md:col-span-3'>
