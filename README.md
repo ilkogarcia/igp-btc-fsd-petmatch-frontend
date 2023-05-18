@@ -78,6 +78,7 @@ This project utilizes the following open source licensed images:
 - [9](https://www.pexels.com/es-es/foto/persona-sosteniendo-una-camara-dslr-673021/) by [waseem kahlool]()
 - [10](https://www.pexels.com/es-es/foto/hombre-en-camiseta-azul-y-roja-con-cuello-redondo-con-gorra-roja-4061512/) by [Erik Mclean]()
 - [11](https://www.pexels.com/es-es/foto/foto-de-mujer-vistiendo-calentador-de-orejas-2766408/) by [Yuri Manei]()
+- [12]("https://www.freepik.com/free-vector/cute-dog-cute-cat-cartoon-illustration_14877551.htm#query=pets&position=3&from_view=search&track=sph") by catalyststuff on Freepik
 
 We appreciate the work of these authors and their contributions to the open source community.
 

@@ -6,19 +6,29 @@ import { fetchAllPets, deleteOnePet } from '@/services/pet.services'
 import toast from 'react-hot-toast'
 import PopUpMessageConfirmation from '../popup-message-confirmation'
 import { format } from 'date-fns'
+import PetAdd from './petAdd'
 
 export default function PetsList() {
   const { data: session } = useSession()
 
+  // State for the list of pets shows in the table and to update the list
   const [pets, setPets] = useState([])
+  const [listUpdated, setListUpdated] = useState(false)
+
+  // States needed to manage list pagination
   const [info, setInfo] = useState({})
   const [page, setPage] = useState(1)
   const [lastPage, setLastPage] = useState(false)
-  const [selected, setSelected] = useState([])
-  const [listUpdated, setListUpdated] = useState(false)
-
+  
+  // States needed to manage the confirmation popup
   const [openConfirmation, setOpenConfirmation] = useState(false)
   const [confirmationMessage, setConfirmationMessage] = useState('')
+  
+  // States needed to manage the add/edit pet popup
+  const [showAddPet, setShowAddPet] = useState(false)
+  
+  // Array to store the selected pets on the list
+  const [selectedPets, setSelectedPets] = useState([])
 
   useEffect(() => {
     const loadPets = async () => {
@@ -45,7 +55,7 @@ export default function PetsList() {
       return
     }
     setPage((prev) => prev + 1)
-    setSelected([])
+    setSelectedPets([])
   }
 
   const handlePreviousPage = () => {
@@ -53,28 +63,42 @@ export default function PetsList() {
       return
     }
     setPage((prev) => prev - 1)
-    setSelected([])
+    setSelectedPets([])
   }
 
   const handleAdd = () => {
-    console.log('Add')
+    setShowAddPet(true)
   }
 
   const handleEdit = () => {
-    console.log('Edit')
+    console.log('Selected pets', selectedPets)
+
+    if (selectedPets.length === 0) {
+      toast.error('Please select at least one pet to edit', { duration: 3000 })
+    } else if (selectedPets.length > 1) {
+      toast.error('Please select only one pet to edit', { duration: 3000 })
+    } else {
+      setShowAddPet(true)
+    }
   }
 
   const handleConfirmation = () => {
-    const message = `Are you sure you want to delete pet with the id ${selected[0]}?`
-    setConfirmationMessage(message)
-    setOpenConfirmation(true)
+    if (selectedPets.length === 0) {
+      toast.error('Please select at least one pet to delete', { duration: 3000 })
+    } else if (selectedPets.length > 1) {
+      toast.error('Please select only one pet to delete', { duration: 3000 })
+    } else {
+      const message = `Please confirm that you want to remove pet with id ${selectedPets[0]}. Are you sure?`
+      setConfirmationMessage(message)
+      setOpenConfirmation(true)
+    }
   }
 
   const handleDelete = async () => {
-    const res = await deleteOnePet(selected, session?.user?.data.token)
+    const res = await deleteOnePet(selectedPets[0], session?.user?.data.token)
     if (res.sucess) {
       toast.success(res.message, { duration: 3000 })
-      setSelected([])
+      setSelectedPets([])
       setListUpdated((prev) => !prev)
     } else {
       toast.error(
@@ -89,14 +113,13 @@ export default function PetsList() {
   }
 
   const handleSelect = (e) => {
-    if (selected.includes(e.id)) {
-      setSelected(selected.filter((id) => id !== e.id))
-    } else {
-      if (e.id !== selected[0]) {
-        if (e.checked) {
-          setSelected([e.id])
-        }
-      }
+    const indexToRemove = selectedPets.indexOf(e.id)
+    const isOnArray = (indexToRemove !== -1)
+    
+    if (e.checked && !isOnArray) {
+      setSelectedPets([...selectedPets, e.id])
+    } else if (!e.checked && isOnArray) {
+      setSelectedPets(selectedPets.filter((_, i) => i !== indexToRemove))
     }
   }
 
@@ -111,14 +134,15 @@ export default function PetsList() {
           Add
         </button>
         <button
-          className='rounded-md bg-green-600 px-4 py-2 text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600'
+          className='rounded-md bg-green-600 px-4 py-2 text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600 disabled:bg-gray-200  disabled:text-gray-300'
+          disabled={selectedPets.length === 0}
           onClick={handleEdit}
         >
           Edit
         </button>
         <button
           className='rounded-md bg-rose-600 px-4 py-2 text-rose-300 shadow-sm transition duration-300 ease-in-out hover:bg-rose-300 hover:text-rose-600 disabled:bg-gray-200  disabled:text-gray-300'
-          disabled={selected.length === 0}
+          disabled={selectedPets.length === 0}
           onClick={handleConfirmation}
         >
           Delete
@@ -127,37 +151,58 @@ export default function PetsList() {
 
       {/* table */}
       <div className='flex flex-col justify-between'>
-        <table className='shadow-lg bg-white border-collapse text-sm font-light table-auto'>
-          <tr>
-            <th className='bg-green-100 border text-left px-4 py-2'>#</th>
-            <th className='bg-green-100 border text-left px-4 py-2'>Name</th>
-            <th className='bg-green-100 border text-left px-4 py-2'>Specie</th>
-            <th className='bg-green-100 border text-left px-4 py-2'>Breed</th>
-            <th className='hidden md:table-cell bg-green-100 border text-left px-4 py-2'>Gender</th>
-            <th className='hidden md:table-cell bg-green-100 border text-left px-4 py-2'>Age</th>
-            <th className='hidden lg:table-cell bg-green-100 border text-left px-4 py-2'>Status</th>
-            <th className='hidden lg:table-cell bg-green-100 border text-left px-4 py-2'>Updated At</th>
-          </tr>
-          {pets.map((pet) => (
-            <tr key={pet.id}>
-              <td className='border px-4 py-2'>
-                <input
-                  type='checkbox'
-                  id={pet.id}
-                  className='mr-2 inline align-middle'
-                  onChange={(e) => handleSelect(e.target)}
-                />
-              </td>
-              <td className='border px-4 py-2'>{pet.name}</td>
-              <td className='border px-4 py-2'>{pet.PetBreed.PetSpecie.specieCommonName}</td>
-              <td className='border px-4 py-2'>{pet.PetBreed.breedName}</td>
-              <td className='hidden md:table-cell border px-4 py-2'>{pet.gender}</td>
-              <td className='hidden md:table-cell border px-4 py-2'>{pet.age}</td>
-              <td className='hidden lg:table-cell border px-4 py-2'>{pet.PetStatus.statusName}</td>
-              <td className='hidden lg:table-cell border px-4 py-2'>{format(new Date(pet.updatedAt), 'MM/dd/yyyy')}</td>
-
+        <table className='table-auto border-collapse bg-white text-sm font-light shadow-lg'>
+          <thead>
+            <tr className='bg-green-100 text-left text-gray-400'>
+              <th className='border px-4 py-4'>#</th>
+              <th className='border px-4 py-4'>Name</th>
+              <th className='border px-4 py-4'>Specie</th>
+              <th className='border px-4 py-4'>Breed</th>
+              <th className='hidden border bg-green-100 px-4 py-2 text-left md:table-cell'>
+                Gender
+              </th>
+              <th className='hidden border bg-green-100 px-4 py-2 text-left md:table-cell'>
+                Age
+              </th>
+              <th className='hidden border bg-green-100 px-4 py-2 text-left lg:table-cell'>
+                Status
+              </th>
+              <th className='hidden border bg-green-100 px-4 py-2 text-left lg:table-cell'>
+                Updated At
+              </th>
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {pets.map((pet) => (
+              <tr key={pet.id}>
+                <td className='border px-4 py-2'>
+                  <input
+                    type='checkbox'
+                    id={pet.id}
+                    className='mr-2 inline align-middle'
+                    onChange={(e) => handleSelect(e.target)}
+                  />
+                </td>
+                <td className='border px-4 py-2'>{pet.name}</td>
+                <td className='border px-4 py-2'>
+                  {pet.PetBreed.PetSpecie.specieCommonName}
+                </td>
+                <td className='border px-4 py-2'>{pet.PetBreed.breedName}</td>
+                <td className='hidden border px-4 py-2 md:table-cell'>
+                  {pet.gender}
+                </td>
+                <td className='hidden border px-4 py-2 md:table-cell'>
+                  {pet.age}
+                </td>
+                <td className='hidden border px-4 py-2 lg:table-cell'>
+                  {pet.PetStatus.statusName}
+                </td>
+                <td className='hidden border px-4 py-2 lg:table-cell'>
+                  {format(new Date(pet.updatedAt), 'MM/dd/yyyy')}
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
       {/* pagination controls */}
@@ -228,9 +273,20 @@ export default function PetsList() {
           </div>
         </div>
       </div>
-      {/* modal */}
-      { openConfirmation && (
-        <PopUpMessageConfirmation message={confirmationMessage} onClose={() => setOpenConfirmation(false)} onConfirmation={() => handleDelete()} />
+
+      {/* modals */}
+      {openConfirmation && (
+        <PopUpMessageConfirmation
+          message={confirmationMessage}
+          onClose={() => setOpenConfirmation(false)}
+          onConfirmation={() => handleDelete()}
+        />
+      )}
+      {showAddPet && (
+        <PetAdd
+          onClose={() => setShowAddPet(false)}
+          selectedPet={pets.find((pet) => pet.id === parseInt(selectedPets[0]))}
+        />
       )}
     </div>
   )

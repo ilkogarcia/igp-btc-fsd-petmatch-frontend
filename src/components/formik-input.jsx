@@ -9,7 +9,7 @@ import {
 } from 'react-icons/hi'
 
 function FormikInput(props) {
-  const { label, name, type, placeholder, ...rest } = props
+  const { label, name, type, ...rest } = props
   return (
     <>
       <label htmlFor={name} className={styles.input_label}>
@@ -20,7 +20,6 @@ function FormikInput(props) {
           id={name}
           name={name}
           type={type}
-          placeholder={placeholder}
           className={styles.input_text}
           {...rest}
         />
