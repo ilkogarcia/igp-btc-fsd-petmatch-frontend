@@ -33,7 +33,7 @@ function PetCard({ pet, newLimit, isLast }) {
       <div className='relative h-80 w-full overflow-hidden rounded-t-md'>
         <Image
           alt={name + ' ' + specieCommonName + ' ' + breedName}
-          src={imageUrl}
+          src={imageUrl || '/assets/pets-placeholder.png'}
           quality={85}
           fill
           sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'

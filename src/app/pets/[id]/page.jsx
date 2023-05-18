@@ -82,18 +82,6 @@ export default async function PetPage ({params}) {
         {/* apply for adoption */}
         <ButtonApply buttonType='button' buttonText='Adopt Me' handleClick={handleAdoption} />
         
-        {/* <Link href={{
-          pathname: '/adoption',
-          query: {
-            petId: data.id,
-            shelterId: data.shelterId,
-          }
-          }}
-        >
-          Adopt Me
-        </Link> */}
-
-
         {/* pet statistics */}
         <p className='text-sm text-gray-400'>
           <span className='font-bold overline underline-offset-1'>
@@ -114,7 +102,7 @@ export default async function PetPage ({params}) {
           width='500'
           height='500'
           alt={data.name}
-          src={`${data.imageUrl}`}
+          src={`${(data.imageUrl !== null) ? data.imageUrl : '/assets/pets-placeholder.png'}`}
           className='rounded-lg border-2 border-green-200 shadow-md'
         />
         <PetSpecie id={data.specieId} />

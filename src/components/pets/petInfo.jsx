@@ -23,7 +23,7 @@ export default async function PetInfo(params) {
         width='500'
         height='500'
         alt={pet.name}
-        src={`${pet.imageUrl}`}
+        src={`${(pet.imageUrl !== null) ? pet.imageUrl : '/assets/pets-placeholder.png'}`}
         className='rounded-lg border-2 border-green-200 shadow-md'
       />
       <p className='text-lg font-normal text-gray-400'>

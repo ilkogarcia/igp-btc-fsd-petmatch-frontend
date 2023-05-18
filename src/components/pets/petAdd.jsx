@@ -171,7 +171,8 @@ export default function PetAdd({ onClose, selectedPet }) {
                         label='Image URL'
                         name='imageUrl'
                         type='text'
-                        placeholder='e.g. https://source.unsplash.com/random/300x300/?dog&sig=1'
+                        placeholder='e.g. https://placedog.net/500?r'
+                        onBlur={(e) => setSrc(e.target.value)}
                       />
                     </div>
                     <div className='md:col-span-9'>
