@@ -1,22 +1,115 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
 import styles from '../styles.module.css'
+import Image from 'next/image'
 import { HiXMark } from 'react-icons/hi2'
+
 import { useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
+
 import { Formik, Form } from 'formik'
 import FormikControl from '../formik-control'
 import * as Yup from 'yup'
-import Image from 'next/image'
+
+import { fetchAllSpecies } from '../../services/petSpecie.services'
+import { fetchAllBreeds } from '../../services/petBreed.services'
+import { fetchAllPetStatuses } from '../../services/petStatus.services'
+import { toast } from 'react-hot-toast'
 
 export default function PetAdd({ onClose, selectedPet }) {
+  const { data: session } = useSession()
+
   const [src, setSrc] = useState(
     selectedPet?.imageUrl || '/assets/pets-placeholder.png'
   )
 
+  const [species, setSpecies] = useState([])
+  const [breeds, setBreeds] = useState([])
+  const [statuses, setStatuses] = useState([])
+
+  const loadSpecies = async () => {
+    const speciesQuery = {
+      filterParams: {
+        isActive: 'Ok',
+      },
+      orderParams: [
+        {
+          field: 'specieCommonName',
+          direction: 'ASC',
+        },
+      ],
+    }
+    const res = await fetchAllSpecies(speciesQuery, session?.user?.data.token)
+    if (res.sucess) {
+      res.data.petSpecies.map((specie) => {
+        setSpecies((prev) => [
+          ...prev,
+          { key: specie.specieCommonName, value: specie.id },
+        ])
+      })
+    } else {
+      toast.error(res.message)
+    }
+  }
+
+  const loadBreeds = async (specieId) => {
+    const breedsQuery = {
+      filterParams: {
+        specieId,
+      },
+      orderParams: [
+        {
+          field: 'breedName',
+          direction: 'ASC',
+        },
+      ],
+    }
+    const res = await fetchAllBreeds(breedsQuery, session?.user?.data.token)
+    if (res.sucess) {
+      setBreeds([])
+      res.data.petBreeds.map((breed) => {
+        setBreeds((prev) => [
+          ...prev,
+          { key: breed.breedName, value: breed.id },
+        ])
+      })
+    } else {
+      toast.error(res.message)
+    }
+  }
+
+  const loadStatuses = async () => {
+    const statusesQuery = {
+      filterParams: {
+      },
+      orderParams: [
+        {
+          field: 'id',
+          direction: 'ASC',
+        },
+      ],
+    }
+    const res = await fetchAllPetStatuses(statusesQuery, session?.user?.data.token)
+    if (res.sucess) {
+      res.data.petStatuses.map((status) => {
+        setStatuses((prev) => [
+          ...prev,
+          { key: status.statusName, value: status.id },
+        ])
+      })
+    } else {
+      toast.error(res.message)
+    }
+  }
+
+
   useEffect(() => {
-    console.log('Selected pet', selectedPet)
+    loadSpecies()
+    loadBreeds(selectedPet?.specieId || species[0]?.value)
+    loadStatuses()
   }, [])
 
   const handleClose = (e) => {
@@ -26,17 +119,17 @@ export default function PetAdd({ onClose, selectedPet }) {
   }
 
   const initialValues = {
-    specieId: selectedPet?.specieId || '',
-    breedId: selectedPet?.breedId || '',
+    specieId: selectedPet?.specieId || species[0]?.value,
+    breedId: selectedPet?.breedId || breeds[0]?.value,
     shelterId: selectedPet?.shelterId || '',
-    statusId: selectedPet?.statusId || '',
-    gender: selectedPet?.gender || '',
+    statusId: selectedPet?.statusId || status[0]?.value,
+    gender: selectedPet?.gender || 'Other',
     name: selectedPet?.name || '',
     age: selectedPet?.age || '',
     description: selectedPet?.description || '',
     imageUrl: selectedPet?.imageUrl || '',
-    vaccinationStatus: selectedPet?.vaccinationStatus || '',
-    spayedNeutered: selectedPet?.spayedNeutered || '',
+    vaccinationStatus: selectedPet?.vaccinationStatus || 'Unknown',
+    spayedNeutered: selectedPet?.spayedNeutered || false,
   }
 
   const validationSchema = Yup.object({
@@ -67,17 +160,24 @@ export default function PetAdd({ onClose, selectedPet }) {
         'Only letters (including accented ones), spaces, hyphens, and apostrophes, with no consecutive special characters'
       ),
     age: Yup.number()
+      .typeError('Age must be a number')
       .integer('Age must be an integer')
       .positive('Age must be a positive number')
       .max(20, 'We dont believe your pet is that old, max age is 20')
       .notRequired(),
     gender: Yup.string()
-      .oneOf(['Male', 'Female', 'Other', ''], 'Invalid gender')
+      .oneOf(['Male', 'Female', 'Other'], 'Invalid gender')
       .notRequired(),
     description: Yup.string().notRequired(),
-    imageUrl: Yup.string().notRequired(),
-    vaccinationStatus: Yup.array().required('Required'),
-    spayedNeutered: Yup.array().required('Required'),
+    imageUrl: Yup.string().url('Invalid url').notRequired(),
+    vaccinationStatus: Yup.string()
+      .oneOf(
+        ['Vaccinated', 'Not Vaccinated', 'Unknown'],
+        'Invalid vaccination status'
+      )
+      .notRequired(),
+    spayedNeutered: Yup.boolean()
+      .notRequired(),
   })
 
   const genderOptions = [
@@ -109,7 +209,7 @@ export default function PetAdd({ onClose, selectedPet }) {
       className='fixed inset-0 top-0 z-10 h-full w-full bg-gray-500 bg-opacity-25 backdrop-blur-sm'
     >
       <div className='inset-0 top-0 p-5'>
-        <div className='mx-auto w-4/5 rounded-xl bg-white p-5 max-w-screen-lg'>
+        <div className='mx-auto w-4/5 max-w-screen-lg rounded-xl bg-white p-5'>
           <div className='mx-auto flex w-full items-center justify-between px-6'>
             <h3 className='text-sm font-semibold text-gray-400'>
               Add a new pet
@@ -139,22 +239,24 @@ export default function PetAdd({ onClose, selectedPet }) {
                       className='rounded-md border-2 border-gray-300 shadow-md'
                       placeholder='blur'
                       blurDataURL='/assets/pets-placeholder.png'
-                      onError={() => setSrc('/assets/image-error.png')}
+                      onError={() => setSrc('/assets/pets-error.png')}
                     />
                   </div>
                   <div className='flex flex-col md:col-span-8 md:grid md:grid-cols-12 md:gap-4 lg:col-span-6'>
                     <div className='md:col-span-12 lg:col-span-4'>
                       <FormikControl
-                        control='input'
+                        control='select'
                         label='Species'
                         name='specieId'
+                        options={species}
                       />
                     </div>
                     <div className='md:col-span-12 lg:col-span-4'>
                       <FormikControl
-                        control='input'
+                        control='select'
                         label='Breed'
                         name='breedId'
+                        options={breeds}
                       />
                     </div>
                     <div className='md:col-span-12 lg:col-span-4'>
@@ -172,7 +274,6 @@ export default function PetAdd({ onClose, selectedPet }) {
                         name='imageUrl'
                         type='text'
                         placeholder='e.g. https://placedog.net/500?r'
-                        onBlur={(e) => setSrc(e.target.value)}
                       />
                     </div>
                     <div className='md:col-span-9'>
@@ -217,18 +318,19 @@ export default function PetAdd({ onClose, selectedPet }) {
                         options={spayedNeuteredOptions}
                       />
                     </div>
-                    <div className='md:col-span-8'>
+                    <div className='md:col-span-6'>
                       <FormikControl
                         control='input'
                         label='Shelter'
                         name='shelterId'
                       />
                     </div>
-                    <div className='md:col-span-4'>
+                    <div className='md:col-span-6'>
                       <FormikControl
-                        control='input'
+                        control='select'
                         label='Status'
                         name='statusId'
+                        options={statuses}
                       />
                     </div>
                     <div className='my-2 md:col-span-12'>

@@ -10,12 +10,14 @@ const fetchOneBreed = async (id) => {
   }).then((res) => res.json())
 }
 
-const fetchAllBreeds = async () => {
-  return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pet-breeds`, {
-    method: 'GET',
+const fetchAllBreeds = async (bodyRequest, token) => {
+  return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pet-breeds/search`, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
+    body: JSON.stringify(bodyRequest),
     next: {
       revalidate: 60,
     },

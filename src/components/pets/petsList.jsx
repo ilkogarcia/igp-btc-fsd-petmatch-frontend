@@ -71,8 +71,6 @@ export default function PetsList() {
   }
 
   const handleEdit = () => {
-    console.log('Selected pets', selectedPets)
-
     if (selectedPets.length === 0) {
       toast.error('Please select at least one pet to edit', { duration: 3000 })
     } else if (selectedPets.length > 1) {
