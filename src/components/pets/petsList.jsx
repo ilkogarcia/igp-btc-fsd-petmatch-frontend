@@ -2,11 +2,14 @@
 
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import { fetchAllPets, deleteOnePet } from '@/services/pet.services'
+
 import toast from 'react-hot-toast'
-import PopUpMessageConfirmation from '../popup-message-confirmation'
 import { format } from 'date-fns'
-import PetAdd from './petAdd'
+
+import { fetchAllPets, deleteOnePet } from '@/services/pet.services'
+
+import PopUpMessageConfirmation from '../popup-message-confirmation'
+import PetAddEdit from './petAddEdit'
 
 export default function PetsList() {
   const { data: session } = useSession()
@@ -26,6 +29,7 @@ export default function PetsList() {
   
   // States needed to manage the add/edit pet popup
   const [showAddPet, setShowAddPet] = useState(false)
+  const [isAdd, setIsAdd] = useState(false)
   
   // Array to store the selected pets on the list
   const [selectedPets, setSelectedPets] = useState([])
@@ -67,7 +71,10 @@ export default function PetsList() {
   }
 
   const handleAdd = () => {
+    setSelectedPets([])
+    setIsAdd(true)
     setShowAddPet(true)
+    setListUpdated((prev) => !prev)
   }
 
   const handleEdit = () => {
@@ -76,6 +83,7 @@ export default function PetsList() {
     } else if (selectedPets.length > 1) {
       toast.error('Please select only one pet to edit', { duration: 3000 })
     } else {
+      setIsAdd(false)
       setShowAddPet(true)
     }
   }
@@ -126,7 +134,8 @@ export default function PetsList() {
       {/* header */}
       <div className='flex-roy mb-6 flex justify-end space-x-4'>
         <button
-          className='rounded-md bg-green-600 px-4 py-2 text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600'
+          className='rounded-md bg-green-600 px-4 py-2 text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600 disabled:bg-gray-200  disabled:text-gray-300'
+          disabled={selectedPets.length > 0}
           onClick={handleAdd}
         >
           Add
@@ -281,9 +290,10 @@ export default function PetsList() {
         />
       )}
       {showAddPet && (
-        <PetAdd
+        <PetAddEdit
           onClose={() => setShowAddPet(false)}
           selectedPet={pets.find((pet) => pet.id === parseInt(selectedPets[0]))}
+          isAdd = {isAdd}
         />
       )}
     </div>

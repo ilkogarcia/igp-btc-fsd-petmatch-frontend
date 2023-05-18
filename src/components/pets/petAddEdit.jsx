@@ -6,6 +6,7 @@
 import styles from '../styles.module.css'
 import Image from 'next/image'
 import { HiXMark } from 'react-icons/hi2'
+import { toast } from 'react-hot-toast'
 
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
@@ -17,9 +18,10 @@ import * as Yup from 'yup'
 import { fetchAllSpecies } from '../../services/petSpecie.services'
 import { fetchAllBreeds } from '../../services/petBreed.services'
 import { fetchAllPetStatuses } from '../../services/petStatus.services'
-import { toast } from 'react-hot-toast'
+import { fetchAllShelters } from '../../services/shelter.services'
+import { createNewPet, updateOnePet } from '../../services/pet.services'
 
-export default function PetAdd({ onClose, selectedPet }) {
+export default function PetAddEdit({ onClose, selectedPet, isAdd }) {
   const { data: session } = useSession()
 
   const [src, setSrc] = useState(
@@ -29,6 +31,7 @@ export default function PetAdd({ onClose, selectedPet }) {
   const [species, setSpecies] = useState([])
   const [breeds, setBreeds] = useState([])
   const [statuses, setStatuses] = useState([])
+  const [shelters, setShelters] = useState([])
 
   const loadSpecies = async () => {
     const speciesQuery = {
@@ -105,11 +108,37 @@ export default function PetAdd({ onClose, selectedPet }) {
     }
   }
 
+  const loadShelters = async () => {
+    const sheltersQuery = {
+      filterParams: {
+        countryId: 9
+      },
+      searchParams: {},
+      orderParams: [
+        {
+          field: 'id',
+          direction: 'ASC',
+        },
+      ],
+    }
+    const res = await fetchAllShelters(sheltersQuery, session?.user?.data.token)
+    if (res.sucess) {
+      res.data.shelters.map((shelter) => {
+        setShelters((prev) => [
+          ...prev,
+          { key: shelter.name, value: shelter.id },
+        ])
+      })
+    } else {
+      toast.error(res.message)
+    }
+  }
 
   useEffect(() => {
     loadSpecies()
     loadBreeds(selectedPet?.specieId || species[0]?.value)
     loadStatuses()
+    loadShelters()
   }, [])
 
   const handleClose = (e) => {
@@ -121,8 +150,8 @@ export default function PetAdd({ onClose, selectedPet }) {
   const initialValues = {
     specieId: selectedPet?.specieId || species[0]?.value,
     breedId: selectedPet?.breedId || breeds[0]?.value,
-    shelterId: selectedPet?.shelterId || '',
-    statusId: selectedPet?.statusId || status[0]?.value,
+    shelterId: selectedPet?.shelterId || shelters[0]?.value,
+    statusId: selectedPet?.statusId || statuses[0]?.value,
     gender: selectedPet?.gender || 'Other',
     name: selectedPet?.name || '',
     age: selectedPet?.age || '',
@@ -198,7 +227,24 @@ export default function PetAdd({ onClose, selectedPet }) {
   ]
 
   async function onSubmit(values) {
-    console.log('PetAdd onSubmit', values)
+    console.log('Pet ID:', selectedPet.id)
+    console.log('Pet values:', values)
+
+    if (isAdd) {
+      const res = await createNewPet(values, session?.user?.data.token)
+      if (res.sucess) {
+        toast.success('Pet added successfully')
+      } else {
+        toast.error(res.message)
+      }
+    } else {
+      const res = await updateOnePet(values, selectedPet.id, session?.user?.data.token)
+      if (res.sucess) {
+        toast.success('Pet edited successfully')
+      } else {
+        toast.error(res.message)
+      }
+    }
     onClose()
   }
 
@@ -212,7 +258,7 @@ export default function PetAdd({ onClose, selectedPet }) {
         <div className='mx-auto w-4/5 max-w-screen-lg rounded-xl bg-white p-5'>
           <div className='mx-auto flex w-full items-center justify-between px-6'>
             <h3 className='text-sm font-semibold text-gray-400'>
-              Add a new pet
+             {(isAdd) ? 'Add a new pet' : 'Edit pet'}
             </h3>
             <HiXMark
               size={25}
@@ -320,9 +366,10 @@ export default function PetAdd({ onClose, selectedPet }) {
                     </div>
                     <div className='md:col-span-6'>
                       <FormikControl
-                        control='input'
+                        control='select'
                         label='Shelter'
                         name='shelterId'
+                        options={shelters}
                       />
                     </div>
                     <div className='md:col-span-6'>
@@ -339,16 +386,14 @@ export default function PetAdd({ onClose, selectedPet }) {
                     <div className='md:col-span-12 lg:col-span-8'>
                       <button
                         type='submit'
-                        id='save_button'
                         className={`w-full ${styles.save_button}`}
                       >
-                        Add
+                        {isAdd ? 'Add' : 'Save'}
                       </button>
                     </div>
                     <div className='md:col-span-12 lg:col-span-4'>
                       <button
-                        type='reset'
-                        id='cancel_button'
+                        type='button'
                         className={`w-full ${styles.cancel_button}`}
                         onClick={() => onClose()}
                       >

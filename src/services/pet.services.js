@@ -38,8 +38,32 @@ const deleteOnePet = async (id, token) => {
   }).then((res) => res.json())
 }
 
+const createNewPet = async (bodyRequest, token) => {
+  return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pets`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(bodyRequest),
+  }).then((res) => res.json())
+}
+
+const updateOnePet = async (id, bodyRequest, token) => {
+  return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pets/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(bodyRequest),
+  }).then((res) => res.json())
+}
+
 module.exports = {
   fetchAllPets,
   fetchOnePet,
   deleteOnePet,
+  createNewPet,
+  updateOnePet,
 }
