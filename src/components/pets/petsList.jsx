@@ -50,7 +50,11 @@ export default function PetsList() {
       setInfo(res.info)
     }
     loadPets()
-  }, [page, listUpdated])
+  }, [page])
+
+  useEffect(() => {
+    console.log(listUpdated)
+  }, [listUpdated])
 
   const handleNextPage = () => {
     const newOffset = info.offset + info.limit
@@ -71,7 +75,6 @@ export default function PetsList() {
   }
 
   const handleAdd = () => {
-    setSelectedPets([])
     setIsAdd(true)
     setShowAddPet(true)
     setListUpdated((prev) => !prev)
@@ -85,6 +88,7 @@ export default function PetsList() {
     } else {
       setIsAdd(false)
       setShowAddPet(true)
+      setListUpdated((prev) => !prev)
     }
   }
 

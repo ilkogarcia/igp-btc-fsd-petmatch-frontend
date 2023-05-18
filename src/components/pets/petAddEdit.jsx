@@ -227,9 +227,6 @@ export default function PetAddEdit({ onClose, selectedPet, isAdd }) {
   ]
 
   async function onSubmit(values) {
-    console.log('Pet ID:', selectedPet.id)
-    console.log('Pet values:', values)
-
     if (isAdd) {
       const res = await createNewPet(values, session?.user?.data.token)
       if (res.sucess) {
@@ -238,7 +235,7 @@ export default function PetAddEdit({ onClose, selectedPet, isAdd }) {
         toast.error(res.message)
       }
     } else {
-      const res = await updateOnePet(values, selectedPet.id, session?.user?.data.token)
+      const res = await updateOnePet(selectedPet.id, values, session?.user?.data.token)
       if (res.sucess) {
         toast.success('Pet edited successfully')
       } else {
