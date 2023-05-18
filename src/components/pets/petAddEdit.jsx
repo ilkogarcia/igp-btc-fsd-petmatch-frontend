@@ -21,7 +21,7 @@ import { fetchAllPetStatuses } from '../../services/petStatus.services'
 import { fetchAllShelters } from '../../services/shelter.services'
 import { createNewPet, updateOnePet } from '../../services/pet.services'
 
-export default function PetAddEdit({ onClose, selectedPet, isAdd }) {
+export default function PetAddEdit({ isAdd, selectedPet, onSuccess, onClose }) {
   const { data: session } = useSession()
 
   const [src, setSrc] = useState(
@@ -226,11 +226,18 @@ export default function PetAddEdit({ onClose, selectedPet, isAdd }) {
     { key: 'No', value: false },
   ]
 
+const handleSpeciesChange = async (e) => {
+    setBreeds([])
+    loadBreeds(e.target.value)
+  }
+
   async function onSubmit(values) {
     if (isAdd) {
       const res = await createNewPet(values, session?.user?.data.token)
       if (res.sucess) {
         toast.success('Pet added successfully')
+        onSuccess()
+        onClose()
       } else {
         toast.error(res.message)
       }
@@ -238,11 +245,12 @@ export default function PetAddEdit({ onClose, selectedPet, isAdd }) {
       const res = await updateOnePet(selectedPet.id, values, session?.user?.data.token)
       if (res.sucess) {
         toast.success('Pet edited successfully')
+        onSuccess()
+        onClose()
       } else {
         toast.error(res.message)
       }
     }
-    onClose()
   }
 
   return (
@@ -292,6 +300,7 @@ export default function PetAddEdit({ onClose, selectedPet, isAdd }) {
                         label='Species'
                         name='specieId'
                         options={species}
+                        onChange={handleSpeciesChange}
                       />
                     </div>
                     <div className='md:col-span-12 lg:col-span-4'>
