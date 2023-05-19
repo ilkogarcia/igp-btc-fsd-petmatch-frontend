@@ -86,8 +86,7 @@ export default function PetAddEdit({ isAdd, selectedPet, onSuccess, onClose }) {
 
   const loadStatuses = async () => {
     const statusesQuery = {
-      filterParams: {
-      },
+      filterParams: {},
       orderParams: [
         {
           field: 'id',
@@ -111,7 +110,7 @@ export default function PetAddEdit({ isAdd, selectedPet, onSuccess, onClose }) {
   const loadShelters = async () => {
     const sheltersQuery = {
       filterParams: {
-        countryId: 9
+        countryId: 9,
       },
       searchParams: {},
       orderParams: [
@@ -205,8 +204,7 @@ export default function PetAddEdit({ isAdd, selectedPet, onSuccess, onClose }) {
         'Invalid vaccination status'
       )
       .notRequired(),
-    spayedNeutered: Yup.boolean()
-      .notRequired(),
+    spayedNeutered: Yup.boolean().notRequired(),
   })
 
   const genderOptions = [
@@ -226,7 +224,7 @@ export default function PetAddEdit({ isAdd, selectedPet, onSuccess, onClose }) {
     { key: 'No', value: false },
   ]
 
-const handleSpeciesChange = async (e) => {
+  const handleSpeciesChange = async (e) => {
     setBreeds([])
     loadBreeds(e.target.value)
   }
@@ -242,7 +240,11 @@ const handleSpeciesChange = async (e) => {
         toast.error(res.message)
       }
     } else {
-      const res = await updateOnePet(selectedPet.id, values, session?.user?.token)
+      const res = await updateOnePet(
+        selectedPet.id,
+        values,
+        session?.user?.token
+      )
       if (res.sucess) {
         toast.success('Pet edited successfully')
         onSuccess()
@@ -263,7 +265,7 @@ const handleSpeciesChange = async (e) => {
         <div className='mx-auto w-4/5 max-w-screen-lg rounded-xl bg-white p-5'>
           <div className='mx-auto flex w-full items-center justify-between px-6'>
             <h3 className='text-sm font-semibold text-gray-400'>
-             {(isAdd) ? 'Add a new pet' : 'Edit pet'}
+              {isAdd ? 'Add a new pet' : 'Edit pet'}
             </h3>
             <HiXMark
               size={25}
@@ -281,7 +283,7 @@ const handleSpeciesChange = async (e) => {
             >
               <Form>
                 <div className='flex flex-col md:grid md:grid-cols-12 md:gap-4'>
-                  <div className='md:col-span-4 lg:col-span-6'>
+                  <div className='flex flex-col space-y-2 md:col-span-4 lg:col-span-6'>
                     <Image
                       src={src}
                       alt='Pet image'
@@ -292,6 +294,19 @@ const handleSpeciesChange = async (e) => {
                       blurDataURL='/assets/pets-placeholder.png'
                       onError={() => setSrc('/assets/pets-error.png')}
                     />
+                    <button
+                      type='submit'
+                      className={`w-10/12 place-self-center ${styles.save_button}`}
+                    >
+                      {isAdd ? 'Add' : 'Save'}
+                    </button>
+                    <button
+                      type='button'
+                      className={`w-10/12 place-self-center ${styles.cancel_button}`}
+                      onClick={() => onClose()}
+                    >
+                      Cancel
+                    </button>
                   </div>
                   <div className='flex flex-col md:col-span-8 md:grid md:grid-cols-12 md:gap-4 lg:col-span-6'>
                     <div className='md:col-span-12 lg:col-span-4'>
@@ -385,26 +400,6 @@ const handleSpeciesChange = async (e) => {
                         name='statusId'
                         options={statuses}
                       />
-                    </div>
-                    <div className='my-2 md:col-span-12'>
-                      <hr className='border-0 bg-gray-200 dark:bg-gray-700' />
-                    </div>
-                    <div className='md:col-span-12 lg:col-span-8'>
-                      <button
-                        type='submit'
-                        className={`w-full ${styles.save_button}`}
-                      >
-                        {isAdd ? 'Add' : 'Save'}
-                      </button>
-                    </div>
-                    <div className='md:col-span-12 lg:col-span-4'>
-                      <button
-                        type='button'
-                        className={`w-full ${styles.cancel_button}`}
-                        onClick={() => onClose()}
-                      >
-                        Cancel
-                      </button>
                     </div>
                   </div>
                 </div>

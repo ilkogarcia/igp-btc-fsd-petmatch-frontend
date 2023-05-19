@@ -10,7 +10,6 @@ import { Formik, Form } from 'formik'
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 
-
 // Import components used on this page
 import toast from 'react-hot-toast'
 import Image from 'next/image'
@@ -21,7 +20,11 @@ import { getOneUser, updateOneUser } from '../services/user.services'
 import FormikSelect from './formik-select'
 import FormikInput from './formik-input'
 import FormikDatePicker from './formik-datepicker'
-import { fetchAllCountries, fetchAllStateProvinces, fetchAllCities } from '@/services/address.services'
+import {
+  fetchAllCountries,
+  fetchAllStateProvinces,
+  fetchAllCities,
+} from '@/services/address.services'
 
 // Main component
 function UserProfile(params) {
@@ -31,27 +34,9 @@ function UserProfile(params) {
   const [savedValues, setSavedValues] = useState({})
   const [editMode, setEditMode] = useState(false)
 
-  const[countries, setCountries] = useState([])
-  const[statesProvices, setStatesProvinces] = useState([])
-  const[cities, setCities] = useState([])
-
-const loadUserProfile = async () => {
-    const res = await getOneUser(session?.user?.id, session?.user?.token)
-    if (res.sucess) {
-      setFormValues(res.data)
-      setSavedValues(res.data)
-    } else {
-      toast.error(
-        <div>
-          <span>Load user profile failed!</span>
-          <span className='block align-baseline text-sm'>
-            {res.message}
-          </span>
-        </div>,
-        { duration: 3000 }
-      )
-    }
-  }
+  const [countries, setCountries] = useState([])
+  const [statesProvices, setStatesProvinces] = useState([])
+  const [cities, setCities] = useState([])
 
   const loadCountries = async () => {
     const res = await fetchAllCountries()
@@ -59,65 +44,104 @@ const loadUserProfile = async () => {
       res.data.countries.map((country) => {
         setCountries((prev) => [
           ...prev,
-          { key: country.countryName, value: country.id }
+          { key: country.countryName, value: country.id },
         ])
       })
+      console.log('Countries loaded:', countries)
     } else {
       toast.error(res.message)
     }
   }
 
   const loadStatesProvinces = async (countryId) => {
-    console.log('Country ID:', countryId)
     const res = await fetchAllStateProvinces(countryId, session?.user?.token)
     if (res.sucess) {
       res.data.stateProvinces.map((stateProvince) => {
         setStatesProvinces((prev) => [
           ...prev,
-          { key: stateProvince.stateProvinceName, value: stateProvince.id }
+          { key: stateProvince.stateProvinceName, value: stateProvince.id },
         ])
       })
+      console.log('States/Provinces loaded:', statesProvices)
     } else {
       toast.error(res.message)
     }
   }
 
   const loadCities = async (stateProvinceId) => {
-    console.log('State ID:', stateProvinceId)
     const res = await fetchAllCities(stateProvinceId, session?.user?.token)
     if (res.sucess) {
       res.data.cities.map((city) => {
-        setCities((prev) => [
-          ...prev,
-          { key: city.cityName, value: city.id }
-        ])
+        setCities((prev) => [...prev, { key: city.cityName, value: city.id }])
       })
+      console.log('Cities loaded:', cities)
     } else {
       toast.error(res.message)
     }
   }
 
   useEffect(() => {
+    const loadUserProfile = async () => {
+      const res = await getOneUser(session?.user?.id, session?.user?.token)
+      if (res.sucess) {
+        setFormValues(res.data)
+        console.log('User profile loaded:', formValues)
+        setSavedValues(res.data)
+      } else {
+        toast.error(
+          <div>
+            <span>Load user profile failed!</span>
+            <span className='block align-baseline text-sm'>{res.message}</span>
+          </div>,
+          { duration: 3000 }
+        )
+      }
+    }  
     loadUserProfile()
-    if (formValues.countryId !== undefined || formValues.countryId !== null || formValues.countryId !== '') {
-     loadCountries()
-    }
-    if (formValues.countryId !== undefined || formValues.countryId !== null || formValues.countryId !== '') {
-      loadStatesProvinces(formValues.countryId)
-    }
-    if (formValues.stateProvinceId !== undefined || formValues.stateProvinceId !== null || formValues.stateProvinceId !== '') {
-      loadCities(formValues.stateProvinceId)
-    }
+  }, [session])
+
+  useEffect(() => {
+    setCountries([])
+    loadCountries()
   }, [])
 
+  useEffect(() => {
+    if (formValues.countryId) {
+      setStatesProvinces([])
+      loadStatesProvinces(formValues.countryId)
+    }
+  }, [formValues.countryId])
+
+  useEffect(() => {
+    if (formValues.stateProvinceId) {
+      setCities([])
+      loadCities(formValues.stateProvinceId)
+    }
+  }, [formValues.stateProvinceId])
+
+
   const handleCountryChange = (event) => {
-    console.log('Country change to:', event.target.value)
-    loadStatesProvinces(event.target.value)
+    setFormValues((prev) => ({
+      ...prev,
+      stateProvinceId: '',
+      cityId: '',
+      countryId: event.target.value,
+    }))
   }
 
   const handleStateProvinceChange = (event) => {
-    console.log('State change to:', event.target.value)
-    loadCities(event.target.value)
+    setFormValues((prev) => ({
+      ...prev,
+      cityId: '',
+      stateProvinceId: event.target.value,
+    }))
+  }
+
+  const handleCityChange = (event) => {
+    setFormValues((prev) => ({
+      ...prev,
+      cityId: event.target.value,
+    }))
   }
 
   const initialValues = {
@@ -138,9 +162,21 @@ const loadUserProfile = async () => {
   }
 
   const validationSchema = Yup.object({
-    cityId: Yup.string().notRequired(),
-    stateProvinceId: Yup.string().notRequired(),
-    countryId: Yup.string().notRequired(),
+    cityId: Yup.number()
+      .typeError('Not a number type')
+      .integer('Must be an integer')
+      .positive('Must be a positive number')
+      .notRequired(),
+    stateProvinceId: Yup.number()
+      .typeError('Not a number type')
+      .integer('Must be an integer')
+      .positive('Must be a positive number')
+      .notRequired(),
+    countryId: Yup.number()
+      .typeError('Not a number type')
+      .integer('Must be an integer')
+      .positive('Must be a positive number')
+      .notRequired(),
     username: Yup.string()
       .required('Username is required!')
       .matches(
@@ -152,7 +188,9 @@ const loadUserProfile = async () => {
     email: Yup.string()
       .required('Email is required!')
       .email('Invalid email address!'),
-    profilePicture: Yup.string().notRequired(),
+    profilePicture: Yup.string()
+      .url('Invalid URL!')
+      .notRequired(),
     firstName: Yup.string()
       .notRequired()
       .matches(
@@ -194,13 +232,22 @@ const loadUserProfile = async () => {
 
   // Handle form submission
   async function onSubmit(values) {
-    const response = await updateOneUser(session?.user.id, values, session?.user.token)
-    if (response.sucess) {
+    console.log('Form data', values)
+
+    const res = await updateOneUser(
+      session?.user.id,
+      values,
+      session?.user.token
+    )
+
+    console.log('Update user profile response', res)
+
+    if (res.sucess) {
       toast.success(
         <div>
           <span>User profile updated successfully!</span>
           <span className='block align-baseline text-sm'>
-            {response.message}
+            {res.message}
           </span>
         </div>,
         { duration: 5000 }
@@ -210,7 +257,7 @@ const loadUserProfile = async () => {
         <div>
           <span>Update user profile failed!</span>
           <span className='block align-baseline text-sm'>
-            {response.message}
+            {res.message}
           </span>
         </div>,
         { duration: 5000 }
@@ -275,17 +322,16 @@ const loadUserProfile = async () => {
               </button>
 
               <button
-                type='submit'
-                id='save_button'
+                type='button'
                 disabled={!editMode}
+                onClick={() => onSubmit()}
                 className={styles.save_button}
               >
                 Save
               </button>
 
               <button
-                type='reset'
-                id='cancel_button'
+                type='button'
                 disabled={!editMode}
                 className={styles.cancel_button}
                 onClick={() => handleResetForm()}
@@ -352,7 +398,7 @@ const loadUserProfile = async () => {
               </div>
 
               {/* phone number */}
-              <div className='col-span-6 md:col-span-4'>
+              <div className='col-span-6 md:col-span-5'>
                 <FormikInput
                   label='Phone number'
                   name='phoneNumber'
@@ -363,7 +409,7 @@ const loadUserProfile = async () => {
               </div>
 
               {/* email */}
-              <div className='col-span-12 md:col-span-8'>
+              <div className='col-span-12 md:col-span-7'>
                 <FormikInput
                   label='Email'
                   name='email'
@@ -372,7 +418,7 @@ const loadUserProfile = async () => {
                   disabled={!editMode}
                 />
               </div>
-                
+
               {/* address line 1 */}
               <div className='col-span-12'>
                 <FormikInput
@@ -408,7 +454,7 @@ const loadUserProfile = async () => {
 
               {/* country */}
               <div className='col-span-6 md:col-span-4'>
-                <FormikSelect 
+                <FormikSelect
                   label='Country'
                   name='countryId'
                   options={countries}
@@ -419,7 +465,7 @@ const loadUserProfile = async () => {
 
               {/* state */}
               <div className='col-span-6 md:col-span-4'>
-              <FormikSelect 
+                <FormikSelect
                   label='State or Province'
                   name='stateProvinceId'
                   options={statesProvices}
@@ -435,6 +481,7 @@ const loadUserProfile = async () => {
                   name='cityId'
                   options={cities}
                   disabled={!editMode}
+                  onChange={handleCityChange}
                 />
               </div>
 

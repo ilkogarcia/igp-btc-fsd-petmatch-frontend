@@ -49,7 +49,7 @@ export default function Terms() {
         <p className='mt-4 c'>
           We use the information we collect for various purposes, including:
         </p>
-        <ul className='mt-4 list-disc pl-6 mt-4 text-gray-500'>
+        <ul className='list-disc pl-6 mt-4 text-gray-500'>
           <li>To provide and improve our Services.</li>
           <li>To communicate with you about your account or our Services.</li>
           <li>To personalize your experience on our Services.</li>
