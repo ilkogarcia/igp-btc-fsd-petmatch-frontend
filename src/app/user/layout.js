@@ -8,7 +8,6 @@ import MenuAdmin from '@/components/menu-left-admin'
 
 function UserLayout({ children }) {
   const { data: session } = useSession()
-  console.log('session', session?.user?.data)
 
   return (
     <NextAuthProvider>
@@ -17,12 +16,10 @@ function UserLayout({ children }) {
         <div className='mx-auto flex w-10/12 flex-col md:grid md:grid-cols-12'>
           <div className='flex flex-col items-start justify-start space-y-6 md:col-span-3'>
             <MenuUser />
-            {session?.user.data.role === 3 && <MenuAdmin />}
+            {session?.user.role === 3 && <MenuAdmin />}
           </div>
           <div className='flex flex-col items-start justify-start md:col-span-9'>
-            <span className='text-green-600'>
-              {session?.user.data.username}
-            </span>
+            <span className='text-green-600'>{session?.user.username}</span>
             {children}
           </div>
         </div>

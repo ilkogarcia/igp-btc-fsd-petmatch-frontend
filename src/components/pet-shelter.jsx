@@ -11,7 +11,7 @@ function Shelter({ id }) {
 
   useEffect(() => {
     async function loadShelter() {
-      const res = await fetchOneShelter(id, session?.user.data.token)
+      const res = await fetchOneShelter(id, session?.user.token)
       setShelter(res.data)
     }
     if (session) {

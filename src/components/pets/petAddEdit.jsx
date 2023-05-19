@@ -45,7 +45,7 @@ export default function PetAddEdit({ isAdd, selectedPet, onSuccess, onClose }) {
         },
       ],
     }
-    const res = await fetchAllSpecies(speciesQuery, session?.user?.data.token)
+    const res = await fetchAllSpecies(speciesQuery, session?.user?.token)
     if (res.sucess) {
       res.data.petSpecies.map((specie) => {
         setSpecies((prev) => [
@@ -70,7 +70,7 @@ export default function PetAddEdit({ isAdd, selectedPet, onSuccess, onClose }) {
         },
       ],
     }
-    const res = await fetchAllBreeds(breedsQuery, session?.user?.data.token)
+    const res = await fetchAllBreeds(breedsQuery, session?.user?.token)
     if (res.sucess) {
       setBreeds([])
       res.data.petBreeds.map((breed) => {
@@ -95,7 +95,7 @@ export default function PetAddEdit({ isAdd, selectedPet, onSuccess, onClose }) {
         },
       ],
     }
-    const res = await fetchAllPetStatuses(statusesQuery, session?.user?.data.token)
+    const res = await fetchAllPetStatuses(statusesQuery, session?.user?.token)
     if (res.sucess) {
       res.data.petStatuses.map((status) => {
         setStatuses((prev) => [
@@ -121,7 +121,7 @@ export default function PetAddEdit({ isAdd, selectedPet, onSuccess, onClose }) {
         },
       ],
     }
-    const res = await fetchAllShelters(sheltersQuery, session?.user?.data.token)
+    const res = await fetchAllShelters(sheltersQuery, session?.user?.token)
     if (res.sucess) {
       res.data.shelters.map((shelter) => {
         setShelters((prev) => [
@@ -233,7 +233,7 @@ const handleSpeciesChange = async (e) => {
 
   async function onSubmit(values) {
     if (isAdd) {
-      const res = await createNewPet(values, session?.user?.data.token)
+      const res = await createNewPet(values, session?.user?.token)
       if (res.sucess) {
         toast.success('Pet added successfully')
         onSuccess()
@@ -242,7 +242,7 @@ const handleSpeciesChange = async (e) => {
         toast.error(res.message)
       }
     } else {
-      const res = await updateOnePet(selectedPet.id, values, session?.user?.data.token)
+      const res = await updateOnePet(selectedPet.id, values, session?.user?.token)
       if (res.sucess) {
         toast.success('Pet edited successfully')
         onSuccess()

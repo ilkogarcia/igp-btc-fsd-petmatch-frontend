@@ -99,7 +99,7 @@ export default function PetsList() {
   }
 
   const handleDelete = async () => {
-    const res = await deleteOnePet(selectedPets[0], session?.user?.data.token)
+    const res = await deleteOnePet(selectedPets[0], session?.user?.token)
     if (res.sucess) {
       toast.success(res.message, { duration: 3000 })
       setSelectedPets([])

@@ -32,7 +32,7 @@ export default function AdoptionPage() {
 
   // Get the user session and user ID
   const { data: session } = useSession()
-  const userId = session?.user?.data.id
+  const userId = session?.user?.id
 
   // Adoption application form, initial values
   const initialValues = {
@@ -56,7 +56,7 @@ export default function AdoptionPage() {
 
   // Handle form submission
   async function onSubmit(values) {
-    const res = await addOneAdoptionApplication(values, session?.user?.data.token)
+    const res = await addOneAdoptionApplication(values, session?.user?.token)
     if (res.status) {
       toast.success(
         <div>

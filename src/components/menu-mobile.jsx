@@ -144,7 +144,7 @@ export default function MobileMenu({ close }) {
             </div>
 
             {/* User Menu */}
-            {session?.user ? (
+            {session && (
               <div className='col-span-1'>
                 <div className='flex flex-col justify-between'>
                   <h4 className='text-xs font-semibold uppercase text-gray-400 underline underline-offset-4'>
@@ -164,12 +164,10 @@ export default function MobileMenu({ close }) {
                   </ul>
                 </div>
               </div>
-            ) : (
-              <></>
             )}
 
             {/* Admin Menu */}
-            {session?.user?.data.role === 3 ? (
+            {session?.user?.role === 3 && (
               <div className='col-span-1'>
                 <h4 className='text-xs font-semibold uppercase text-gray-400 underline underline-offset-4'>
                   Admin Menu
@@ -187,12 +185,10 @@ export default function MobileMenu({ close }) {
                   ))}
                 </ul>
               </div>
-            ) : (
-              <></>
             )}
 
             {/* Auth Menu */}
-            {session?.user ? (
+            {session ? (
               <div className='col-span-1 mx-auto'>
                 <button
                   className='rounded-md bg-green-600 px-3 py-2 text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600'

@@ -16,12 +16,11 @@ export const authOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials, req) {
-        const user = await logMeIn(credentials?.email, credentials?.password)
-
-        if (user.sucess) {
-          return user
+        const res = await logMeIn(credentials?.email, credentials?.password)
+        if (res.sucess) {
+          return res.data
         } else {
-          throw new Error(user.message)
+          throw new Error(res.message)
         }
       },
     }),
@@ -40,8 +39,8 @@ export const authOptions = {
 
   session: {
     strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-    updateAge: 24 * 60 * 60, // 24 hours
+    maxAge: 2 * 60 * 60, // 2 hours
+    updateAge: 10 * 60, // 10 minutes
   },
 
   pages: {

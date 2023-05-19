@@ -12,7 +12,7 @@ import FormikControl from '../formik-control'
 export default function PetFilter({ onClose, onFilterChange }) {
   // Get the user's session and token
   const { data: session } = useSession()
-  const userToken = session?.user?.data?.token || null
+  const userToken = session?.user?.token || null
 
   // Elements to be rendered on the form select input controls
   const [species, setSpecies] = useState([])

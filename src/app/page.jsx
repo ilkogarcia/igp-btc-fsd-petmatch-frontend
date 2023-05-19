@@ -28,7 +28,7 @@ export default function HomePage() {
             </span>
           </p>
         </div>
-        {session?.user === undefined ? (
+        {!session && (
           <div className='mx-auto mt-10 w-4/5 bg-green-400 text-center'>
             <Link
               className='mx-auto rounded-full bg-green-500 px-10 py-5 text-lg text-white outline-none ring ring-green-300 hover:bg-green-700 active:bg-green-900'
@@ -37,8 +37,6 @@ export default function HomePage() {
               Register now. It's free!
             </Link>
           </div>
-        ) : (
-          <></>
         )}
       </div>
 

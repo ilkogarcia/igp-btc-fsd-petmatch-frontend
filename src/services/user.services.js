@@ -18,6 +18,7 @@ const updateOneUser = async (id, data, token) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
+    body: JSON.stringify(data),
   }).then((res) => res.json())
 }
 

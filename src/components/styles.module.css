@@ -44,53 +44,68 @@
   @apply text-gray-700;
 }
 
+/* edit button style */
 .edit_button {
-  @apply inline-flex items-center justify-center rounded-md border border-transparent bg-green-400;
-  @apply px-4 py-2 text-sm font-medium text-white shadow-sm;
+  @apply inline-flex rounded-md border border-transparent bg-green-600 px-4 py-2 shadow-sm;
+  @apply items-center justify-center text-sm font-semibold text-green-300;
 }
 
 .edit_button:focus {
-  @apply outline-none;
+  @apply outline-1 outline-green-300;
 }
 
 .edit_button:hover {
-  @apply bg-green-600;
+  @apply transition duration-300 ease-in-out bg-green-300 text-green-600;
 }
 
+.edit_button:disabled {
+  @apply bg-gray-200 text-gray-300;
+}
+
+/* save button style */
 .save_button {
-  @apply inline-flex items-center justify-center rounded-md border border-transparent bg-green-400;
-  @apply px-4 py-2 text-sm font-semibold text-gray-600 shadow-sm;
+  @apply inline-flex rounded-md border border-transparent bg-green-600 px-4 py-2 shadow-sm;
+  @apply items-center justify-center text-sm font-semibold text-green-300;
 }
 
 .save_button:focus {
-  @apply outline-none;
+  @apply outline-1 outline-green-300;
 }
 
 .save_button:hover {
-  @apply bg-green-200;
+  @apply transition duration-300 ease-in-out bg-green-300 text-green-600;
 }
 
+.save_button:disabled {
+  @apply bg-gray-200 text-gray-300;
+}
+
+/* cancel button style */
 .cancel_button {
-  @apply inline-flex items-center justify-center rounded-md border border-transparent bg-gray-200;
-  @apply px-4 py-2 text-sm font-medium text-gray-800 shadow-sm;
+  @apply inline-flex rounded-md border border-transparent bg-gray-600 px-4 py-2 shadow-sm;
+  @apply items-center justify-center text-sm font-semibold text-gray-300;
 }
 
 .cancel_button:focus {
-  @apply outline-none;
+  @apply outline-1 outline-green-300;
 }
 
 .cancel_button:hover {
-  @apply bg-gray-400;
+  @apply transition duration-300 ease-in-out bg-gray-300 text-gray-600;
+}
+
+.cancel_button:disabled {
+  @apply bg-gray-200 text-gray-300;
 }
 
 /* apply button style */
 .apply_button {
-  @apply w-full inline-flex cursor-pointer rounded-md bg-green-400 items-center justify-center;
+  @apply inline-flex w-full cursor-pointer items-center justify-center rounded-md bg-green-400;
   @apply px-3 py-2 text-base font-medium text-green-200 shadow-sm;
 }
 
 .apply_button:focus {
-  @apply outline-none;
+  @apply outline-1 outline-green-300;
 }
 
 .apply_button:hover {
@@ -98,6 +113,6 @@
 }
 
 .apply_button:disabled {
-  @apply inline-flex pointer-events-none items-center justify-center rounded-md border border-transparent bg-gray-100;
+  @apply pointer-events-none inline-flex items-center justify-center rounded-md border border-transparent bg-gray-100;
   @apply px-4 py-2 text-sm font-medium text-gray-400;
 }

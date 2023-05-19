@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
@@ -20,6 +21,7 @@ import { getOneUser, updateOneUser } from '../services/user.services'
 import FormikSelect from './formik-select'
 import FormikInput from './formik-input'
 import FormikDatePicker from './formik-datepicker'
+import { fetchAllCountries, fetchAllStateProvinces, fetchAllCities } from '@/services/address.services'
 
 // Main component
 function UserProfile(params) {
@@ -29,146 +31,93 @@ function UserProfile(params) {
   const [savedValues, setSavedValues] = useState({})
   const [editMode, setEditMode] = useState(false)
 
-  const countries = [ 
-    { 
-      key: 'Spain',
-      value: '9',
-      states: [
-        { 
-          key: 'Andalusia',
-          value: '40',
-          cities: [
-            { key: 'Almería', value: '1' },
-            { key: 'Cádiz', value: '2' },
-            { key: 'Córdoba', value: '3' },
-            { key: 'Granada', value: '4' },
-            { key: 'Huelva', value: '5' },
-            { key: 'Jaén', value: '6' },
-            { key: 'Málaga', value: '7' },
-          ],
-        },
-        { 
-          key: 'Aragon',
-          value: '41',
-          cities: [
-            { key: 'Huesca', value: '8' },
-            { key: 'Teruel', value: '9' },
-            { key: 'Zaragoza', value: '10' },
-          ],
-        },
-        { 
-          key: 'Asturias',
-          value: '42',
-          cities: [
-            { key: 'Oviedo', value: '11' },
-            { key: 'Gijón', value: '12' },
-            { key: 'Avilés', value: '13' },
-          ],
-        },
-        { 
-          key: 'Castile-La Mancha',
-          value: '47',
-          cities: [
-            { key: 'Albacete', value: '12' },
-            { key: 'Ciudad Real', value: '13' },
-            { key: 'Cuenca', value: '14' },
-            { key: 'Guadalajara', value: '15' },
-            { key: 'Toledo', value: '16' },
-          ],
-        },
-      ],
-    },
-    { 
-      key: 'Germany',
-      value: '4',
-      states: [
-        {
-          key: 'Baden-Württemberg',
-          value: '43',
-          cities: [
-            { key: 'Stuttgart', value: '17' },
-            { key: 'Karlsruhe', value: '18' },
-            { key: 'Freiburg im Breisgau', value: '19' },
-            { key: 'Heidelberg', value: '20' },
-            { key: 'Heilbronn', value: '21' },
-            { key: 'Pforzheim', value: '22' },
-            { key: 'Ulm', value: '23' },
-          ],
-        },
-        {
-          key: 'Bavaria',
-          value: '44',
-          cities: [
-            { key: 'Munich', value: '24' },
-            { key: 'Augsburg', value: '25' },
-            { key: 'Bamberg', value: '26' },
-            { key: 'Bayreuth', value: '27' },
-            { key: 'Erlangen', value: '28' },
-            { key: 'Ingolstadt', value: '29' },
-            { key: 'Nuremberg', value: '30' },
-            { key: 'Regensburg', value: '31' },
-            { key: 'Würzburg', value: '32' },
-          ],
-        },
-      ],
-    },
-    {
-      key: 'United Kingdom',
-      value: '10',
-      states: [
-        {
-          key: 'England',
-          value: '45',
-          cities: [
-            { key: 'Bath', value: '33' },
-            { key: 'Birmingham', value: '34' },
-            { key: 'Bradford', value: '35' },
-            { key: 'Brighton & Hove', value: '36' },
-            { key: 'Bristol', value: '37' },
-            { key: 'Cambridge', value: '38' },
-            { key: 'Canterbury', value: '39' },
-          ],
-        },
-        {
-          key: 'Scotland',
-          value: '46',
-          cities: [
-            { key: 'Aberdeen', value: '40' },
-            { key: 'Dundee', value: '41' },
-            { key: 'Edinburgh', value: '42' },
-            { key: 'Glasgow', value: '43' },
-            { key: 'Inverness', value: '44' },
-            { key: 'Stirling', value: '45' },
-          ],
-        },
-      ],
-    },
-  ]
+  const[countries, setCountries] = useState([])
+  const[statesProvices, setStatesProvinces] = useState([])
+  const[cities, setCities] = useState([])
 
-  const [country, setCountry] = useState('')
-  // const [stateProvince, setStateProvince] = useState('')
-  // const [city, setCity] = useState('')
+const loadUserProfile = async () => {
+    const res = await getOneUser(session?.user?.id, session?.user?.token)
+    if (res.sucess) {
+      setFormValues(res.data)
+      setSavedValues(res.data)
+    } else {
+      toast.error(
+        <div>
+          <span>Load user profile failed!</span>
+          <span className='block align-baseline text-sm'>
+            {res.message}
+          </span>
+        </div>,
+        { duration: 3000 }
+      )
+    }
+  }
 
-  const [states, setStates] = useState([])
-  const [cities, setCities] = useState([])
+  const loadCountries = async () => {
+    const res = await fetchAllCountries()
+    if (res.sucess) {
+      res.data.countries.map((country) => {
+        setCountries((prev) => [
+          ...prev,
+          { key: country.countryName, value: country.id }
+        ])
+      })
+    } else {
+      toast.error(res.message)
+    }
+  }
+
+  const loadStatesProvinces = async (countryId) => {
+    console.log('Country ID:', countryId)
+    const res = await fetchAllStateProvinces(countryId, session?.user?.token)
+    if (res.sucess) {
+      res.data.stateProvinces.map((stateProvince) => {
+        setStatesProvinces((prev) => [
+          ...prev,
+          { key: stateProvince.stateProvinceName, value: stateProvince.id }
+        ])
+      })
+    } else {
+      toast.error(res.message)
+    }
+  }
+
+  const loadCities = async (stateProvinceId) => {
+    console.log('State ID:', stateProvinceId)
+    const res = await fetchAllCities(stateProvinceId, session?.user?.token)
+    if (res.sucess) {
+      res.data.cities.map((city) => {
+        setCities((prev) => [
+          ...prev,
+          { key: city.cityName, value: city.id }
+        ])
+      })
+    } else {
+      toast.error(res.message)
+    }
+  }
+
+  useEffect(() => {
+    loadUserProfile()
+    if (formValues.countryId !== undefined || formValues.countryId !== null || formValues.countryId !== '') {
+     loadCountries()
+    }
+    if (formValues.countryId !== undefined || formValues.countryId !== null || formValues.countryId !== '') {
+      loadStatesProvinces(formValues.countryId)
+    }
+    if (formValues.stateProvinceId !== undefined || formValues.stateProvinceId !== null || formValues.stateProvinceId !== '') {
+      loadCities(formValues.stateProvinceId)
+    }
+  }, [])
 
   const handleCountryChange = (event) => {
-    const country = countries.find((country) => country.value === event.target.value)
-    setCountry(country)
-    savedValues.countryId = country.value
-    setFormValues(savedValues)
-
-    setStates(country.states)
-    // setStateProvince(country.states[0])
-    setCities(country.states[0].cities)
-    // setCity(country.states[0].cities[0])
+    console.log('Country change to:', event.target.value)
+    loadStatesProvinces(event.target.value)
   }
 
   const handleStateProvinceChange = (event) => {
-    const stateProvince = country.states.find((stateProvince) => stateProvince.value === event.target.value)
-    // setStateProvince(stateProvince)
-    setCities(stateProvince.cities)
-    // setCity(stateProvince.cities[0])
+    console.log('State change to:', event.target.value)
+    loadCities(event.target.value)
   }
 
   const initialValues = {
@@ -243,32 +192,9 @@ function UserProfile(params) {
       .notRequired(),
   })
 
-  // Load user profile data when component mounts
-  useEffect(() => {
-    async function loadUserProfile() {
-      const response = await getOneUser(session?.user?.data.id, session?.user?.data.token)
-      if (response.sucess) {
-        setFormValues(response.data)
-        setSavedValues(response.data)
-      } else {
-        toast.error(
-          <div>
-            <span>Load user profile failed!</span>
-            <span className='block align-baseline text-sm'>
-              {response.message}
-            </span>
-          </div>,
-          { duration: 5000 }
-        )
-      }
-    }
-    loadUserProfile()
-  }, [])
-
-
   // Handle form submission
   async function onSubmit(values) {
-    const response = await updateOneUser(session?.user.data.id, values, session?.user.data.token)
+    const response = await updateOneUser(session?.user.id, values, session?.user.token)
     if (response.sucess) {
       toast.success(
         <div>
@@ -341,7 +267,6 @@ function UserProfile(params) {
             <div className='mx-auto mt-10 flex w-2/3 flex-col gap-4'>
               <button
                 type='button'
-                id='edit_button'
                 disabled={editMode}
                 className={styles.edit_button}
                 onClick={() => handleEditMode()}
@@ -497,7 +422,7 @@ function UserProfile(params) {
               <FormikSelect 
                   label='State or Province'
                   name='stateProvinceId'
-                  options={states}
+                  options={statesProvices}
                   disabled={!editMode}
                   onChange={handleStateProvinceChange}
                 />

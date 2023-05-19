@@ -11,8 +11,8 @@ export default function UserInfo() {
   useEffect(() => {
     async function loadUser() {
       const res = await getOneUser(
-        session?.user?.data.id,
-        session?.user?.data.token
+        session?.user?.id,
+        session?.user?.token
       )
       setUser(res.data)
     }

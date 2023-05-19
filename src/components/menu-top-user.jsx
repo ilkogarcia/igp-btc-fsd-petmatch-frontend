@@ -11,10 +11,10 @@ export default function UserMenu() {
     <div className=' mx-auto flex h-fit w-fit items-center justify-between gap-2 md:gap-4 lg:gap-8'>
       {session?.user ? (
         <div className='flex items-center justify-between space-x-2'>
-          {session.user.data.image ? (
+          {session.user.image ? (
             <Avatar
-              src={session.user.data.image}
-              alt={session.user.data.username}
+              src={session.user.image}
+              alt={session.user.username}
               size={30}
               className='rounded-full border border-gray-400'
             />
@@ -24,7 +24,7 @@ export default function UserMenu() {
             </span>
           )}
           <h2 className='text-gray-600'>
-            <Link href='/user'>{session.user.data.username || 'Unknow'}</Link>
+            <Link href='/user'>{session.user.username || 'Unknow'}</Link>
           </h2>
         </div>
       ) : (
