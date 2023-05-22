@@ -47,7 +47,6 @@ export default function UserProfile () {
           { key: country.countryName, value: country.id },
         ])
       })
-      console.log('Countries loaded:', countries)
     } else {
       toast.error(res.message)
     }
@@ -62,7 +61,6 @@ export default function UserProfile () {
           { key: stateProvince.stateProvinceName, value: stateProvince.id },
         ])
       })
-      console.log('States/Provinces loaded:', statesProvices)
     } else {
       toast.error(res.message)
     }
@@ -74,15 +72,12 @@ export default function UserProfile () {
       res.data.cities.map((city) => {
         setCities((prev) => [...prev, { key: city.cityName, value: city.id }])
       })
-      console.log('Cities loaded:', cities)
     } else {
       toast.error(res.message)
     }
   }
 
   useEffect(() => {
-    console.log('Session:', session?.user)
-
     const loadUserProfile = async () => {
       const res = await getOneUser(session?.user?.id, session?.user?.token)
       if (res.sucess) {
@@ -98,7 +93,6 @@ export default function UserProfile () {
         }
       }  
       loadUserProfile()
-      console.log('User profile loaded:', formValues)
   }, [session])
 
   useEffect(() => {
@@ -232,8 +226,6 @@ export default function UserProfile () {
 
   // Handle form submission
   async function onSubmit(values, submitProps) {
-    console.log('Form data', values)
-    console.log('submitProps', submitProps)
     submitProps.setSubmitting(false)
 
     const res = await updateOneUser(
@@ -241,7 +233,6 @@ export default function UserProfile () {
       values,
       session?.user.token
     )
-    console.log('Update user profile response', res)
 
     if (res.sucess) {
       toast.success(
@@ -274,7 +265,6 @@ export default function UserProfile () {
       enableReinitialize
     >
       {formik => {
-        console.log('Formik props', formik)
         return (
           <Form className='mx-auto mt-8'>
             <div className='flex flex-col sm:grid sm:grid-cols-12 sm:gap-6'>

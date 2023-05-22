@@ -12,8 +12,8 @@ const Avatar = () => {
       <Link href='/user' className='flex items-center space-x-2'>
         {session?.user?.image ? (
           <Image
-            src={session.user.image}
-            alt={session.user.username}
+            src={session?.user?.image}
+            alt={session?.user?.username}
             width={32}
             height={32}
             className='rounded-full border border-gray-400'
@@ -24,7 +24,7 @@ const Avatar = () => {
           </span>
         )}
         <span className='icon items-center text-gray-600'>
-          {session.user.username || 'Unknow'}
+          {session?.user?.username || 'Unknow'}
         </span>
       </Link>
     </>

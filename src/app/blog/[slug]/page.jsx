@@ -4,7 +4,7 @@ import Markdown from 'markdown-to-jsx'
 import matter from 'gray-matter'
 import getPostMetadata from '@/components/posts/getPostMetadata'
 import { format } from 'date-fns'
-import Avatar from '@/components/avatar'
+import Image from 'next/image'
 
 const getPostContent = (slug) => {
   const root = process.cwd()
@@ -36,10 +36,11 @@ const PostPage = (props) => {
             {post.data.title}
           </h2>
           <div className='flex items-center'>
-            <Avatar
+            <Image
               alt={post.data.author.name}
               src={post.data.author.picture}
-              size={45}
+              width={45}
+              height={45}
               className='rounded-full border-2 border-green-300'
             />
             <p className='ml-2 text-base text-gray-400'>
