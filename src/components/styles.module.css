@@ -36,7 +36,7 @@
 
 .button {
   @apply w-full rounded-md bg-gradient-to-r from-green-400 to-green-600 text-center;
-  @apply py-3 text-lg font-semibold text-gray-50;
+  @apply py-3 text-sm md:text-base lg:text-lg font-semibold text-gray-50;
 }
 
 .button:hover {

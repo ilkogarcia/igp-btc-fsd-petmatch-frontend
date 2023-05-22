@@ -63,16 +63,15 @@ export default function SignUp() {
   return (
     <section className='mx-auto w-3/4'>
       <div className='title'>
-        <h1 className='w-3/4 py-4 mx-auto text-4xl font-bold text-gray-800'>
-          Join the PetMatch Community
-        </h1>
-        <p className='mx-auto mb-6 w-3/4 text-gray-400'>
-          By registering for an account, you can be part of a growing community
-          of pet lovers who are committed to helping animals in need.
+        <h2 className='text-xl md:text-2xl lg:text-4xl font-bold text-gray-800'>
+          Join <span className='text-gray-400'>PetMatch Community!</span>
+        </h2>
+        <p className='mx-auto my-6 w-3/4 text-gray-400 text-xs md:text-sm lg:text-base'>
+          You can be part of a growing community of pet lovers who are committed to helping animals in need.
         </p>
 
         {/* register form */}
-        <form className='flex flex-col gap-5' onSubmit={formik.handleSubmit}>
+        <form className='flex flex-col gap-5 text-sm md:text-base' onSubmit={formik.handleSubmit}>
 
           {/* email imput */}
           <div className={styles.input_group}>
@@ -153,11 +152,11 @@ export default function SignUp() {
         </form>
 
         {/* bottom */}
-        <div className='mt-2 text-center text-gray-400'>
+        <div className='mx-auto mt-2 w-3/4 text-center text-gray-400 text-xs md:text-sm lg:text-base'>
           Have an account?{' '}
           <Link
             href='/auth/login'
-            className='inline-block align-baseline text-sm text-green-500 hover:text-green-800'
+            className='inline-block align-baseline text-green-500 hover:text-green-800'
           >
             Sign In
           </Link>

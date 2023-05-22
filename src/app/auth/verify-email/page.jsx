@@ -11,16 +11,16 @@ export default async function VerifyEmailPage() {
   const petImage = '/assets/michaelG_TJ0LK4iFgNM_1920x2880.jpg'
 
   // Get token from url
-  const searchParams = useSearchParams();
-  const token = searchParams.get('token');
+  const searchParams = useSearchParams()
+  const token = searchParams.get('token')
 
   // Verify email fetch request
   const verifyEmailResponse = await verifyEmail(token)
 
   return (
-    <div className='flex h-screen bg-green-400'>
-      <div className='mx-auto mt-20 grid h-3/4 w-3/5 rounded-md bg-slate-50 lg:grid-cols-2'>
-        <div className='relative overflow-hidden rounded-t-md md:rounded-t-md lg:rounded-l-md lg:rounded-tr-none'>
+    <div className='flex min-h-screen flex-col'>
+      <div className='mx-auto mt-10 flex h-auto w-3/5 max-w-screen-lg flex-col rounded-md bg-gray-50 md:mt-20 lg:grid lg:grid-cols-12'>
+        <div className='relative hidden overflow-hidden md:flex md:h-96 md:rounded-t-md lg:col-span-6 lg:h-auto lg:rounded-l-md lg:rounded-tr-none'>
           <Image
             alt='This pet is looking for a home'
             src={petImage}
@@ -34,13 +34,13 @@ export default async function VerifyEmailPage() {
             }}
           />
         </div>
-        <div className='right flex flex-col justify-evenly'>
+        <div className='flex flex-col justify-evenly lg:col-span-6 lg:h-auto'>
           {verifyEmailResponse.sucess ? (
             <div className='mx-auto w-3/4 text-center align-middle'>
-              <h1 className='text-4xl font-bold text-gray-800'>
+              <h2 className='text-xl font-bold text-gray-800 md:text-2xl lg:text-4xl'>
                 Email verified!
-              </h1>
-              <p className='mb-8 mt-2 text-gray-400'>
+              </h2>
+              <p className='mb-8 mt-2 text-gray-400 text-sm md:text-base'>
                 Your email has been{' '}
                 <span className='font-bold text-green-500'>successfully</span>{' '}
                 verified.
@@ -60,10 +60,10 @@ export default async function VerifyEmailPage() {
             </div>
           ) : (
             <div className='mx-auto w-3/4 text-center align-middle'>
-              <h1 className='text-4xl font-bold text-gray-800'>
+              <h2 className='text-xl font-bold text-gray-800 md:text-2xl lg:text-4xl'>
                 Email not verified!
-              </h1>
-              <p className='mb-8 mt-2 text-gray-500'>
+              </h2>
+              <p className='mb-8 mt-2 text-gray-500 text-sm md:text-base'>
                 Your email has{' '}
                 <span className='font-bold text-rose-500'>not</span> been
                 verified.

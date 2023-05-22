@@ -50,17 +50,16 @@ export default function SignIn() {
 
   return (
     <div className='mx-auto w-3/4'>
-      <div className='title'>
-        <h1 className='py-4 text-4xl font-bold text-gray-800'>
-          Login to Your Account
-        </h1>
-        <p className='mx-auto mb-6 w-3/4 text-gray-400'>
-          Welcome back! Please log in to access your account and stay connected
-          with all the latest updates from PetMatch.
+      <div>
+        <h2 className='text-xl md:text-2xl lg:text-4xl font-bold text-gray-800'>
+          Welcome <span className='text-gray-400'>back!</span>
+        </h2>
+        <p className='mx-auto my-6 w-3/4 text-gray-400 text-xs md:text-sm lg:text-base'>
+          Please log in to access your PetMatch account and stay connected.
         </p>
 
         {/* login form */}
-        <form className='flex flex-col gap-5' onSubmit={formik.handleSubmit}>
+        <form className='flex flex-col gap-5 text-sm md:text-base' onSubmit={formik.handleSubmit}>
           {/* input email field */}
           <div className={styles.input_group}>
             <input
@@ -115,20 +114,22 @@ export default function SignIn() {
         </form>
 
         {/* bottom */}
-        <div className='mt-2 text-center text-gray-400'>
+        <div className='mt-2 text-center text-gray-400 text-xs md:text-sm lg:text-base'>
           <Link href='/auth/forgot-password' className='text-green-500 hover:text-green-800'>
             Forgot your password?
           </Link>
         </div>
-        <div className='mx-auto mt-2 w-3/4 text-center text-gray-400'>
-          <p>Don't have an account yet?</p>
-          <Link
-            href='/auth/register'
-            className='text-green-500 hover:text-green-800'
-          >
-            Sign Up
-          </Link>{' '}
-          and finding your perfect pet companion.
+        <div className='mx-auto mt-2 w-3/4 text-center text-gray-400 text-xs md:text-sm lg:text-base'>
+          <p>
+            Don't have an account? {' '}
+              <Link
+                href='/auth/register'
+                className='text-green-500 hover:text-green-800'
+              >
+                Sign Up
+              </Link>{' '}
+            and find your loved pet companion.
+          </p>
         </div>
       </div>
     </div>

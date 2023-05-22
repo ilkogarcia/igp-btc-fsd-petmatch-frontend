@@ -63,16 +63,19 @@ export default function ForgotPassword() {
 
   return (
     <div className='mx-auto w-3/4'>
-      <h1 className='py-4 text-4xl font-bold text-gray-800'>
-        Forgot your password?
-      </h1>
-      <p className='mx-auto mb-6 w-3/4 text-gray-400'>
-        Please enter the email address associated with your account and we will
-        send you a link to reset your password.
+      <h2 className='text-xl font-bold text-gray-800 md:text-2xl lg:text-4xl'>
+        Forgot <span className='text-gray-400'>your password?</span>
+      </h2>
+      <p className='mx-auto my-6 w-3/4 text-xs text-gray-400 md:text-sm lg:text-base'>
+        Enter the email address associated with your account and we will send
+        you a link to reset your password.
       </p>
 
       {/* login form */}
-      <form className='flex flex-col gap-5' onSubmit={formik.handleSubmit}>
+      <form
+        className='flex flex-col gap-5 text-sm md:text-base'
+        onSubmit={formik.handleSubmit}
+      >
         {/* input email field */}
         <div className={styles.input_group}>
           <input
@@ -103,15 +106,17 @@ export default function ForgotPassword() {
       </form>
 
       {/* bottom */}
-      <div className='mx-auto mt-2 w-3/4 text-center text-gray-400'>
-        <p>Remember your password?</p>
-        <Link
-          href='/auth/login'
-          className='text-green-500 hover:text-green-800'
-        >
-          Click here
-        </Link>{' '}
-        to go back to the login page.
+      <div className='mt-2 text-center text-xs text-gray-400 md:text-sm lg:text-base'>
+        <p>
+          Remember your password? {' '}
+          <Link
+            href='/auth/login'
+            className='text-green-500 hover:text-green-800'
+          >
+            Click here
+          </Link>{' '}
+          to go back to the login page.
+        </p>
       </div>
     </div>
   )
