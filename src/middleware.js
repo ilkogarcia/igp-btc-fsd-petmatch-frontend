@@ -7,16 +7,15 @@ export async function middleware(req) {
   if (!session) {
     const requestedPage = req.nextUrl.pathname
     const url = req.nextUrl.clone()
-    url.pathname = '/login'
-    url.search = `p=${requestedPage}`
+    url.pathname = '/auth/login'
+    url.search = `callbackUrl=${requestedPage}`
 
     return NextResponse.redirect(url)
   }
 
-  //   return NextResponse.redirect(new URL('/about', req.url))
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: '/admin/:path*', // Matched paths will render this middleware e.g. /admin
+  matcher: ['/admin/:path*', '/user/:path*'],
 }

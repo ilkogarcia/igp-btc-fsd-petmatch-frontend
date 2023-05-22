@@ -1,20 +1,12 @@
 'use client'
 
 import '../../styles/globals.css'
-
 import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
-
 import MenuUser from '@/components/menu-left-users'
 import MenuAdmin from '@/components/menu-left-admin'
 
 function UserLayout({ children }) {
-  const { data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect('/auth/login?callbackUrl=/user')
-    },
-  })
+  const { data: session } = useSession()
 
   return (
     <div className='h-fit min-h-screen bg-white pt-20'>

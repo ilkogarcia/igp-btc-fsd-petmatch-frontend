@@ -1,16 +1,10 @@
 import { getServerSession } from 'next-auth/next'
-import { redirect } from 'next/navigation'
 import { authOptions } from '../api/auth/[...nextauth]/route'
-
 import MenuUser from '@/components/menu-left-users'
 import MenuAdmin from '@/components/menu-left-admin'
 
 const AdminLayout = async ({ children }) => {
   const session = await getServerSession(authOptions)
-
-  if (!session) {
-    redirect('/auth/login?callbackUrl=/admin')
-  }
 
   return (
     <div className='h-full min-h-screen bg-white pb-40 pt-20'>
