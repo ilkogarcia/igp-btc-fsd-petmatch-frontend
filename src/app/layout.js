@@ -4,7 +4,7 @@ import { font } from './fonts'
 import { Toaster } from 'react-hot-toast'
 
 import Header from '@/components/header'
-import Footer from '@/components/footer'
+import Footer from '@/components/footer/footer'
 import NextAuthProvider from '@/components/provider'
 
 export const metadata = {
