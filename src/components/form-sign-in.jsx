@@ -6,7 +6,7 @@ import styles from './styles.module.css'
 // Import hooks needed and libraries
 import { useState } from 'react'
 import { useFormik } from 'formik'
-import { useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 // Import components used on this page
 import Link from 'next/link'
@@ -20,7 +20,8 @@ import validateSignIn from '../utils/validateSignIn'
 // Main component
 export default function SignIn() {
   const [show, setShow] = useState(false)
-  const router = useRouter()
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl') || '/'
 
   // Formik hook
   const formik = useFormik({
@@ -35,14 +36,13 @@ export default function SignIn() {
   // Handle form submission
   async function onSubmit(values) {
     const response = await signIn(`credentials`, {
-      redirect: false,
+      redirect: true,
       email: values.email,
       password: values.password,
-      callbackUrl: '/'
+      callbackUrl,
     })
     if (response.ok && !response.error) {
       toast.success('Logged in successfully!', { duration: 3000 })
-      router.push('/')
     } else {
       toast.error(<div><span>Something went wrong!</span><br /><span className='text-sm'>{response.error}</span></div>, { duration: 5000 })
     }

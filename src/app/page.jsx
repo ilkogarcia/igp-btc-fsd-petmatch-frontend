@@ -1,12 +1,13 @@
-'use client'
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { RiNumber1, RiNumber2, RiNumber3 } from 'react-icons/ri'
 import PetList from '@/components/pet-list'
 
-export default function HomePage() {
-  const { data: session } = useSession()
+import { getServerSession } from 'next-auth/next'
+import { authOptions } from './api/auth/[...nextauth]/route'
+
+const HomePage = async () => {
+  const session = await getServerSession(authOptions)
   const petImage = '/assets/michaelG_kpbHRhlSHHA_1920x2880.jpg'
 
   return (
@@ -288,3 +289,5 @@ export default function HomePage() {
     </main>
   )
 }
+
+export default HomePage

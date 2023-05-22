@@ -1,17 +1,15 @@
-'use client'
+import { getServerSession } from 'next-auth/next'
+import { redirect } from 'next/navigation'
+import { authOptions } from '../api/auth/[...nextauth]/route'
 
-import '../../styles/globals.css'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import MenuUser from '@/components/menu-left-users'
 import MenuAdmin from '@/components/menu-left-admin'
 
-function AdminLayout({ children }) {
-  const { data: session } = useSession()
-  const router = useRouter()
+const AdminLayout = async ({ children }) => {
+  const session = await getServerSession(authOptions)
 
   if (!session) {
-    router.push('/auth/login')
+    redirect('/auth/login?callbackUrl=/admin')
   }
 
   return (

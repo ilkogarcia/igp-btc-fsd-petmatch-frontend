@@ -1,14 +1,11 @@
-/**
- * @file Root layout component
- * @description This file contains the root layout component
- */
-
 import '../styles/globals.css'
-import Header from '../components/header'
 import { font } from './fonts'
-import Footer from '@/components/footer'
-import { NextAuthProvider } from './providers'
+
 import { Toaster } from 'react-hot-toast'
+
+import Header from '@/components/header'
+import Footer from '@/components/footer'
+import NextAuthProvider from '@/components/provider'
 
 export const metadata = {
   title: 'PetMatch. Bringing forever homes and loving pets together',

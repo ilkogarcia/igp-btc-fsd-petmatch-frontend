@@ -1,7 +1,7 @@
-import TeamPlayer from '@/components/team-player'
 import '../../styles/globals.css'
-import Image from 'next/image'
 import { FaRegHeart, FaRegClock, FaRegHandshake } from 'react-icons/fa'
+import Image from 'next/image'
+import TeamPlayer from '@/components/team-player'
 
 export const metadata = {
   title: 'PetMatch. About us. Adopt a Pet and Save a Life',
