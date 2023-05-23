@@ -29,7 +29,7 @@ export default async function VerifyEmailPage() {
             }}
           />
         </div>
-        <div className='flex flex-col justify-evenly lg:col-span-6 lg:h-auto'>
+        <div className='flex flex-col py-20 justify-evenly lg:col-span-6 lg:h-auto'>
           {verifyEmailResponse.sucess ? (
             <div className='mx-auto w-3/4 text-center align-middle'>
               <h2 className='text-xl font-bold text-gray-800 md:text-2xl lg:text-4xl'>
