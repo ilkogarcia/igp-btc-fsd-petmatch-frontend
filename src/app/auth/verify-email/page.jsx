@@ -1,21 +1,16 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-
 import Image from 'next/image'
 import Link from 'next/link'
-import { verifyEmail } from '../../../services/pet.services'
+import { verifyEmail } from '@/services/auth.services'
 
 // Main component
 export default async function VerifyEmailPage() {
-  const petImage = '/assets/michaelG_TJ0LK4iFgNM_1920x2880.jpg'
-
-  // Get token from url
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
-
-  // Verify email fetch request
   const verifyEmailResponse = await verifyEmail(token)
+  const petImage = '/assets/michaelG_TJ0LK4iFgNM_1920x2880.jpg'
 
   return (
     <div className='flex min-h-screen flex-col'>

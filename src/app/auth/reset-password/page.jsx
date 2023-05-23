@@ -4,18 +4,14 @@ import { useSearchParams } from 'next/navigation'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { resetMyPassword } from '../../../services/pet.services'
+import { resetMyPassword } from '@/services/auth.services'
 
 // Main component
 export default async function VerifyEmailPage() {
-  const petImage = '/assets/michaelG_TJ0LK4iFgNM_1920x2880.jpg'
-
-  // Get token from url
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
-
-  // Verify email fetch request
   const resetPasswordResponse = await resetMyPassword(token)
+  const petImage = '/assets/michaelG_TJ0LK4iFgNM_1920x2880.jpg'
 
   return (
     <div className='flex flex-col min-h-screen'>
