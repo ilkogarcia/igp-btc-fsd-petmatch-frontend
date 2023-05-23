@@ -1,16 +1,31 @@
 'use client'
 
+// Import hooks
 import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+
+// Import components
 import Image from 'next/image'
 import Link from 'next/link'
+
+// Import services
 import { verifyEmail } from '@/services/auth.services'
 
-// Main component
-export default async function VerifyEmailPage() {
+const VerifyEmailPage = async () => {
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
-  const verifyEmailResponse = await verifyEmail(token)
+
   const petImage = '/assets/michaelG_TJ0LK4iFgNM_1920x2880.jpg'
+
+  const [isVerified, setIsVerified] = useState(false)
+
+  useEffect(() => {
+    const verify = async () => {
+      const res = await verifyEmail(token)
+      setIsVerified(res.sucess)
+    }
+    verify()
+  }, [token])
 
   return (
     <div className='flex min-h-screen flex-col'>
@@ -29,19 +44,16 @@ export default async function VerifyEmailPage() {
             }}
           />
         </div>
-        <div className='flex flex-col py-20 justify-evenly lg:col-span-6 lg:h-auto'>
-          {verifyEmailResponse.sucess ? (
+        <div className='flex flex-col justify-evenly py-20 lg:col-span-6 lg:h-auto'>
+          {isVerified ? (
             <div className='mx-auto w-3/4 text-center align-middle'>
               <h2 className='text-xl font-bold text-gray-800 md:text-2xl lg:text-4xl'>
                 Email verified!
               </h2>
-              <p className='mb-8 mt-2 text-gray-400 text-sm md:text-base'>
+              <p className='mb-8 mt-2 text-sm text-gray-400 md:text-base'>
                 Your email has been{' '}
                 <span className='font-bold text-green-500'>successfully</span>{' '}
                 verified.
-                <span className='inline-block align-baseline text-gray-400'>
-                  {verifyEmailResponse.message}
-                </span>
                 <span className='inline-block align-baseline font-light italic text-gray-400'>
                   Click below to log into your account.
                 </span>
@@ -58,16 +70,11 @@ export default async function VerifyEmailPage() {
               <h2 className='text-xl font-bold text-gray-800 md:text-2xl lg:text-4xl'>
                 Email not verified!
               </h2>
-              <p className='mb-8 mt-2 text-gray-500 text-sm md:text-base'>
+              <p className='mb-8 mt-2 text-sm text-gray-500 md:text-base'>
                 Your email has{' '}
                 <span className='font-bold text-rose-500'>not</span> been
                 verified.
-                <br />
-                <span className='text-gray-400'>
-                  {verifyEmailResponse.message}
-                </span>
-                <br />
-                <span className='font-light italic text-gray-400'>
+                <span className='inline-block align-baseline font-light italic text-gray-400'>
                   Please check your email for the verification link.
                 </span>
               </p>
@@ -84,3 +91,5 @@ export default async function VerifyEmailPage() {
     </div>
   )
 }
+
+export default VerifyEmailPage
