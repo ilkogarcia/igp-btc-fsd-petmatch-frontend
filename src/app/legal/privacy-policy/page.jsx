@@ -1,11 +1,5 @@
 import '../../../styles/globals.css'
 
-export const metadata = {
-  title: 'PetMatch. Terms and Conditions',
-  description:
-    'PetMatch is a web application that helps you find your perfect pet match. We use machine learning to match you with pets that are most likely to be compatible with you.',
-}
-
 export default function Terms() {
   return (
     <div className='h-fit bg-white'>

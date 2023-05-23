@@ -2,12 +2,6 @@ import '../../styles/globals.css'
 import ContactUs from '@/components/form-contact-us'
 import OurOffices from '@/components/contact/contact-offices'
 
-export const metadata = {
-  title: 'PetMatch. Contact us. Adopt a Pet and Save a Life',
-  description:
-    'The PetMatch platform is designed to make the adoption process as simple and stress-free as possible for both pets and their new families.',
-}
-
 const ContactPage = () => {
 
   return (

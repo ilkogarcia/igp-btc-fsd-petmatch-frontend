@@ -10,7 +10,12 @@ import NextAuthProvider from '@/components/provider'
 export const metadata = {
   title: 'PetMatch. Bringing forever homes and loving pets together',
   description:
-    'A pet adoption platform to unites forever homes and loving pets together. We allows users to search for available pets for adoption and connect with local shelters or rescue organizations. We encourages and facilitates pet adoption, connects potential adopters with animals in need, and provides them with the support and resources necessary to ensure successful adoption.',
+    'A pet adoption platform to unites forever homes and loving pets together.',
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+  },
 }
 
 export default async function RootLayout({ children }) {

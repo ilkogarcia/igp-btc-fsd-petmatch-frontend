@@ -3,12 +3,6 @@ import { FaRegHeart, FaRegClock, FaRegHandshake } from 'react-icons/fa'
 import Image from 'next/image'
 import TeamPlayer from '@/components/team-player'
 
-export const metadata = {
-  title: 'PetMatch. About us. Adopt a Pet and Save a Life',
-  description:
-    'The PetMatch platform is designed to make the adoption process as simple and stress-free as possible for both pets and their new families.',
-}
-
 function AboutPage() {
   // Static images used on the page
   const petImage1 = '/assets/pexelsdorte_179221_640x640.jpg'
