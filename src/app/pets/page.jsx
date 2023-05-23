@@ -1,13 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
+import { HiOutlineFunnel } from 'react-icons/hi2'
 import { useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
 import { fetchAllPets } from '@/services/pet.services'
 import PetCard from '@/components/pet-card'
-import { HiOutlineFunnel } from 'react-icons/hi2'
 import PetFilter from '@/components/pets/petFilter'
 
-function PetsPage() {
+const PetsPage = () => {
+  const { data: session } = useSession()
+
   const [pets, setPets] = useState([])
   const [page, setPage] = useState(1)
   const [openFilter, setOpenFilter] = useState(false)
@@ -56,19 +59,18 @@ function PetsPage() {
         <div className='flex flex-col items-start justify-end space-y-6 text-left lg:col-span-7'>
           <p className='text-xl text-gray-400'>
             We have a wide variety of pets available for adoption, from cats to
-            dogs, rabbits to birds. Simply use our filter function to narrow
-            down your search based on your preferences. With our infinite
-            scroll, you can easily find the pet you've been looking for.
+            dogs, rabbits to birds. With our infinite scroll, you can easily find the pet you've been looking for.
           </p>
           <button
-            className='rounded-md bg-green-600 px-6 py-4 font-semibold text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600'
+            disabled={!session}
+            className='rounded-md bg-green-600 px-6 py-4 font-semibold text-green-300 shadow-sm transition duration-300 ease-in-out hover:bg-green-300 hover:text-green-600 disabled:bg-gray-200 disabled:text-gray-300'
             onClick={() => setOpenFilter(true)}
           >
             <HiOutlineFunnel className='mr-3 inline-block h-6 w-6' />
             Filter
           </button>
           <span className='text-sm italic text-gray-300'>
-            Current filter applied: {JSON.stringify(filterParams)}
+            Registered users can use our filter function to narrow down search based on preferences.
           </span>
         </div>
         {openFilter ? (
