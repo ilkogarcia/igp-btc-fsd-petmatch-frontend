@@ -1,13 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { TbPaw } from 'react-icons/tb'
 import Link from 'next/link'
 import MainMenu from './menu-top-main'
 import UserMenu from './menu-top-user'
 import MobileMenu from './menu-mobile'
-import { TbPaw } from 'react-icons/tb'
-import { useState } from 'react'
 
 export default function Header() {
-  const [open, setOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsMenuOpen(state => !state)
+    }
+  }, [pathname])
 
   return (
     <header className='mx-auto flex w-full flex-col items-center justify-center bg-green-400'>
@@ -34,7 +43,7 @@ export default function Header() {
           <button
             className='mobile-menu-button text-green-100 hover:text-white'
             onClick={() => {
-              setOpen(true)
+              setIsMenuOpen(true)
             }}
           >
             <svg
@@ -43,7 +52,6 @@ export default function Header() {
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
-              onClick={() => console.log('click')}
             >
               <path
                 strokeLinecap='round'
@@ -54,7 +62,7 @@ export default function Header() {
             </svg>
           </button>
         </div>
-        {open ? <MobileMenu close={() => setOpen(false)} /> : <></>}
+        {isMenuOpen ? <MobileMenu close={() => setIsMenuOpen(false)} /> : <></>}
       </nav>
     </header>
   )
