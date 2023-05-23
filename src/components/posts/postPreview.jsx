@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import Avatar from '@/components/avatar'
 import { format } from 'date-fns'
 
 const PostPreview = (props) => {
@@ -32,10 +31,11 @@ const PostPreview = (props) => {
           {props.excerpt}
         </p>
         <div className='mb-6 mt-8 flex items-center px-4'>
-          <Avatar
+          <Image
             alt={props.authorName}
             src={props.authorPicture}
-            size={35}
+            width={40}
+            height={40}
             className='rounded-full border-2 border-green-300'
           />
           <p className='ml-2 text-sm text-gray-400'>
