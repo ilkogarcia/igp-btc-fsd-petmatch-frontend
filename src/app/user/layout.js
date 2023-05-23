@@ -1,16 +1,14 @@
 'use client'
 
-import '../../styles/globals.css'
 import { useSession } from 'next-auth/react'
 import MenuUser from '@/components/menu-left-users'
 import MenuAdmin from '@/components/menu-left-admin'
 
-function UserLayout({ children }) {
+const UserLayout = ({ children }) => {
   const { data: session } = useSession()
 
   return (
-    <div className='h-fit min-h-screen bg-white pt-20'>
-      {/* page top section  */}
+    <div className='min-h-screen bg-white py-20'>
       <div className='mx-auto flex w-10/12 flex-col md:grid md:grid-cols-12'>
         <div className='flex flex-col items-start justify-start space-y-6 md:col-span-3'>
           <MenuUser />

@@ -1,9 +1,8 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { logMeIn } from '../../../../services/auth.services'
+import { logMeIn } from '@/services/auth.services'
 
 export const authOptions = {
-  // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -50,4 +49,5 @@ export const authOptions = {
 }
 
 const handler = NextAuth(authOptions)
+
 export { handler as GET, handler as POST }

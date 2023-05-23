@@ -1,5 +1,6 @@
 import '../../styles/globals.css'
 import ContactUs from '@/components/form-contact-us'
+import OurOffices from '@/components/contact/contact-offices'
 
 export const metadata = {
   title: 'PetMatch. Contact us. Adopt a Pet and Save a Life',
@@ -7,7 +8,7 @@ export const metadata = {
     'The PetMatch platform is designed to make the adoption process as simple and stress-free as possible for both pets and their new families.',
 }
 
-function ContactPage() {
+const ContactPage = () => {
 
   return (
     <div className='h-fit bg-white pb-40'>
@@ -34,7 +35,7 @@ function ContactPage() {
           className="relative"
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12080.73732861526!2d-74.0059418!3d40.7127847!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM40zMDA2JzEwLjAiTiA3NMKwMjUnMzcuNyJX!5e0!3m2!1sen!2sus!4v1648482801994!5m2!1sen!2sus"
           style={{border:"0"}}
-          allowfullscreen=""
+          allowFullScreen
           height="520"
           width="100%"
           loading='lazy'
@@ -53,40 +54,8 @@ function ContactPage() {
            <span className='baseline inline-block'>Visit us at one of our many locations and find your perfect match today.</span> 
           </p>
         </div>
-        <div className='mt-16 h-full grid gap-20 lg:grid-cols-12'>
-          <div className='col-span-4 flex flex-col text-center items-center'>
-            <h2 className='text-2xl font-bold text-gray-600'>London</h2>
-            <p className='text-lg text-gray-500'>123 Main Street. London, UK</p>
-            <p className='mt-6 text-sm text-gray-400'>+44 123 456 7890 - london@petmatch.es</p>
-          </div>
-          <div className='col-span-4 flex flex-col text-center items-center'>
-            <h2 className='text-2xl font-bold text-gray-600'>Paris</h2>
-            <p className='text-lg text-gray-500'>123 Main Street. Paris, France</p>
-            <p className='mt-6 text-sm text-gray-400'>+33 123 456 7890 - paris@petmatch.es</p>
-          </div>
-          <div className='col-span-4 flex flex-col text-center items-center'>
-            <h2 className='text-2xl font-bold text-gray-600'>Berlin</h2>
-            <p className='text-lg text-gray-500'>123 Main Street. Berlin, Germany</p>
-            <p className='mt-6 text-sm text-gray-400'>+49 123 456 7890 - berlin@petmatch.es</p>
-          </div>
-          <div className='col-span-4 flex flex-col text-center items-center'>
-            <h2 className='text-2xl font-bold text-gray-600'>Madrid</h2>
-            <p className='text-lg text-gray-500'>123 Main Street. Madrid, Spain</p>
-            <p className='mt-6 text-sm text-gray-400'>+34 123 456 7890 - madrid@petmatch.es</p>
-          </div>
-          <div className='col-span-4 flex flex-col text-center items-center'>
-            <h2 className='text-2xl font-bold text-gray-600'>Rome</h2>
-            <p className='text-lg text-gray-500'>123 Main Street. Rome, Italy</p>
-            <p className='mt-6 text-sm text-gray-400'>+39 123 456 7890 - rome@petmatch.es</p>
-          </div>
-          <div className='col-span-4 flex flex-col text-center items-center'>
-            <h2 className='text-2xl font-bold text-gray-600'>Lisbon</h2>
-            <p className='text-lg text-gray-500'>123 Main Street. Lisbon, Portugal</p>
-            <p className='mt-6 text-sm text-gray-400'>+351 123 456 7890 - lisbon@petmatch.es</p>
-          </div>
-        </div>
+        <OurOffices />
       </div>
-
     </div>
   )
 }
