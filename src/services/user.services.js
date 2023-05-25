@@ -5,9 +5,6 @@ const getOneUser = async (id, token) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    next: {
-      revalidate: 60,
-    },
   }).then((res) => res.json())
 }
 

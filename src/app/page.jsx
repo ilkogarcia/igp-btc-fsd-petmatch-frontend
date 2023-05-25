@@ -1,13 +1,13 @@
+'use client'
+
+import { useSession } from 'next-auth/react'
+import { RiNumber1, RiNumber2, RiNumber3} from 'react-icons/ri'
 import Link from 'next/link'
 import Image from 'next/image'
-import { RiNumber1, RiNumber2, RiNumber3 } from 'react-icons/ri'
 import PetList from '@/components/pet-list'
 
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from './api/auth/[...nextauth]/route'
-
 const HomePage = async () => {
-  const session = await getServerSession(authOptions)
+  const { data: session } = useSession()
   const petImage = '/assets/michaelG_kpbHRhlSHHA_1920x2880.jpg'
 
   return (

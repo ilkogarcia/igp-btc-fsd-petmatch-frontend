@@ -4,39 +4,28 @@ const fetchAllCountries = async () => {
     headers: {
       'Content-Type': 'application/json',
     },
-    next: {
-      revalidate: 60,
-    },
   }).then((res) => res.json())
 }
 
-const fetchAllStateProvinces = async (countryId, token) => {
+const fetchAllStateProvinces = async (countryId) => {
   return await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/state-provinces?countryId=${countryId}`,
     {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      next: {
-        revalidate: 60,
       },
     }
   ).then((res) => res.json())
 }
 
-const fetchAllCities = async (stateProvinceId, token) => {
+const fetchAllCities = async (stateProvinceId) => {
   return await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/cities?stateProvinceId=${stateProvinceId}`,
     {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      next: {
-        revalidate: 60,
       },
     }
   ).then((res) => res.json())

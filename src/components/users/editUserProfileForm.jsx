@@ -1,159 +1,126 @@
-/* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable array-callback-return */
 'use client'
 
-// Import styles sheet
-import styles from './styles.module.css'
-
-// Import hooks needed
-import { Formik, Form } from 'formik'
-import { useState, useEffect, useMemo } from 'react'
+import styles from '@/components/styles.module.css'
 import { useSession } from 'next-auth/react'
-
-// Import components used
-import toast from 'react-hot-toast'
+import React, { useEffect, useState } from 'react'
+import { Formik, Form } from 'formik'
+import FormikControl from '@/components/formik-control'
 import Image from 'next/image'
-import FormikInput from './formik-input'
-import FormikDatePicker from './formik-datepicker'
-import FormikSelect from './formik-select'
-
-// Import utilities used
+import toast from 'react-hot-toast'
 import * as Yup from 'yup'
-import { getOneUser, updateOneUser } from '../services/user.services'
+import { updateOneUser } from '@/services/user.services'
 import {
   fetchAllCountries,
   fetchAllStateProvinces,
   fetchAllCities,
 } from '@/services/address.services'
 
-// Main component
-export default function UserProfile () {
+const UserProfileForm = ({ userProfile }) => {
   const { data: session } = useSession()
 
-  const [formValues, setFormValues] = useState({})
-
   const [countries, setCountries] = useState([])
-  const [statesProvices, setStatesProvinces] = useState([])
+  const [stateProvinces, setStateProvinces] = useState([])
   const [cities, setCities] = useState([])
 
-  const loadCountries = async () => {
-    setCountries([])
+  const [stateProvincesEnabled, setStateProvincesEnabled] = useState(false)
+  const [citiesEnabled, setCitiesEnabled] = useState(false)
 
-    const res = await fetchAllCountries()
-    if (res.sucess) {
-      res.data.countries.map((country) => {
+  const loadCountries = async () => {
+    const {
+      sucess,
+      message,
+      data: { countries },
+    } = await fetchAllCountries()
+    console.log(sucess, message, countries)
+
+    if (sucess) {
+      countries.map((country) => {
         setCountries((prev) => [
           ...prev,
           { key: country.countryName, value: country.id },
         ])
       })
     } else {
-      toast.error(res.message)
+      toast.error(message)
     }
   }
 
   const loadStatesProvinces = async (countryId) => {
-    const res = await fetchAllStateProvinces(countryId, session?.user?.token)
-    if (res.sucess) {
-      res.data.stateProvinces.map((stateProvince) => {
-        setStatesProvinces((prev) => [
+    setStateProvinces([])
+    const {
+      sucess,
+      message,
+      data: { stateProvinces },
+    } = await fetchAllStateProvinces(countryId)
+    console.log(sucess, message, stateProvinces)
+
+    if (sucess) {
+      stateProvinces.map((stateProvince) => {
+        setStateProvinces((prev) => [
           ...prev,
           { key: stateProvince.stateProvinceName, value: stateProvince.id },
         ])
       })
     } else {
-      toast.error(res.message)
+      toast.error(message)
     }
   }
 
   const loadCities = async (stateProvinceId) => {
-    const res = await fetchAllCities(stateProvinceId, session?.user?.token)
-    if (res.sucess) {
-      res.data.cities.map((city) => {
+    setCities([])
+    const {
+      sucess,
+      message,
+      data: { cities },
+    } = await fetchAllCities(stateProvinceId)
+    console.log(sucess, message, cities)
+
+    if (sucess) {
+      cities.map((city) => {
         setCities((prev) => [...prev, { key: city.cityName, value: city.id }])
       })
     } else {
-      toast.error(res.message)
+      toast.error(message)
     }
   }
-
-  useEffect(() => {
-    const loadUserProfile = async () => {
-      const res = await getOneUser(session?.user?.id, session?.user?.token)
-      if (res.sucess) {
-        setFormValues(res.data)
-      } else {
-        toast.error(
-          <div>
-            <span>Load user profile failed!</span>
-            <span className='block align-baseline text-sm'>{res.message}</span>
-          </div>,
-          { duration: 3000 }
-          )
-        }
-      }  
-      loadUserProfile()
-  }, [session])
 
   useEffect(() => {
     loadCountries()
+    console.log('Countries un useState:', countries)
   }, [])
 
   useEffect(() => {
-    if (formValues.countryId) {
-      setStatesProvinces([])
-      loadStatesProvinces(formValues.countryId)
+    if (userProfile.countryId) {
+      setStateProvincesEnabled(true)
+      loadStatesProvinces(userProfile.countryId)
     }
-  }, [formValues.countryId])
+  }, [userProfile.countryId])
 
   useEffect(() => {
-    if (formValues.stateProvinceId) {
-      setCities([])
-      loadCities(formValues.stateProvinceId)
+    if (userProfile.stateProvinceId) {
+      setCitiesEnabled(true)
+      loadCities(userProfile.stateProvinceId)
     }
-  }, [formValues.stateProvinceId])
+  }, [userProfile.stateProvinceId])
 
-
-  const handleCountryChange = (event) => {
-    setFormValues((prev) => ({
-      ...prev,
-      stateProvinceId: '',
-      cityId: '',
-      countryId: event.target.value,
-    }))
+  const initialValues = {
+    firstName: userProfile.firstName || '',
+    lastName: userProfile.lastName || '',
+    username: userProfile.username || '',
+    profilePicture: userProfile.profilePicture || '',
+    birthday: userProfile.birthday || null,
+    gender: userProfile.gender || '',
+    email: userProfile.email || '',
+    phoneNumber: userProfile.phoneNumber || '',
+    addressLine1: userProfile.addressLine1 || '',
+    addressLine2: userProfile.addressLine2 || '',
+    postalCode: userProfile.postalCode || '',
+    cityId: userProfile.cityId || 1,
+    stateProvinceId: userProfile.stateProvinceId || 1,
+    countryId: userProfile.countryId || 1,
   }
-
-  const handleStateProvinceChange = (event) => {
-    setFormValues((prev) => ({
-      ...prev,
-      cityId: '',
-      stateProvinceId: event.target.value,
-    }))
-  }
-
-  const handleCityChange = (event) => {
-    setFormValues((prev) => ({
-      ...prev,
-      cityId: event.target.value,
-    }))
-  }
-
-  const initialValues = useMemo(() => ({
-    firstName: formValues.firstName || '',
-    lastName: formValues.lastName || '',
-    username: formValues.username || '',
-    profilePicture: formValues.profilePicture || '',
-    birthday: formValues.birthday || '',
-    gender: formValues.gender || '',
-    email: formValues.email || '',
-    phoneNumber: formValues.phoneNumber || '',
-    addressLine1: formValues.addressLine1 || '',
-    addressLine2: formValues.addressLine2 || '',
-    postalCode: formValues.postalCode || '',
-    cityId: formValues.cityId || '',
-    stateProvinceId: formValues.stateProvinceId || '',
-    countryId: formValues.countryId || '',
-  }), [])
 
   const validationSchema = Yup.object({
     cityId: Yup.number()
@@ -182,9 +149,7 @@ export default function UserProfile () {
     email: Yup.string()
       .required('Email is required!')
       .email('Invalid email address!'),
-    profilePicture: Yup.string()
-      .url('Invalid URL!')
-      .notRequired(),
+    profilePicture: Yup.string().url('Invalid URL!').notRequired(),
     firstName: Yup.string()
       .notRequired()
       .matches(
@@ -224,33 +189,42 @@ export default function UserProfile () {
       .notRequired(),
   })
 
-  // Handle form submission
-  async function onSubmit(values, submitProps) {
-    submitProps.setSubmitting(false)
+  const handleCountryChange = (event) => {
+    userProfile.countryId = event.target.value
+    loadStatesProvinces(userProfile.countryId)
+    console.log(userProfile.countryId)
+  }
 
+  const handleStateProvinceChange = (event) => {
+    userProfile.stateProvinceId = event.target.value
+    loadCities(userProfile.stateProvinceId)
+    console.log(userProfile.stateProvinceId)
+  }
+
+  const handleCityChange = (event) => {
+    userProfile.cityId = event.target.value
+    console.log(userProfile.cityId)
+  }
+
+  async function onSubmit(values) {
     const res = await updateOneUser(
       session?.user.id,
       values,
       session?.user.token
     )
-
     if (res.sucess) {
       toast.success(
         <div>
           <span>User profile updated successfully!</span>
-          <span className='block align-baseline text-sm'>
-            {res.message}
-          </span>
+          <span className='block align-baseline text-sm'>{res.message}</span>
         </div>,
-        { duration: 5000 }
+        { duration: 3000 }
       )
     } else {
       toast.error(
         <div>
           <span>Update user profile failed!</span>
-          <span className='block align-baseline text-sm'>
-            {res.message}
-          </span>
+          <span className='block align-baseline text-sm'>{res.message}</span>
         </div>,
         { duration: 5000 }
       )
@@ -264,7 +238,7 @@ export default function UserProfile () {
       onSubmit={onSubmit}
       enableReinitialize
     >
-      {formik => {
+      {(formik) => {
         return (
           <Form className='mx-auto mt-8'>
             <div className='flex flex-col sm:grid sm:grid-cols-12 sm:gap-6'>
@@ -273,14 +247,15 @@ export default function UserProfile () {
                 {/* user image profile */}
                 <div className='flex flex-col space-y-4'>
                   <Image
-                    className='square-img rounded-md shadow-md'
-                    type='file'
-                    id='profilePicture'
-                    name='profilePicture'
-                    src={formValues.profilePicture}
-                    alt='Picture of the author'
+                    src={
+                      formik.values.profilePicture || '/assets/pets-error.png'
+                    }
+                    alt={formik.values.username || 'User profile picture'}
                     width={600}
                     height={600}
+                    className='square-img rounded-md shadow-md'
+                    placeholder='blur'
+                    blurDataURL='/assets/pets-error.png'
                   />
                   <p className='mt-2 text-sm text-gray-500'>
                     Click on the image to change it
@@ -318,7 +293,8 @@ export default function UserProfile () {
                 <div className='flex flex-col sm:grid sm:grid-cols-12 sm:gap-5'>
                   {/* firstname */}
                   <div className='col-span-12 lg:col-span-5'>
-                    <FormikInput
+                    <FormikControl
+                      control='input'
                       label='Firstname'
                       name='firstName'
                       type='text'
@@ -328,27 +304,28 @@ export default function UserProfile () {
 
                   {/* lastname */}
                   <div className='col-span-12 md:col-span-7'>
-                    <FormikInput
+                    <FormikControl
+                      control='input'
                       label='Lastname'
                       name='lastName'
-                      type='text'
                       placeholder='e.g. John Doe'
                     />
                   </div>
 
                   {/* username */}
                   <div className='col-span-6 md:col-span-4'>
-                    <FormikInput
+                    <FormikControl
+                      control='input'
                       label='Username'
                       name='username'
-                      type='text'
                       placeholder='e.g. john_doe'
                     />
                   </div>
 
                   {/* birthday */}
                   <div className='col-span-6 md:col-span-4'>
-                    <FormikDatePicker
+                    <FormikControl
+                      control='date'
                       label='Birthday'
                       name='birthday'
                     />
@@ -356,67 +333,78 @@ export default function UserProfile () {
 
                   {/* gender */}
                   <div className='col-span-6 md:col-span-4'>
-                    <FormikInput
+                    <FormikControl
+                      control='input'
                       label='Gender'
                       name='gender'
-                      type='text'
                       placeholder='e.g. Male'
+                    />
+                  </div>
+
+                  {/* user profile picture */}
+                  <div className='col-span-12'>
+                    <FormikControl
+                      control='input'
+                      label='Profile picture'
+                      name='profilePicture'
+                      placeholder='e.g. https://www.example.com/image.jpg'
                     />
                   </div>
 
                   {/* phone number */}
                   <div className='col-span-6 md:col-span-5'>
-                    <FormikInput
+                    <FormikControl
+                      control='input'
                       label='Phone number'
                       name='phoneNumber'
-                      type='text'
                       placeholder='e.g. +34 678 987 789'
                     />
                   </div>
 
                   {/* email */}
                   <div className='col-span-12 md:col-span-7'>
-                    <FormikInput
+                    <FormikControl
+                      control='input'
                       label='Email'
                       name='email'
-                      type='email'
                       placeholder='e.g. example@domain.com'
                     />
                   </div>
 
                   {/* address line 1 */}
                   <div className='col-span-12'>
-                    <FormikInput
+                    <FormikControl
+                      control='input'
                       label='Street address'
                       name='addressLine1'
-                      type='text'
                       placeholder='e.g. 123 Main St.'
                     />
                   </div>
 
                   {/* address line 2 */}
                   <div className='col-span-12 md:col-span-8'>
-                    <FormikInput
+                    <FormikControl
+                      control='input'
                       label='Rest of address'
                       name='addressLine2'
-                      type='text'
                       placeholder='e.g. Apt. 4B or Suite 200'
                     />
                   </div>
 
                   {/* postal code */}
                   <div className='col-span-6 md:col-span-4'>
-                    <FormikInput
+                    <FormikControl
+                      control='input'
                       label='Postal/ZIP code'
                       name='postalCode'
-                      type='text'
                       placeholder='e.g. 10001'
                     />
                   </div>
 
                   {/* country */}
                   <div className='col-span-6 md:col-span-4'>
-                    <FormikSelect
+                    <FormikControl
+                      control='select'
                       label='Country'
                       name='countryId'
                       options={countries}
@@ -426,20 +414,24 @@ export default function UserProfile () {
 
                   {/* state */}
                   <div className='col-span-6 md:col-span-4'>
-                    <FormikSelect
+                    <FormikControl
+                      control='select'
                       label='State or Province'
                       name='stateProvinceId'
-                      options={statesProvices}
+                      options={stateProvinces}
+                      disabled={!stateProvincesEnabled}
                       onChange={handleStateProvinceChange}
                     />
                   </div>
 
                   {/* city */}
                   <div className='col-span-6 md:col-span-4'>
-                    <FormikSelect
+                    <FormikControl
+                      control='select'
                       label='City'
                       name='cityId'
                       options={cities}
+                      disabled={!citiesEnabled}
                       onChange={handleCityChange}
                     />
                   </div>
@@ -455,7 +447,10 @@ export default function UserProfile () {
               </div>
             </div>
           </Form>
-        )}}
+        )
+      }}
     </Formik>
   )
 }
+
+export default UserProfileForm
